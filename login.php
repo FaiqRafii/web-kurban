@@ -22,7 +22,7 @@
 
     <div class="w-2/6 h-3/4 rounded-2xl bg-white border border-neutral-300">
         <div class="flex justify-center items-center mt-10">
-            <img src="assets/img/logo.png" class="w-32 h-ft" alt="">
+            <img src="assets/img/logo2.png" class="w-35 h-fit" alt="">
         </div>
         <div class="mt-5 px-10">
             <form action="">
@@ -60,4 +60,7 @@
     </div>
 </body>
 
+<script>
+    history.pushState({},'','/login');
+</script>
 </html>

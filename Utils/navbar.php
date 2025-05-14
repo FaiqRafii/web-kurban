@@ -2,7 +2,7 @@
     <div class="bg-[#F6F2EC] text-[rgb(102,57,19)] w-full h-20 absolute top-0">
         <div class="grid grid-cols-5 h-full">
             <div class=" flex my-auto">
-                <img src="../assets/img/logo.png" class="w-40 pl-10 mx-auto h-fit" alt="">
+                <img src="../assets/img/logo2.png" class="w-40 pl-10 mx-auto h-fit" alt="">
             </div>
             <div class="col-span-3 space-x-10 justify-center flex my-auto">
 
