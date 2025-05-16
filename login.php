@@ -3,22 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Easy Qurban</title>
+    <title>Easy Qurban | Login</title>
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="icon" href="assets/img/logo.png">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
-
-    <style>
-        .font-montserrat {
-            font-family: 'Montserrat', sans-serif;
-        }
-    </style>
+    <link rel="stylesheet" href="../assets/css/style.css">
 </head>
 
-<body class="flex justify-center items-center bg-neutral-100">
+<body class="flex justify-center items-center bg-neutral-100 font-montserrat">
 
     <div class="w-2/6 h-3/4 rounded-2xl bg-white border border-neutral-300">
         <div class="flex justify-center items-center mt-10">
@@ -27,9 +22,9 @@
         <div class="mt-5 px-10">
             <form action="">
                 <div class="flex justify-center items-center mb-5">
-                    <h1 class="font-montserrat font-bold text-xl">Login</h1>
+                    <h1 class=" font-bold text-xl">Login</h1>
                 </div>
-                <label for="input-group-1" class="block mb-2 text-sm font-montserrat text-gray-900">Email</label>
+                <label for="input-group-1" class="block mb-2 text-sm  text-gray-900">Email</label>
                 <div class="relative mb-4">
                     <div class="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none">
                         <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 16">
@@ -37,9 +32,9 @@
                             <path d="M11.241 9.817c-.36.275-.801.425-1.255.427-.428 0-.845-.138-1.187-.395L0 2.6V14a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V2.5l-8.759 7.317Z" />
                         </svg>
                     </div>
-                    <input type="text" id="input-group-1" class="bg-neutral-50 border border-gray-300 text-gray-900 text-sm rounded-lg font-montserrat focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5" placeholder="name@gmail.com">
+                    <input type="email" id="email" class="bg-neutral-50 border border-gray-300 text-gray-900 text-sm rounded-lg  focus:ring-blue-500 focus:border-neutral-500 block w-full ps-10 p-2.5" placeholder="name@gmail.com">
                 </div>
-                <label for="input-group-1" class="block mb-3 text-sm font-montserrat text-gray-900">Password</label>
+                <label for="input-group-1" class="block mb-3 text-sm  text-gray-900">Password</label>
                 <div class="relative mb-10">
                     <div class="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none">
                         <svg viewBox="0 0 24 24" class="w-5 h-5 text-gray-500 dark:text-gray-400" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -50,17 +45,16 @@
                             </g>
                         </svg>
                     </div>
-                    <input type="text" id="input-group-1" class="bg-neutral-50 border border-gray-300 text-gray-900 text-sm rounded-lg font-montserrat focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5" placeholder="Masukkan password anda">
+                    <input type="password" id="ipassword" class="bg-neutral-50 border border-gray-300 text-gray-900 text-sm rounded-lg  focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5" placeholder="Masukkan password anda">
                 </div>
                 <div class="flex justify-center items-center">
-                    <input type="submit" class="bg-[#C19548] font-montserrat text-white hover:cursor-pointer hover:bg-[#5D320E] transition-all ease-in duration-75 px-5 py-1.5  font-semibold text-sm rounded">
+                    <input type="submit" class="bg-gradient-to-l from-[rgb(154,94,44)] to-[rgb(99,52,14)] hover:bg-gradient-to-r  text-white hover:cursor-pointer hover:bg-[#5D320E] transition-all ease-in duration-75 px-5 py-1.5  font-semibold text-sm rounded">
                 </div>
             </form>
         </div>
     </div>
 </body>
 
-<script>
-    history.pushState({},'','/login');
-</script>
+<script src="assets/js/configUrl.js"></script>
+
 </html>

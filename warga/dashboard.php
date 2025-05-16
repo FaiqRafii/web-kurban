@@ -4,7 +4,7 @@
             <div class="absolute left-115">
                 <img src="../assets/img/logo2.png" class=" w-30 h-fit" alt="">
             </div>
-            <div class="bg-[rgb(102,57,19)] w-30 h-80"></div>
+            <div class="bg-gradient-to-bl from-[rgb(154,94,44)] to-[rgb(99,52,14)] w-30 h-80"></div>
             <div class=" w-3/5 h-80 ">
                 <div class="mt-20 ml-10 grid grid-cols-[45%_55%]">
                     <div>
