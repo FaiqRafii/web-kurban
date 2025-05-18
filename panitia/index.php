@@ -2,6 +2,12 @@
 require_once '../View/Content.php';
 use App\View\Content;
 
+session_start();
+
+if($_SESSION['level_akun']!='panitia'){
+    header('Location: ../');
+}
+
 $content = new Content();
 ?>
 

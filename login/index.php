@@ -1,3 +1,18 @@
+<?php
+require_once '../Controller/loginController.php';
+require_once '../View/loginView.php';
+
+
+$view = new loginView();
+$login = new loginController();
+
+$login->cekIsLogin();
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $login->validasiData();
+}
+?>
+
 <html lang="en">
 
 <head>
@@ -8,7 +23,6 @@
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="icon" href="assets/img/logo.png">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../assets/css/style.css">
 </head>
@@ -20,12 +34,25 @@
         <div class="bg-gradient-to-r from-[rgb(154,94,44)] to-[rgb(99,52,14)] max-h-full h-screen w-screen absolute top-3/7 left-0"></div>
         <div class="text-white font-thin text-sm absolute left-30 top-55">*Silahkan kontak <span><a href="" class="font-bold hover:underline">Admin</a></span> bila belum terdaftar</div>
     </div>
-    <div class="relative z-10 w-2/6 h-3/4 ml-150 rounded-2xl bg-white border border-neutral-300">
+
+    <?php
+    if ($_SESSION['alert']) {
+        $view->alert($_SESSION['alert']);
+        echo 'Alart sebelum unset: '. $_SESSION['alert'];
+        unset($_SESSION['alert']);
+        echo 'Alart setelah unset: '. $_SESSION['alert'];
+    }
+    ?>
+
+
+
+
+    <div class="absolute z-10 w-2/6 h-3/4 ml-150 rounded-2xl bg-white border border-neutral-300">
         <div class="flex justify-center items-center mt-10">
-            <img src="assets/img/logo2.png" class="w-35 h-fit" alt="">
+            <img src="../assets/img/logoScroll.png" class="w-25 h-fit" alt="">
         </div>
-        <div class="mt-5 px-10">
-            <form action="">
+        <div class="mt-10 px-10">
+            <form action="index.php" method="POST">
                 <div class="flex justify-center items-center mb-5">
                     <h1 class=" font-bold text-xl">Login</h1>
                 </div>
@@ -37,7 +64,7 @@
                             <path d="M11.241 9.817c-.36.275-.801.425-1.255.427-.428 0-.845-.138-1.187-.395L0 2.6V14a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V2.5l-8.759 7.317Z" />
                         </svg>
                     </div>
-                    <input type="email" id="email" class="bg-neutral-50 border border-gray-300 text-gray-900 text-sm rounded-lg  focus:ring-blue-500 focus:border-neutral-500 block w-full ps-10 p-2.5" placeholder="name@gmail.com">
+                    <input type="email" name="email" id="email" class="bg-neutral-50 border border-gray-300 text-gray-900 text-sm rounded-lg  focus:ring-blue-500 focus:border-neutral-500 block w-full ps-10 p-2.5" placeholder="name@gmail.com">
                 </div>
                 <label for="input-group-1" class="block mb-3 text-sm  text-gray-900">Password</label>
                 <div class="relative mb-10">
@@ -50,7 +77,7 @@
                             </g>
                         </svg>
                     </div>
-                    <input type="password" id="ipassword" class="bg-neutral-50 border border-gray-300 text-gray-900 text-sm rounded-lg  focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5" placeholder="Masukkan password anda">
+                    <input type="password" name="password" id="ipassword" class="bg-neutral-50 border border-gray-300 text-gray-900 text-sm rounded-lg  focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5" placeholder="Masukkan password anda">
                 </div>
                 <div class="flex justify-center items-center">
                     <input type="submit" class="bg-gradient-to-l from-[rgb(154,94,44)] to-[rgb(99,52,14)] hover:bg-gradient-to-r  text-white hover:cursor-pointer hover:bg-[#5D320E] transition-all ease-in duration-75 px-5 py-1.5  font-semibold text-sm rounded">
@@ -60,6 +87,7 @@
     </div>
 </body>
 
-<script src="assets/js/configUrl.js"></script>
+<!-- <script src="assets/js/configUrl.js"></script> -->
+<script src="assets/js/alert.js"></script>
 
 </html>

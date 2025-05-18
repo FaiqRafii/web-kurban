@@ -111,7 +111,7 @@
                     <div class="absolute left-6.5 top-35 h-8 w-8 rounded-full bg-[rgb(99,52,14)] group-hover:bg-white flex justify-center items-center">
                         <div class="font-semibold group-hover:text-[rgb(99,52,14)]">2</div>
                     </div>
-                    <div class="h-50 w-40 mt-4 ml-14 space-y-5">
+                    <div class="h-50 w-40 mt-6 ml-14 space-y-11">
                         <div class="text-[rgb(99,52,14)] font-semibold group-hover:text-white">Pendataan Identitas</div>
                         <div class="text-[rgb(99,52,14)] font-semibold group-hover:text-white">Cetak ID Card Panitia</div>
                     </div>
@@ -152,17 +152,13 @@
                     <div class="absolute left-6.5 top-18 h-8 w-8 rounded-full bg-[rgb(99,52,14)] group-hover:bg-white flex justify-center items-center">
                         <div class="font-semibold group-hover:text-[rgb(99,52,14)]">1</div>
                     </div>
-                    <div class="absolute left-6.5 top-35 h-8 w-8 rounded-full bg-[rgb(99,52,14)] group-hover:bg-white flex justify-center items-center">
-                        <div class="font-semibold group-hover:text-[rgb(99,52,14)]">2</div>
-                    </div>
                     <div class="h-50 w-40 mt-4 ml-14 space-y-5">
-                        <div class="text-[rgb(99,52,14)] font-semibold group-hover:text-white">Pendataan Identitas</div>
-                        <div class="text-[rgb(99,52,14)] font-semibold group-hover:text-white">Cetak ID Card Panitia</div>
+                        <div class="text-[rgb(99,52,14)] font-semibold group-hover:text-white">Qr-Code Pengambilan Daging</div>
                     </div>
                 </div>
-                
             </div>
         </div>
+    </div>
     </div>
 
 </body>

@@ -1,1 +1,3 @@
-history.pushState({}, "", "/login");
+document.addEventListener("DOMContentLoaded", function () {
+  history.pushState({}, "", "/login");
+});

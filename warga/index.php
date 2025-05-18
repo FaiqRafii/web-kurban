@@ -3,6 +3,11 @@ require_once '../View/Content.php';
 
 use App\View\Content;
 
+session_start();
+if ($_SESSION['level_akun'] != 'warga') {
+    header('Location: ../');
+}
+
 $content = new Content();
 ?>
 
