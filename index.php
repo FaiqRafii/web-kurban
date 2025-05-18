@@ -1,4 +1,4 @@
-<html lang="en">
+<html lang="en" class="scroll-smooth">
 
 <head>
     <meta charset="UTF-8">
@@ -11,9 +11,12 @@
     <link rel="icon" href="assets/img/logo.png">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../assets/css/style.css">
-    
+    <script src="assets/js/home.js"></script>
+
 </head>
 
+<?php include 'Utils/navbar.php' ?>
 <?php include 'Utils/landingPage.php' ?>
+<?php include 'Utils/footer.php' ?>
 
 </html>

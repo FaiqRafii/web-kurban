@@ -22,7 +22,7 @@ $content = new Content();
 </head>
 <?php include 'sidebar.php' ?>
 
-<body class="font-montserrat bg-gray-50 p-4 sm:ml-64">
+<body class="font-montserrat bg-white p-4 sm:ml-64">
 <?php $content->loadContent($content->getPage()) ?>
 </body>
 

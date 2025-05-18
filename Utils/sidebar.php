@@ -9,7 +9,7 @@
 <aside id="logo-sidebar" class="fixed top-0 left-0 z-40 w-64 h-screen transition-transform -translate-x-full sm:translate-x-0" aria-label="Sidebar">
    <div class="h-full px-3 py-4 overflow-y-auto bg-gradient-to-tr from-[#e2cca7] via-[#F6F2EC] to-white">
       <a href="#" class="flex items-center ps-2.5 mb-5">
-         <img src="../assets/img/logo2.png" class="w-45 h-fit" />
+         <img src="../assets/img/logo2.png" class="w-35 h-fit" />
       </a>
       <ul class="space-y-2 font-montserrat">
          <li>

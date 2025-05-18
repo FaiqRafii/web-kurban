@@ -13,9 +13,14 @@
     <link rel="stylesheet" href="../assets/css/style.css">
 </head>
 
-<body class="flex justify-center items-center bg-neutral-100 font-montserrat">
-
-    <div class="w-2/6 h-3/4 rounded-2xl bg-white border border-neutral-300">
+<body class="relative flex justify-center items-center min-h-screen bg-neutral-100 font-montserrat overflow-hidden">
+    <div class="absolute inset-0 z-0">
+        <div class="bg-gradient-to-l from-[rgb(154,94,44)] to-[rgb(99,52,14)] h-3/7 w-screen absolute top-0 left-0"></div>
+        <div class="text-white font-semibold text-5xl absolute left-30 top-40">Selamat Datang</div>
+        <div class="bg-gradient-to-r from-[rgb(154,94,44)] to-[rgb(99,52,14)] max-h-full h-screen w-screen absolute top-3/7 left-0"></div>
+        <div class="text-white font-thin text-sm absolute left-30 top-55">*Silahkan kontak <span><a href="" class="font-bold hover:underline">Admin</a></span> bila belum terdaftar</div>
+    </div>
+    <div class="relative z-10 w-2/6 h-3/4 ml-150 rounded-2xl bg-white border border-neutral-300">
         <div class="flex justify-center items-center mt-10">
             <img src="assets/img/logo2.png" class="w-35 h-fit" alt="">
         </div>
