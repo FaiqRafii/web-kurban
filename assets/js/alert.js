@@ -8,3 +8,5 @@ function closeAlert() {
     }, 50);
   }
 }
+
+window.closeAlert=closeAlert;

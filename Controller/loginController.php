@@ -7,7 +7,7 @@ session_start();
 
 class loginController extends akunModel
 {
-    public string $nik;
+    public $nik;
     public $password;
     private $view;
 

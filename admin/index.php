@@ -5,7 +5,7 @@ require_once '../View/adminView.php';
 
 use App\View\Content;
 
-session_start();
+
 if ($_SESSION['level_akun'] != 'admin') {
     header('Location: ../');
 }
@@ -43,6 +43,7 @@ $view = new adminView();
 
     <script src="../assets/js/date2.js"></script>
     <script src="../assets/js/admin.js"></script>
+    <script src="../assets/js/alert.js"></script>
 </body>
 
 </html>

@@ -1,6 +1,16 @@
-<?php require_once '../View/adminView.php'; $view = new adminView();?>
+<?php require_once '../View/adminView.php';
+$view = new adminView();
 
-<div class="px-10 py-5">
+if (isset($_SESSION['alert'])) {
+    $view->alert($_SESSION['alert']);
+    unset($_SESSION['alert']);
+} else if (isset($_SESSION['alertSukses'])) {
+    $view->alertSukses($_SESSION['alertSukses']);
+    unset($_SESSION['alertSukses']);
+}
+?>
+<div class="relative px-10 py-5">
+
     <div class="w-full h-fit px-10 pb-15 bg-gradient-to-b from-[#fff5e3] via-white to-white rounded-xl">
         <div class="w-full pt-1">
             <table class="mt-10 w-full text-sm">
@@ -15,47 +25,41 @@
                     <th class="border border-black py-2 px-5">No HP</th>
                     <th class="border border-black py-2 px-5">Level</th>
                 </tr>
-                <!-- Row Pakai Input -->
+
                 <?php $view->isiTabelAkun(); ?>
 
-                <!-- Row Pakai Td Biasa -->
-                <!-- <tr class="text-left odd:bg-white even:bg-neutral-50 hover:bg-[rgb(154,94,44)]/10 hover:cursor-pointer" onclick="">
-                        <td class="border border-black py-2 pl-5">Budi</td>
-                        <td class="border border-black py-2 px-5">Jl. Melati No. 5</td>
-                        <td class="border border-black py-2 px-5">08123456789</td>
-                        <td class="border border-black py-2 px-5">Warga</td>
-                    </tr> -->
-                    <tfoot>
-                        <tr>
-                            <td></td>
-                            <?php $view->jumlahWarga() ?>
-                            <?php $view->jumlahBerqurban() ?>
-                            <?php $view->jumlahAdmin() ?>
-                            <?php $view->jumlahPanitia() ?>
-                            <?php $view->jumlahTotal() ?>
-                        </tr>
-                    </tfoot>
+                <tfoot>
+                    <tr>
+                        <td></td>
+                        <?php $view->jumlahWarga() ?>
+                        <?php $view->jumlahBerqurban() ?>
+                        <?php $view->jumlahAdmin() ?>
+                        <?php $view->jumlahPanitia() ?>
+                        <?php $view->jumlahTotal() ?>
+                    </tr>
+                </tfoot>
             </table>
         </div>
 
         <div id="addModal" class="hw-fit transition-all ease-in duration-150 fixed bottom-3 right-3 z-30 h-fit bg-white border border-neutral-300 rounded-xl mt-23.5">
-            <div class="flex justify-between items-center space-x-3 p-4">
+            <div onclick="minimizeAddModal()" class="hover:cursor-pointer flex justify-between items-center space-x-3 p-4">
                 <h3 class="font-bold">Tambah Akun</h3>
-                <button onclick="minimizeAddModal()" class="hover:cursor-pointer">
+                <div class="hover:cursor-pointer">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7" />
                     </svg>
-                </button>
+                </div>
             </div>
             <div id="addModalContent" class="hidden pb-6 pr-4">
-                <form action="" method="">
+                <form action="../Controller/adminController.php" method="POST">
                     <input type="hidden" id="idAkun" name="idAkun">
+                    <input type="hidden" name="action" value="add" id="">
                     <div class="w-full max-w-sm min-w-[200px] relative mt-5 ml-5">
                         <label class="block mb-1 text-sm text-neutral-600">
                             Nama
                         </label>
                         <div class="relative">
-                            <input type="text" class="w-81 bg-transparent placeholder:text-neutral-400 text-black text-sm border border-neutral-300 rounded-md pr-3 pl-10 py-2 transition duration-300 ease focus:outline-none focus:border-neutral-400 hover:border-neutral-300" placeholder="Masukkan nama" />
+                            <input name="nama" type="text" class="w-81 bg-transparent placeholder:text-neutral-400 text-black text-sm border border-neutral-300 rounded-md pr-3 pl-10 py-2 transition duration-300 ease focus:outline-none focus:border-neutral-400 hover:border-neutral-300" placeholder="Masukkan nama" />
                             <div class="absolute left-1 top-1 rounded bg-gradient-to-bl from-[rgb(154,94,44)] to-[rgb(99,52,14)] p-1.5 border border-transparent text-center text-sm text-white transition-all focus:bg-neutral-700 active:bg-neutral-700  disabled:pointer-events-none disabled:opacity-50">
                                 <svg fill="#ffffff" class="w-4 h-fit" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                     <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
@@ -72,7 +76,7 @@
                             NIK
                         </label>
                         <div class="relative">
-                            <input type="text" class="w-81 bg-transparent placeholder:text-neutral-400 text-black text-sm border border-neutral-300 rounded-md pr-3 pl-10 py-2 transition duration-300 ease focus:outline-none focus:border-neutral-400 hover:border-neutral-300" placeholder="Masukkan NIK" />
+                            <input name="nik" type="text" class="w-81 bg-transparent placeholder:text-neutral-400 text-black text-sm border border-neutral-300 rounded-md pr-3 pl-10 py-2 transition duration-300 ease focus:outline-none focus:border-neutral-400 hover:border-neutral-300" placeholder="Masukkan NIK" />
                             <div class="absolute left-1 top-1 rounded bg-gradient-to-bl from-[rgb(154,94,44)] to-[rgb(99,52,14)] p-1.5 border border-transparent text-center text-sm text-white transition-all focus:bg-neutral-700 active:bg-neutral-700  disabled:pointer-events-none disabled:opacity-50">
                                 <svg fill="#ffffff" class="w-4 h-fit" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                     <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
@@ -89,7 +93,7 @@
                             Alamat
                         </label>
                         <div class="relative">
-                            <input type="text" class="w-81 bg-transparent placeholder:text-neutral-400 text-black text-sm border border-neutral-300 rounded-md pr-3 pl-10 py-2 transition duration-300 ease focus:outline-none focus:border-neutral-400 hover:border-neutral-300" placeholder="Masukkan alamat" />
+                            <input name="alamat" type="text" class="w-81 bg-transparent placeholder:text-neutral-400 text-black text-sm border border-neutral-300 rounded-md pr-3 pl-10 py-2 transition duration-300 ease focus:outline-none focus:border-neutral-400 hover:border-neutral-300" placeholder="Masukkan alamat" />
                             <div class="absolute left-1 top-1 rounded bg-gradient-to-bl from-[rgb(154,94,44)] to-[rgb(99,52,14)] p-1.5 border border-transparent text-center text-sm text-white transition-all focus:bg-neutral-700 active:bg-neutral-700  disabled:pointer-events-none disabled:opacity-50">
                                 <svg fill="#ffffff" class="w-4 h-fit" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                     <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
@@ -106,7 +110,7 @@
                             Nomor HP
                         </label>
                         <div class="relative">
-                            <input type="text" class="w-81 bg-transparent placeholder:text-neutral-400 text-black text-sm border border-neutral-300 rounded-md pr-3 pl-10 py-2 transition duration-300 ease focus:outline-none focus:border-neutral-400 hover:border-neutral-300" placeholder="Masukkan nomor hp" />
+                            <input name="noHp" type="text" class="w-81 bg-transparent placeholder:text-neutral-400 text-black text-sm border border-neutral-300 rounded-md pr-3 pl-10 py-2 transition duration-300 ease focus:outline-none focus:border-neutral-400 hover:border-neutral-300" placeholder="Masukkan nomor hp" />
                             <div class="absolute left-1 top-1 rounded bg-gradient-to-bl from-[rgb(154,94,44)] to-[rgb(99,52,14)] p-1.5 border border-transparent text-center text-sm text-white transition-all focus:bg-neutral-700 active:bg-neutral-700  disabled:pointer-events-none disabled:opacity-50">
                                 <svg fill="#ffffff" class="w-4 h-fit" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                     <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
@@ -124,13 +128,12 @@
                         </label>
                         <div class="relative">
                             <div class="relative">
-                                <select
-                                    class="w-81 pl-10 bg-transparent placeholder:text-neutral-700 text-black text-sm border border-neutral-300 rounded py-2 transition duration-300 ease focus:outline-none focus:border-neutral-400 hover:border-neutral-400 appearance-none cursor-pointer">
-                                    <option value="brazil" selected="" disabled class="disabled:text-neutral-700 hover:bg-[rgb(99,52,14)]">Pilih level</option>
-                                    <option value="brazil" class="hover:bg-[rgb(99,52,14)]">Brazil</option>
-                                    <option value="bucharest">Bucharest</option>
-                                    <option value="london">London</option>
-                                    <option value="washington">Washington</option>
+                                <select name="level" class="w-81 pl-10 bg-transparent placeholder:text-neutral-700 text-black text-sm border border-neutral-300 rounded py-2 transition duration-300 ease focus:outline-none focus:border-neutral-400 hover:border-neutral-400 appearance-none cursor-pointer">
+                                    <option value="" selected="" disabled class="disabled:text-neutral-700 hover:bg-[rgb(99,52,14)]">Pilih level</option>
+                                    <option value="warga">Warga</option>
+                                    <option value="berqurban">Berqurban</option>
+                                    <option value="panitia">Panitia</option>
+                                    <option value="admin">Admin</option>
                                 </select>
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.2" stroke="currentColor" class="h-5 w-5 ml-1 absolute top-2.5 right-12 text-neutral-700">
                                     <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 15 12 18.75 15.75 15m-7.5-6L12 5.25 15.75 9" />

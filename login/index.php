@@ -38,9 +38,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <?php
     if ($_SESSION['alert']) {
         $view->alert($_SESSION['alert']);
-        echo 'Alart sebelum unset: ' . $_SESSION['alert'];
         unset($_SESSION['alert']);
-        echo 'Alart setelah unset: ' . $_SESSION['alert'];
     }
     ?>
 
@@ -79,6 +77,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 </body>
 
 <!-- <script src="assets/js/configUrl.js"></script> -->
-<script src="assets/js/alert.js"></script>
+<script src="../assets/js/alert.js"></script>
 
 </html>
