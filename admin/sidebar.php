@@ -20,7 +20,7 @@
          </svg>
          <div class="text-xs ml-2">
             <div class="font-semibold"><?= $akun->getNama() ?><span class="text-neutral-500"> - <?= ucwords($akun->getLevel()) ?></span></div>
-            <div><?= $akun->getEmail() ?></div>
+            <div><?= $akun->getNIK() ?></div>
          </div>
       </div>
       <ul class="space-y-2 font-montserrat">

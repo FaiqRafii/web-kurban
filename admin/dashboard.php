@@ -1,44 +1,56 @@
+<?php require_once '../View/adminView.php'; $view = new adminView();?>
+
 <div class="px-10 py-5">
     <div class="w-full h-fit px-10 pb-15 bg-gradient-to-b from-[#fff5e3] via-white to-white rounded-xl">
-        <div class="grid grid-cols-[60%_40%] w-full h-full">
-            <div class="w-full">
-                <table class="mt-10 w-130 text-sm">
-                    <tr class="">
-                        <th colspan="3" class="text-left text-3xl pb-5">Pendataan Akun</th>
-                    </tr>
-                    <tr class=" text-left text-white bg-gradient-to-bl from-[rgb(154,94,44)] to-[rgb(99,52,14)]">
-                        <th class="border border-black py-2 pl-5">Nama</th>
-                        <th class="border border-black py-2 px-5">Alamat</th>
-                        <th class="border border-black py-2 px-5">No HP</th>
-                        <th class="border border-black py-2 px-5">Level</th>
-                    </tr>
-                    <!-- Row Pakai Input -->
-                    <tr class="text-left odd:bg-white even:bg-neutral-50 hover:bg-[rgb(154,94,44)]/10 hover:cursor-pointer" onclick="">
-                        <input type="hidden" id="idAkun" name="idAkun">
-                        <td class="border border-black pl-5"><input type="text" class="w-25 placeholder:text-black focus:border-none focus:outline-none" placeholder="Budi">
-                        </td>
-                        <td class="border border-black py-2 px-5"> <input type="text" class="w-30 placeholder:text-black focus:border-none focus:outline-none" placeholder="Jl. Melati No. 5">
-                        </td>
-                        <td class="border border-black py-2 px-5"> <input type="text" class="w-25 placeholder:text-black focus:border-none focus:outline-none" placeholder="08123456789">
-                        </td>
-                        <td class="border border-black py-2 px-5"> <input type="text" class="w-15 placeholder:text-black focus:border-none focus:outline-none" placeholder="Warga">
-                        </td>
-                    </tr>
-                    <!-- Row Pakai Td Biasa -->
-                    <tr class="text-left odd:bg-white even:bg-neutral-50 hover:bg-[rgb(154,94,44)]/10 hover:cursor-pointer" onclick="">
+        <div class="w-full pt-1">
+            <table class="mt-10 w-full text-sm">
+                <tr class="">
+                    <th colspan="3" class="text-left text-3xl pb-5">Pendataan Akun</th>
+                </tr>
+                <tr class=" text-left text-white bg-gradient-to-bl from-[rgb(154,94,44)] to-[rgb(99,52,14)]">
+                    <th class="border border-black py-2 pl-5">No</th>
+                    <th class="border border-black py-2 pl-5">Nama</th>
+                    <th class="border border-black py-2 pl-5">NIK</th>
+                    <th class="border border-black py-2 px-5">Alamat</th>
+                    <th class="border border-black py-2 px-5">No HP</th>
+                    <th class="border border-black py-2 px-5">Level</th>
+                </tr>
+                <!-- Row Pakai Input -->
+                <?php $view->isiTabelAkun(); ?>
+
+                <!-- Row Pakai Td Biasa -->
+                <!-- <tr class="text-left odd:bg-white even:bg-neutral-50 hover:bg-[rgb(154,94,44)]/10 hover:cursor-pointer" onclick="">
                         <td class="border border-black py-2 pl-5">Budi</td>
                         <td class="border border-black py-2 px-5">Jl. Melati No. 5</td>
                         <td class="border border-black py-2 px-5">08123456789</td>
                         <td class="border border-black py-2 px-5">Warga</td>
-                    </tr>
-                </table>
-            </div>
+                    </tr> -->
+                    <tfoot>
+                        <tr>
+                            <td></td>
+                            <?php $view->jumlahWarga() ?>
+                            <?php $view->jumlahBerqurban() ?>
+                            <?php $view->jumlahAdmin() ?>
+                            <?php $view->jumlahPanitia() ?>
+                            <?php $view->jumlahTotal() ?>
+                        </tr>
+                    </tfoot>
+            </table>
+        </div>
 
-            <div class="w-full h-fit pb-9 bg-white border border-neutral-300 rounded-xl mt-23.5">
+        <div id="addModal" class="hw-fit transition-all ease-in duration-150 fixed bottom-3 right-3 z-30 h-fit bg-white border border-neutral-300 rounded-xl mt-23.5">
+            <div class="flex justify-between items-center space-x-3 p-4">
+                <h3 class="font-bold">Tambah Akun</h3>
+                <button onclick="minimizeAddModal()" class="hover:cursor-pointer">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7" />
+                    </svg>
+                </button>
+            </div>
+            <div id="addModalContent" class="hidden pb-6 pr-4">
                 <form action="" method="">
                     <input type="hidden" id="idAkun" name="idAkun">
                     <div class="w-full max-w-sm min-w-[200px] relative mt-5 ml-5">
-                        <div class="font-semibold text-lg text-center mr-10 mb-2 mt-2">Tambah Akun</div>
                         <label class="block mb-1 text-sm text-neutral-600">
                             Nama
                         </label>
@@ -50,6 +62,23 @@
                                     <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
                                     <g id="SVGRepo_iconCarrier">
                                         <path d="M12,11A5,5,0,1,0,7,6,5.006,5.006,0,0,0,12,11Zm0-8A3,3,0,1,1,9,6,3,3,0,0,1,12,3ZM3,22V18a5.006,5.006,0,0,1,5-5h8a5.006,5.006,0,0,1,5,5v4a1,1,0,0,1-2,0V18a3,3,0,0,0-3-3H8a3,3,0,0,0-3,3v4a1,1,0,0,1-2,0Z"></path>
+                                    </g>
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="w-full max-w-sm min-w-[200px] relative mt-2 ml-5">
+                        <label class="block mb-1 text-sm text-neutral-600">
+                            NIK
+                        </label>
+                        <div class="relative">
+                            <input type="text" class="w-81 bg-transparent placeholder:text-neutral-400 text-black text-sm border border-neutral-300 rounded-md pr-3 pl-10 py-2 transition duration-300 ease focus:outline-none focus:border-neutral-400 hover:border-neutral-300" placeholder="Masukkan NIK" />
+                            <div class="absolute left-1 top-1 rounded bg-gradient-to-bl from-[rgb(154,94,44)] to-[rgb(99,52,14)] p-1.5 border border-transparent text-center text-sm text-white transition-all focus:bg-neutral-700 active:bg-neutral-700  disabled:pointer-events-none disabled:opacity-50">
+                                <svg fill="#ffffff" class="w-4 h-fit" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                    <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                                    <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                                    <g id="SVGRepo_iconCarrier">
+                                        <path d="M4,21H20a3,3,0,0,0,3-3V6a3,3,0,0,0-3-3H4A3,3,0,0,0,1,6V18A3,3,0,0,0,4,21ZM3,6A1,1,0,0,1,4,5H20a1,1,0,0,1,1,1V18a1,1,0,0,1-1,1H4a1,1,0,0,1-1-1ZM5,16a1,1,0,0,1,1-1H9a1,1,0,0,1,0,2H6A1,1,0,0,1,5,16Zm0-3a1,1,0,0,1,1-1h6a1,1,0,0,1,0,2H6A1,1,0,0,1,5,13Z"></path>
                                     </g>
                                 </svg>
                             </div>

@@ -1,6 +1,7 @@
 <?php
 require_once '../View/Content.php';
 require_once '../Model/akunModel.php';
+require_once '../View/adminView.php';
 
 use App\View\Content;
 
@@ -12,6 +13,7 @@ if ($_SESSION['level_akun'] != 'admin') {
 ob_start();
 $content = new Content();
 $akun = new akunModel();
+$view = new adminView();
 ?>
 
 <html lang="en">
@@ -25,7 +27,7 @@ $akun = new akunModel();
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="icon" href="assets/img/logo.png">
+    <link rel="icon" href="assets/img/logo3.png">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../assets/css/style.css">
 </head>
@@ -40,6 +42,7 @@ $akun = new akunModel();
     ?>
 
     <script src="../assets/js/date2.js"></script>
+    <script src="../assets/js/admin.js"></script>
 </body>
 
 </html>

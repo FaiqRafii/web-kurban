@@ -1,12 +1,38 @@
 document.addEventListener("DOMContentLoaded", function () {
   const navbar = document.getElementById("navbar");
-  const profileSvg = document.getElementById("profileSvg");
-  const profileBtn = document.getElementById("profileBtn");
+  fetch("Controller/getIsLogin.php")
+    .then((response) => response.json())
+    .then((data) => {
+      if (data.isLogin) {
+        const profileSvg = document.getElementById("profileSvg");
+        const profileBtn = document.getElementById("profileBtn");
+        const profileModal = document.getElementById("profileModal");
+        window.addEventListener("scroll", () => {
+          if (window.scrollY > 500) {
+            profileSvg.classList.replace("text-white", "text-[rgb(99,52,14)]");
+            profileModal.classList.replace("bg-white", "bg-[rgb(99,52,14)]");
+            profileModal.classList.replace(
+              "text-[rgb(99,52,14)]",
+              "text-white"
+            );
+          } else {
+            profileSvg.classList.replace("text-[rgb(99,52,14)]", "text-white");
+            profileModal.classList.replace("bg-[rgb(99,52,14)]", "bg-white");
+            profileModal.classList.replace(
+              "text-white",
+              "text-[rgb(99,52,14)]"
+            );
+          }
+        });
+
+        profileBtn.addEventListener("click", () => {
+          profileModal.classList.toggle("hidden");
+        });
+      }
+    });
+
   const logo = document.getElementById("logo");
   const navBtn = document.querySelectorAll(".navBtn");
-  console.log("Logo:", logo);
-
-  const profileModal = document.getElementById("profileModal");
 
   window.addEventListener("scroll", () => {
     if (window.scrollY > 500) {
@@ -19,9 +45,6 @@ document.addEventListener("DOMContentLoaded", function () {
           "hover:border-[rgb(99,52,14)]"
         );
       });
-      profileSvg.classList.replace("text-white", "text-[rgb(99,52,14)]");
-      profileModal.classList.replace("bg-white", "bg-[rgb(99,52,14)]");
-      profileModal.classList.replace("text-[rgb(99,52,14)]", "text-white");
 
       logo.src = "assets/img/logoScroll.png";
 
@@ -42,9 +65,6 @@ document.addEventListener("DOMContentLoaded", function () {
           "hover:border-white"
         );
       });
-      profileSvg.classList.replace("text-[rgb(99,52,14)]", "text-white");
-      profileModal.classList.replace("bg-[rgb(99,52,14)]", "bg-white");
-      profileModal.classList.replace("text-white", "text-[rgb(99,52,14)]");
 
       logo.src = "assets/img/logo3.png";
 
@@ -68,9 +88,5 @@ document.addEventListener("DOMContentLoaded", function () {
         behavior: "smooth",
       });
     });
-  });
-
-  profileBtn.addEventListener("click", () => {
-    profileModal.classList.toggle("hidden");
   });
 });

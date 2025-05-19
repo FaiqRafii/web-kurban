@@ -1,8 +1,8 @@
 <div class="p-15">
     <div class="bg-white border border-neutral-300 rounded-xl w-full h-80 overflow-hidden">
-        <div class="flex">
-            <div class="absolute left-115">
-                <img src="../assets/img/logo2.png" class=" w-30 h-fit" alt="">
+        <div class="flex relative">
+            <div class="absolute left-38 top-6">
+                <img src="../assets/img/logoScroll.png" class=" w-20 h-fit" alt="">
             </div>
             <div class="bg-gradient-to-bl from-[rgb(154,94,44)] to-[rgb(99,52,14)] w-30 h-80"></div>
             <div class=" w-3/5 h-80 ">

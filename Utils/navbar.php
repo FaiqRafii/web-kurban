@@ -34,8 +34,7 @@
             <?php
             if (isset($_SESSION['isLogin'])) {
                 echo '
-                
-            <div class="relative inline-block mt-4">
+                            <div class="relative inline-block mt-4">
                 <div id="profileBtn" class="hover:cursor-pointer size-10 rounded-full flex-row items-center justify-center">
                     <svg id="profileSvg" fill="currentColor" class="text-white w-5 h-fit" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                         <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
@@ -52,7 +51,7 @@
                                 ' . ucwords($_SESSION['nama_akun']) . '
                             </div>
                             <div class="text-xs">
-                                ' . ucwords($_SESSION['email_akun']) . '
+                                ' . $_SESSION['nik_akun'] . '
                             </div>
                         </li>
                         <a href="../' . $_SESSION['level_akun'] . '" class="">
