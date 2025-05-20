@@ -24,10 +24,10 @@ class adminController extends adminModel
             exit;
         }
 
-        $this->update($field, $value, $idAkun);
+        $this->updateAkun($field, $value, $idAkun);
     }
 
-    function addAkun()
+    function addAkunBaru()
     {
         $nama = ucwords($_POST['nama']);
         $nik = ucwords($_POST['nik']);
@@ -35,7 +35,7 @@ class adminController extends adminModel
         $noHp = ucwords($_POST['noHp']);
         $level = ucwords($_POST['level']);
 
-        $addStatus = $this->add($nama, $nik, $alamat, $noHp, $level);
+        $addStatus = $this->addAkun($nama, $nik, $alamat, $noHp, $level);
 
         if ($addStatus) {
             $_SESSION['alertSukses'] = 'Berhasil menambah akun';
@@ -44,6 +44,24 @@ class adminController extends adminModel
             $_SESSION['alert'] = 'Gagal menambah akun';
             header('Location: ../admin/');
         }
+    }
+
+    function getAllKeuanganByTanggal()
+    {
+        return $this->getAllKeuanganByTanggal();
+    }
+
+    function updateFieldsKeuangan(){
+    $idTransaksi=$_POST['idTransaksi'];
+    $field=$_POST['field'];
+    $valueRaw=$_POST['value'];
+    $value=str_replace('.','',$valueRaw);
+
+    $this->updateKeuangan($idTransaksi,$field,$value);
+    }
+
+    function getTotalDebetFoot(){
+       return $this->getTotalDebetString();
     }
 }
 
@@ -54,7 +72,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         if ($_POST['action'] == 'updateField') {
             $controller->updateFields();
         } else if ($_POST['action'] == 'add') {
-            $controller->addAkun();
+            $controller->addAkunBaru();
+        }else if($_POST['action']=='updateFieldKeuangan'){
+            $controller->updateFieldsKeuangan();
+        }else if($_POST['action']=='gettotaldebet'){
+            echo "Rp".$controller->getTotalDebetFoot();
         }
     }
 }

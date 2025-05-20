@@ -1,3 +1,8 @@
+<?php 
+require_once '../View/adminView.php'; 
+$view=new adminView(); 
+?>
+
 <div class="px-10 py-5">
     <div class="w-full h-fit px-10 pb-15 bg-gradient-to-b from-[#fff5e3] via-white to-white rounded-xl">
         <div class="pt-1 w-full h-full">
@@ -89,37 +94,10 @@
                         <th class="border border-black py-2 px-5">Kredit</th>
                         <th class="border border-black py-2 px-5">Saldo</th>
                     </tr>
-                    <!-- Row Pakai Input -->
-                    <tr class="text-left odd:bg-white even:bg-neutral-50 hover:bg-[rgb(154,94,44)]/10 hover:cursor-pointer" onclick="">
-                        <input type="hidden" id="idAkun" name="idAkun">
-                        <td class="border border-black pl-5"><input type="text" class="w-25 placeholder:text-black focus:border-none focus:outline-none" placeholder="Budi">
-                        </td>
-                        <td class="border border-black py-2 px-5"> <input type="text" class="w-30 placeholder:text-black focus:border-none focus:outline-none" placeholder="Jl. Melati No. 5">
-                        </td>
-                        <td class="border border-black py-2 px-5"> <input type="text" class="w-25 placeholder:text-black focus:border-none focus:outline-none" placeholder="08123456789">
-                        </td>
-                        <td class="border border-black py-2 px-5"> <input type="text" class="w-15 placeholder:text-black focus:border-none focus:outline-none" placeholder="Warga">
-                        </td>
-                        <td class="border border-black py-2 px-5"> <input type="text" class="w-15 placeholder:text-black focus:border-none focus:outline-none" placeholder="Warga">
-                        </td>
-                    </tr>
-                    <!-- Row Pakai Td Biasa -->
-                    <tr class="text-left odd:bg-white even:bg-neutral-50 hover:bg-[rgb(154,94,44)]/10 hover:cursor-pointer" onclick="">
-                        <td class="border border-black py-2 pl-5">Budi</td>
-                        <td class="border border-black py-2 px-5">Jl. Melati No. 5</td>
-                        <td class="border border-black py-2 px-5">08123456789</td>
-                        <td class="border border-black py-2 px-5">Warga</td>
-                        <td class="border border-black py-2 px-5">Warga</td>
-                    </tr>
-                    <tfoot class="border-t-2 pt-3 border-[rgb(99,52,14)]">
-                        <tr>
-                            <td class="pt-2"><span class="font-bold">12</span> Transaksi</td>
-                            <td class="pt-2"></td>
-                            <td class="pt-2">Rp400.000</td>
-                            <td class="pt-2">Rp400.000</td>
-                            <td class="pt-2">Rp400.000</td>
-                        </tr>
-                    </tfoot>
+
+                    <?php $view->isiTabelKeuangan() ?>
+
+
                 </table>
             </div>
 

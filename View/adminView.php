@@ -142,4 +142,40 @@ class adminView extends adminController
     </div>
         ';
     }
+
+    function isiTabelKeuangan()
+    {
+        $qTransaksi = $this->model->getAllKeuanganByTanggal();
+        $totalDebet=$this->model->getTotalDebet()->fetch_assoc()['totalDebet'];
+        $totalKredit=$this->model->getTotalKredit()->fetch_assoc()['totalKredit'];
+        $totalSaldo=$this->model->getTotalSaldo()->fetch_assoc()['totalSaldo'];
+        while ($transaksi = $qTransaksi->fetch_assoc()) {
+            echo '
+            <tr class="text-left odd:bg-white even:bg-neutral-50 hover:bg-[rgb(154,94,44)]/10 hover:cursor-pointer" onclick="">
+            <input type="hidden" id="idTransaksi" name="idTransaksi" value="' . $transaksi['id_transaksi'] . '">
+            <td class="border border-black pl-5"><input type="text" data-id="'.$transaksi['id_transaksi'].'" data-field="tanggal" class="input-keuangan w-25 placeholder:text-black focus:border-none focus:outline-none" placeholder="Masukkan tanggal" value="' . $transaksi['tanggal'] . '">
+            </td>
+            <td class="border border-black py-2 px-5"> <input type="text" data-id="'.$transaksi['id_transaksi'].'" data-field="keterangan" class="input-keuangan w-30 placeholder:text-black focus:border-none focus:outline-none" placeholder="Masukkan keterangan" value="' . $transaksi['keterangan'] . '">
+            </td>
+            <td class="border border-black py-2 px-5"><span>Rp</span> <input id="rupiah" type="text" data-id="'.$transaksi['id_transaksi'].'" data-field="debet" class="input-keuangan w-35 placeholder:text-black focus:border-none focus:outline-none" placeholder="" value="' . number_format($transaksi['debet'] ?? 0, 0, ',', '.') . '">
+            </td>
+            <td class="border border-black py-2 px-5"><span>Rp</span><input id="rupiah" type="text" data-id="'.$transaksi['id_transaksi'].'" data-field="kredit" class="input-keuangan w-35 placeholder:text-black focus:border-none focus:outline-none" placeholder="" value="' . number_format($transaksi['kredit'] ?? 0, 0, ',', '.') . '">
+            </td>
+            <td class="border border-black py-2 px-5"><span>Rp</span><input disabled type="text" class="input-data w-35 placeholder:text-black focus:border-none focus:outline-none" placeholder="" value="' . number_format($transaksi['saldo'] ?? 0, 0, ',', '.') . '">
+            </td>
+        </tr>
+            ';
+        }
+        echo '
+        <tfoot class="border-t-2 pt-3 border-[rgb(99,52,14)]">
+        <tr>
+            <td class="pt-2 px-5"><span class="font-bold">12</span> Transaksi</td>
+            <td class="pt-2 px-5"></td>
+            <td id="totaldebet" class="pt-2 px-5">Rp'.number_format($totalDebet??'0',0,',','.').'</td>
+            <td id="totalkredit " class="pt-2 px-5">Rp'.number_format($totalKredit??'0',0,',','.').'</td>
+            <td id="totalsaldo" class="pt-2 px-5">Rp'.number_format($totalSaldo??'0',0,',','.').'</td>
+        </tr>
+    </tfoot>
+        ';
+    }
 }
