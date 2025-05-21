@@ -34,44 +34,6 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   });
 
-  inputsKeuangan.forEach((input) => {
-    input.addEventListener("change", () => {
-      const idTransaksi = input.getAttribute("data-id");
-      const field = input.getAttribute("data-field");
-      const value = input.value;
-
-      fetch("../Controller/adminController.php", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/x-www-form-urlencoded",
-        },
-        body: `action=updateFieldKeuangan&idTransaksi=${idTransaksi}&field=${field}&value=${encodeURIComponent(
-          value
-        )}`,
-      })
-        .then((response) => response.text())
-        .then((data) => {
-          console.log("Berhasil update:", data);
-          const fieldFooter = "total" + field;
-          document.getElementById(fieldFooter).innerHTML = "Rp";
-          fetch("../Controller/adminController.php", {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/x-www-form-urlencoded",
-            },
-            body: `action=get${fieldFooter}`,
-          })
-            .then((response) => response.text())
-            .then((data) => {
-              document.getElementById(fieldFooter).innerHTML = data;
-            });
-        })
-        .catch((error) => {
-          console.error("Gagal update:", error);
-        });
-    });
-  });
-
   document.querySelectorAll('input[id="rupiah"]').forEach((e) => {
     e.addEventListener("input", function (input) {
       const value = input.target.value;

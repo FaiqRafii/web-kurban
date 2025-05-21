@@ -1,6 +1,14 @@
-<?php 
-require_once '../View/adminView.php'; 
-$view=new adminView(); 
+<?php
+require_once '../View/adminView.php';
+$view = new adminView();
+
+if (isset($_SESSION['alert'])) {
+    $view->alert($_SESSION['alert']);
+    unset($_SESSION['alert']);
+} else if (isset($_SESSION['alertSukses'])) {
+    $view->alertSukses($_SESSION['alertSukses']);
+    unset($_SESSION['alertSukses']);
+}
 ?>
 
 <div class="px-10 py-5">
@@ -8,10 +16,12 @@ $view=new adminView();
         <div class="pt-1 w-full h-full">
             <div class="w-full">
                 <h1 class="text-left text-3xl pt-10 font-bold">Pencatatan Keuangan</h1>
-                <div id="addContainer" >
-                    <form action="" method="POST" class="w-full h-20 bg-white border border-neutral-300 mt-5 rounded-lg flex space-x-5 items-center px-5">
+                <div id="addContainer">
+                    <form action="../Controller/adminController.php" method="POST" class="w-full h-20 bg-white border border-neutral-300 mt-5 rounded-lg flex space-x-5 items-center px-5">
                         <div class="datepicker-container">
                             <div class="bg-white rounded-lg border-1 text-black border-neutral-300 focus-within:border-neutral-500">
+                                <input type="hidden" name="penginput" value="<?= $_SESSION['nama_akun'] ?>">
+                                <input type="hidden" name="tgl_input" value="<?= ((new DateTime('now', new DateTimeZone('Asia/Jakarta')))->format('d-m-Y H:i:s')) ?>">
                                 <input type="text" name="tanggal" id="tanggal" required class="date-input w-35" placeholder="Pilih tanggal" />
                             </div>
 
@@ -72,13 +82,13 @@ $view=new adminView();
                         </div>
                         <div class="h-12 p-2.5 bg-white rounded-lg border-1 text-black border-neutral-300 flex items-center">
                             <div class="text-neutral-400 mr-2">Rp</div>
-                            <input type="number" name="keterangan" id="" class="w-35 focus:outline-none focus:border-none" placeholder="Nominal">
+                            <input type="text" name="nominal" id="rupiah" class="w-35 focus:outline-none focus:border-none" placeholder="Nominal">
                         </div>
                         <div class="h-12 p-2.5 bg-white rounded-lg border-1 text-black border-neutral-300 flex items-center">
-                            <select name="" id="" class="w-25 focus:outline-none focus:border-none disabled:text-neutral-300">
+                            <select name="akun" id="" class="w-25 focus:outline-none focus:border-none disabled:text-neutral-300">
                                 <option value="" selected disabled>Akun</option>
-                                <option value="">Debet</option>
-                                <option value="">Kredit</option>
+                                <option value="debet">Debet</option>
+                                <option value="kredit">Kredit</option>
                             </select>
                         </div>
                         <div class="h-12 p-2.5 flex items-center">
@@ -86,19 +96,21 @@ $view=new adminView();
                         </div>
                     </form>
                 </div>
-                <table class="mt-5 w-full text-sm">
-                    <tr class=" text-left text-white bg-gradient-to-bl from-[rgb(154,94,44)] to-[rgb(99,52,14)]">
-                        <th class="border border-black py-2 pl-5">Tanggal</th>
-                        <th class="border border-black py-2 px-5">Keterangan</th>
-                        <th class="border border-black py-2 px-5">Debet</th>
-                        <th class="border border-black py-2 px-5">Kredit</th>
-                        <th class="border border-black py-2 px-5">Saldo</th>
-                    </tr>
+                <form action="../Controller/adminController.php" method="POST">
+                    <table class="mt-5 w-full text-sm">
+                        <tr class=" text-left text-white bg-gradient-to-bl from-[rgb(154,94,44)] to-[rgb(99,52,14)]">
+                            <th></th>
+                            <th class="border border-black py-2 pr-5">Tanggal</th>
+                            <th class="border border-black py-2 px-5">Keterangan</th>
+                            <th class="border border-black py-2 px-5">Debet</th>
+                            <th class="border border-black py-2 px-5">Kredit</th>
+                            <th class="border border-black py-2 px-5">Saldo</th>
+                        </tr>
 
-                    <?php $view->isiTabelKeuangan() ?>
+                        <?php $view->isiTabelKeuangan() ?>
 
-
-                </table>
+                    </table>
+                </form>
             </div>
 
         </div>

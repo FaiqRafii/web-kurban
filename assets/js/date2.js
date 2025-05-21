@@ -33,11 +33,10 @@ document.addEventListener("click", (e) => {
 // handle apply button click event
 applyBtn.addEventListener("click", () => {
   // set the selected date to date input
-  dateInput.value = selectedDate.toLocaleDateString("en-US", {
-    year: "numeric",
-    month: "2-digit",
-    day: "2-digit",
-  });
+  const day=String(selectedDate.getDate()).padStart(2,'0');
+  const month=String(selectedDate.getMonth()).padStart(2,'0');
+  const year=selectedDate.getFullYear();
+  dateInput.value = `${day}-${month}-${year}`;
 
   // hide datepicker
   datepicker.hidden = true;

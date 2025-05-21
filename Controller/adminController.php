@@ -46,22 +46,61 @@ class adminController extends adminModel
         }
     }
 
+    function addTransaksiBaru()
+    {
+        $penginput = $_POST['penginput'];
+        $tglInput = $_POST['tgl_input'];
+        $tanggal = $_POST['tanggal'];
+        $keterangan = $_POST['keterangan'];
+        $nominalRaw = $_POST['nominal'];
+        $nominal = str_replace('.', '', $nominalRaw);
+        $akun = $_POST['akun'];
+
+        $addStatus = $this->addTransaksi($penginput, $tglInput, $tanggal, $keterangan, $nominal, $akun);
+        if ($addStatus) {
+            $_SESSION['alertSukses'] = 'Berhasil menambah transaksi';
+            header('Location: ../admin/index.php?page=keuangan');
+        } else {
+            $_SESSION['alert'] = 'Gagal menambah transaksi';
+            header('Location: ../admin/index.php?page=keuangan');
+        }
+    }
+
+    function hapusTransaksi(){
+        $idTransaksi=$_POST['idTransaksi'];
+        $this->deleteTransaksi($idTransaksi);
+    }
+
     function getAllKeuanganByTanggal()
     {
         return $this->getAllKeuanganByTanggal();
     }
 
-    function updateFieldsKeuangan(){
-    $idTransaksi=$_POST['idTransaksi'];
-    $field=$_POST['field'];
-    $valueRaw=$_POST['value'];
-    $value=str_replace('.','',$valueRaw);
-
-    $this->updateKeuangan($idTransaksi,$field,$value);
+    function getTotalDebetFoot()
+    {
+        $dataRaw = $this->getTotalDebetString();
+        $data = explode('|', $dataRaw);
+        return $data;
     }
 
-    function getTotalDebetFoot(){
-       return $this->getTotalDebetString();
+    function getTotalTransaksiClean()
+    {
+        return $totalTransaksi = $this->getTotalTransaksi()->fetch_assoc()['totalTransaksi'];
+    }
+
+    function getTotalDebetClean()
+    {
+        return $totalDebet = $this->getTotalDebet()->fetch_assoc()['totalDebet'];
+    }
+
+    function getTotalKreditClean()
+    {
+        return $totalKredit = $this->getTotalKredit()->fetch_assoc()['totalKredit'];
+    }
+
+    function getTotalSaldoClean()
+    {
+        return $totalSaldo = $this->getTotalSaldo()->fetch_assoc()['totalSaldo'];
     }
 }
 
@@ -73,10 +112,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $controller->updateFields();
         } else if ($_POST['action'] == 'add') {
             $controller->addAkunBaru();
-        }else if($_POST['action']=='updateFieldKeuangan'){
-            $controller->updateFieldsKeuangan();
-        }else if($_POST['action']=='gettotaldebet'){
-            echo "Rp".$controller->getTotalDebetFoot();
+        } else if ($_POST['action'] == 'gettotaldebet') {
+            echo $controller->getTotalDebetFoot();
         }
+    } else if (isset($_POST['idAkun'])) {
+        $controller->addAkunBaru();
+    } else if (isset($_POST['penginput'])) {
+        $controller->addTransaksiBaru();
+    }else if(isset($_POST['idTransaksi'])){
+        $controller->hapusTransaksi();
     }
 }
