@@ -99,7 +99,7 @@ if (isset($_SESSION['alert'])) {
                 <form action="../Controller/adminController.php" method="POST">
                     <table class="mt-5 w-full text-sm">
                         <tr class=" text-left text-white bg-gradient-to-bl from-[rgb(154,94,44)] to-[rgb(99,52,14)]">
-                            <th></th>
+                            <th class="border border-black py-2 pr-5"></th>
                             <th class="border border-black py-2 pr-5">Tanggal</th>
                             <th class="border border-black py-2 px-5">Keterangan</th>
                             <th class="border border-black py-2 px-5">Debet</th>

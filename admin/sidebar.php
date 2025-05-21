@@ -30,14 +30,17 @@
                   <path d="M16.975 11H10V4.025a1 1 0 0 0-1.066-.998 8.5 8.5 0 1 0 9.039 9.039.999.999 0 0 0-1-1.066h.002Z" />
                   <path d="M12.5 0c-.157 0-.311.01-.565.027A1 1 0 0 0 11 1.02V10h8.975a1 1 0 0 0 1-.935c.013-.188.028-.374.028-.565A8.51 8.51 0 0 0 12.5 0Z" />
                </svg>
-               <span class="ms-3">Dashboard</span>
+               <span class="ms-3">Akun</span>
             </a>
          </li>
          <li>
             <a href="?page=keuangan" class="flex items-center p-2 text-[rgb(102,57,19)] rounded-lg  hover:bg-[rgb(102,57,19)] hover:text-white  group">
-               <svg class="w-5 h-5 text-[rgb(102,57,19)] transition duration-75  group-hover:text-white " aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 22 21">
-                  <path d="M16.975 11H10V4.025a1 1 0 0 0-1.066-.998 8.5 8.5 0 1 0 9.039 9.039.999.999 0 0 0-1-1.066h.002Z" />
-                  <path d="M12.5 0c-.157 0-.311.01-.565.027A1 1 0 0 0 11 1.02V10h8.975a1 1 0 0 0 1-.935c.013-.188.028-.374.028-.565A8.51 8.51 0 0 0 12.5 0Z" />
+               <svg fill="currentColor" class="w-5 h-5 text-[rgb(102,57,19)] transition duration-75  group-hover:text-white mb-0.5"  viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                  <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                  <g id="SVGRepo_iconCarrier">
+                     <path d="M22,4H2A1,1,0,0,0,1,5V19a1,1,0,0,0,1,1H22a1,1,0,0,0,1-1V5A1,1,0,0,0,22,4ZM21,16.184A2.987,2.987,0,0,0,19.184,18H4.816A2.987,2.987,0,0,0,3,16.184V7.816A2.987,2.987,0,0,0,4.816,6H19.184A2.987,2.987,0,0,0,21,7.816ZM12,8a4,4,0,1,0,4,4A4,4,0,0,0,12,8Zm0,6a2,2,0,1,1,2-2A2,2,0,0,1,12,14ZM7,12a1,1,0,0,1-1,1H5a1,1,0,0,1,0-2H6A1,1,0,0,1,7,12Zm13,0a1,1,0,0,1-1,1H18a1,1,0,0,1,0-2h1A1,1,0,0,1,20,12Z"></path>
+                  </g>
                </svg>
                <span class="ms-3">Keuangan</span>
             </a>

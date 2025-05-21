@@ -14,35 +14,35 @@ class adminView extends adminController
     function jumlahWarga()
     {
         echo '
-        <td class="text-xs pt-5"><span class="font-bold">' . $this->model->getJumlahWarga() . '</span> Warga</td>
+        <td class="text-xs pt-5 pl-5"><span class="font-bold">' . $this->model->getJumlahWarga() . '</span> Warga</td>
         ';
     }
 
     function jumlahBerqurban()
     {
         echo '
-        <td class="text-xs pt-5"><span class="font-bold">' . $this->model->getJumlahBerqurban() . '</span> Berqurban</td>
+        <td class="text-xs pt-5 pl-5"><span class="font-bold">' . $this->model->getJumlahBerqurban() . '</span> Berqurban</td>
         ';
     }
 
     function jumlahAdmin()
     {
         echo '
-        <td class="text-xs pt-5"><span class="font-bold">' . $this->model->getJumlahAdmin() . '</span> Admin</td>
+        <td class="text-xs pt-5 pl-5"><span class="font-bold">' . $this->model->getJumlahAdmin() . '</span> Admin</td>
         ';
     }
 
     function jumlahPanitia()
     {
         echo '
-        <td class="text-xs pt-5"><span class="font-bold">' . $this->model->getJumlahPanitia() . '</span> Panitia</td>
+        <td class="text-xs pt-5 pl-5"><span class="font-bold">' . $this->model->getJumlahPanitia() . '</span> Panitia</td>
         ';
     }
 
     function jumlahTotal()
     {
         echo '
-        <td class="text-xs pt-5 font-semibold">Total <span class="font-bold">' . $this->model->getJumlahTotal() . '</span></td>
+        <td class="text-xs pt-5 pl-5 font-semibold">Total <span class="font-bold">' . $this->model->getJumlahTotal() . '</span></td>
         ';
     }
 
@@ -53,9 +53,11 @@ class adminView extends adminController
         while ($akun = $q->fetch_array()) {
             echo '
             <tr class="text-left odd:bg-white even:bg-neutral-50 hover:bg-[rgb(154,94,44)]/10 hover:cursor-pointer" onclick="">
+                            <td class="border border-black py-2 pl-5">
+                            <input type="checkbox" id="idAkun" name="idAkun[]" value="' . $akun['id_akun'] . '" class="hover:cursor-pointer">
+                            </td>
                             <td class="text-center">' . $no++ . '
                             </td>
-                            <input type="hidden" class="idAkun" name="idAkun" value="' . $akun['id_akun'] . '">
                             <td class="border border-black pl-5"><input name="nama" type="text" class="input-data w-25 placeholder:text-black focus:border-none focus:outline-none" placeholder="Masukkan nama" data-field="nama" data-id="' . $akun['id_akun'] . '" value="' . $akun['nama'] . '">
                             </td>
                             <td class="border border-black pl-5"><input name="nik" type="text" class="input-data w-29 placeholder:text-black focus:border-none focus:outline-none" placeholder="Masukkan NIK" data-field="nik" data-id="' . $akun['id_akun'] . '" value="' . $akun['nik'] . '">
@@ -75,6 +77,18 @@ class adminView extends adminController
                         </tr>
                         ';
         }
+        echo '
+        <tfoot>
+        <tr>
+            <td class="text-xs pt-5 pr-10  sticky bottom-4 z-10"><input type="submit" class="text-xs bottom-10 border border-red-600 bg-white text-red-600 hover:cursor-pointer hover:bg-red-600 hover:text-white hover:border-transparent px-1 py-0.5 rounded" value="Hapus"></input></td>';
+        echo $this->jumlahTotal();
+        echo $this->jumlahWarga();
+        echo $this->jumlahBerqurban();
+        echo $this->jumlahAdmin();
+        echo $this->jumlahPanitia();
+        echo '</tr>
+        </tfoot>
+        ';
     }
 
     function alert($keterangan)
@@ -116,11 +130,10 @@ class adminView extends adminController
         <div id="alert" class="z-10 transition-all ease-in-out transform duration-150 fixed top-2 right-5 bg-teal-50 border border-teal-200 text-sm text-teal-800 rounded-lg p-4" role="alert">
         <div class="flex">
             <div class="shrink-0">
-                <svg class="shrink-0 size-4 mt-0.5" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <circle cx="12" cy="12" r="10"></circle>
-                    <path d="m15 9-6 6"></path>
-                    <path d="m9 9 6 6"></path>
-                </svg>
+            <svg class="shrink-0 size-4 mt-0.5" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z"></path>
+            <path d="m9 12 2 2 4-4"></path>
+          </svg>
             </div>
             <div class="ms-2">
                 <h3 class="text-sm font-medium">
@@ -166,10 +179,10 @@ class adminView extends adminController
             echo
             '</td>
             <td class="border border-black py-2 px-5">Rp';
-            
-            if($transaksi['akun']=='kredit'){
+
+            if ($transaksi['akun'] == 'kredit') {
                 echo number_format($transaksi['nominal'] ?? 0, 0, ',', '.');
-            }else{
+            } else {
                 echo '0';
             }
             echo '
@@ -183,7 +196,7 @@ class adminView extends adminController
         echo '
         <tfoot class="border-t-2 pt-3 border-[rgb(99,52,14)]">
         <tr>
-            <td class="pt-2 px-5"><input type="submit" class="border border-red-600 text-red-600 hover:cursor-pointer hover:bg-red-600 hover:text-white hover:border-transparent px-2 py-0.5 rounded" value="Hapus"></input></td>
+            <td class="text-xs pt-5 pr-10  sticky bottom-4 z-10"><input type="submit" class="text-xs bottom-10 border border-red-600 bg-white text-red-600 hover:cursor-pointer hover:bg-red-600 hover:text-white hover:border-transparent px-1 py-0.5 rounded" value="Hapus"></input></td>
             <td class="pt-2 px-5"></td>
             <td class="pt-2 px-5"><span class="font-bold">' . $this->getTotalTransaksiClean() . '</span> Transaksi</td>
             <td id="totaldebet" class="pt-2 px-5">Rp' . number_format($this->getTotalDebetClean() ?? '0', 0, ',', '.') . '</td>

@@ -46,6 +46,11 @@ class adminController extends adminModel
         }
     }
 
+    function hapusAkun(){
+        $idAkun=$_POST['idAkun'];
+        $this->deleteAkun($idAkun);
+    }
+
     function addTransaksiBaru()
     {
         $penginput = $_POST['penginput'];
@@ -116,7 +121,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             echo $controller->getTotalDebetFoot();
         }
     } else if (isset($_POST['idAkun'])) {
-        $controller->addAkunBaru();
+        $controller->hapusAkun();
     } else if (isset($_POST['penginput'])) {
         $controller->addTransaksiBaru();
     }else if(isset($_POST['idTransaksi'])){

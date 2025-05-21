@@ -121,6 +121,18 @@ class adminModel extends koneksi
         }
     }
 
+    function deleteAkun($idAkun){
+        foreach($idAkun as $akun){
+            $hapus=$this->connect()->query("DELETE FROM akun WHERE id_akun='".$akun."'");
+            if($hapus){
+                $_SESSION['alertSukses']='Berhasil menghapus akun';
+            }else{
+                $_SESSION['alert']='Gagal menghapus akun';
+            }
+            header('Location: ../admin/');
+        }
+    }
+
     function deleteTransaksi($idTransaksi)
     {
         foreach ($idTransaksi as $transaksi) {

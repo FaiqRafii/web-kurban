@@ -13,32 +13,26 @@ if (isset($_SESSION['alert'])) {
 
     <div class="w-full h-fit px-10 pb-15 bg-gradient-to-b from-[#fff5e3] via-white to-white rounded-xl">
         <div class="w-full pt-1">
-            <table class="mt-10 w-full text-sm">
-                <tr class="">
-                    <th colspan="3" class="text-left text-3xl pb-5">Pendataan Akun</th>
-                </tr>
-                <tr class=" text-left text-white bg-gradient-to-bl from-[rgb(154,94,44)] to-[rgb(99,52,14)]">
-                    <th class="border border-black py-2 pl-5">No</th>
-                    <th class="border border-black py-2 pl-5">Nama</th>
-                    <th class="border border-black py-2 pl-5">NIK</th>
-                    <th class="border border-black py-2 px-5">Alamat</th>
-                    <th class="border border-black py-2 px-5">No HP</th>
-                    <th class="border border-black py-2 px-5">Level</th>
-                </tr>
-
-                <?php $view->isiTabelAkun(); ?>
-
-                <tfoot>
-                    <tr>
-                        <td></td>
-                        <?php $view->jumlahWarga() ?>
-                        <?php $view->jumlahBerqurban() ?>
-                        <?php $view->jumlahAdmin() ?>
-                        <?php $view->jumlahPanitia() ?>
-                        <?php $view->jumlahTotal() ?>
+            <form action="../Controller/adminController.php" method="POST">
+                <table class="mt-10 w-full text-sm">
+                    <tr class="">
+                        <th colspan="3" class="text-left text-3xl pb-5">Pendataan Akun</th>
                     </tr>
-                </tfoot>
-            </table>
+                    <tr class=" text-left text-white bg-gradient-to-bl from-[rgb(154,94,44)] to-[rgb(99,52,14)]">
+                        <th class="border border-black py-2 pl-5"></th>
+                        <th class="border border-black py-2 pl-5">No</th>
+                        <th class="border border-black py-2 pl-5">Nama</th>
+                        <th class="border border-black py-2 pl-5">NIK</th>
+                        <th class="border border-black py-2 px-5">Alamat</th>
+                        <th class="border border-black py-2 px-5">No HP</th>
+                        <th class="border border-black py-2 px-5">Level</th>
+                    </tr>
+
+                    <?php $view->isiTabelAkun(); ?>
+
+                </table>
+                
+            </form>
         </div>
 
         <div id="addModal" class="hw-fit transition-all ease-in duration-150 fixed bottom-3 right-3 z-30 h-fit bg-white border border-neutral-300 rounded-xl mt-23.5">
@@ -52,14 +46,13 @@ if (isset($_SESSION['alert'])) {
             </div>
             <div id="addModalContent" class="hidden pb-6 pr-4">
                 <form action="../Controller/adminController.php" method="POST">
-                    <input type="hidden" id="idAkun" name="idAkun">
                     <input type="hidden" name="action" value="add" id="">
                     <div class="w-full max-w-sm min-w-[200px] relative mt-5 ml-5">
                         <label class="block mb-1 text-sm text-neutral-600">
                             Nama
                         </label>
                         <div class="relative">
-                            <input name="nama" type="text" class="w-81 bg-transparent placeholder:text-neutral-400 text-black text-sm border border-neutral-300 rounded-md pr-3 pl-10 py-2 transition duration-300 ease focus:outline-none focus:border-neutral-400 hover:border-neutral-300" placeholder="Masukkan nama" />
+                            <input required name="nama" type="text" class="w-81 bg-transparent placeholder:text-neutral-400 text-black text-sm border border-neutral-300 rounded-md pr-3 pl-10 py-2 transition duration-300 ease focus:outline-none focus:border-neutral-400 hover:border-neutral-300" placeholder="Masukkan nama" />
                             <div class="absolute left-1 top-1 rounded bg-gradient-to-bl from-[rgb(154,94,44)] to-[rgb(99,52,14)] p-1.5 border border-transparent text-center text-sm text-white transition-all focus:bg-neutral-700 active:bg-neutral-700  disabled:pointer-events-none disabled:opacity-50">
                                 <svg fill="#ffffff" class="w-4 h-fit" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                     <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
@@ -76,7 +69,7 @@ if (isset($_SESSION['alert'])) {
                             NIK
                         </label>
                         <div class="relative">
-                            <input name="nik" type="text" class="w-81 bg-transparent placeholder:text-neutral-400 text-black text-sm border border-neutral-300 rounded-md pr-3 pl-10 py-2 transition duration-300 ease focus:outline-none focus:border-neutral-400 hover:border-neutral-300" placeholder="Masukkan NIK" />
+                            <input required name="nik" type="text" class="w-81 bg-transparent placeholder:text-neutral-400 text-black text-sm border border-neutral-300 rounded-md pr-3 pl-10 py-2 transition duration-300 ease focus:outline-none focus:border-neutral-400 hover:border-neutral-300" placeholder="Masukkan NIK" />
                             <div class="absolute left-1 top-1 rounded bg-gradient-to-bl from-[rgb(154,94,44)] to-[rgb(99,52,14)] p-1.5 border border-transparent text-center text-sm text-white transition-all focus:bg-neutral-700 active:bg-neutral-700  disabled:pointer-events-none disabled:opacity-50">
                                 <svg fill="#ffffff" class="w-4 h-fit" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                     <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
@@ -93,7 +86,7 @@ if (isset($_SESSION['alert'])) {
                             Alamat
                         </label>
                         <div class="relative">
-                            <input name="alamat" type="text" class="w-81 bg-transparent placeholder:text-neutral-400 text-black text-sm border border-neutral-300 rounded-md pr-3 pl-10 py-2 transition duration-300 ease focus:outline-none focus:border-neutral-400 hover:border-neutral-300" placeholder="Masukkan alamat" />
+                            <input required name="alamat" type="text" class="w-81 bg-transparent placeholder:text-neutral-400 text-black text-sm border border-neutral-300 rounded-md pr-3 pl-10 py-2 transition duration-300 ease focus:outline-none focus:border-neutral-400 hover:border-neutral-300" placeholder="Masukkan alamat" />
                             <div class="absolute left-1 top-1 rounded bg-gradient-to-bl from-[rgb(154,94,44)] to-[rgb(99,52,14)] p-1.5 border border-transparent text-center text-sm text-white transition-all focus:bg-neutral-700 active:bg-neutral-700  disabled:pointer-events-none disabled:opacity-50">
                                 <svg fill="#ffffff" class="w-4 h-fit" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                     <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
@@ -110,7 +103,7 @@ if (isset($_SESSION['alert'])) {
                             Nomor HP
                         </label>
                         <div class="relative">
-                            <input name="noHp" type="text" class="w-81 bg-transparent placeholder:text-neutral-400 text-black text-sm border border-neutral-300 rounded-md pr-3 pl-10 py-2 transition duration-300 ease focus:outline-none focus:border-neutral-400 hover:border-neutral-300" placeholder="Masukkan nomor hp" />
+                            <input required name="noHp" type="text" class="w-81 bg-transparent placeholder:text-neutral-400 text-black text-sm border border-neutral-300 rounded-md pr-3 pl-10 py-2 transition duration-300 ease focus:outline-none focus:border-neutral-400 hover:border-neutral-300" placeholder="Masukkan nomor hp" />
                             <div class="absolute left-1 top-1 rounded bg-gradient-to-bl from-[rgb(154,94,44)] to-[rgb(99,52,14)] p-1.5 border border-transparent text-center text-sm text-white transition-all focus:bg-neutral-700 active:bg-neutral-700  disabled:pointer-events-none disabled:opacity-50">
                                 <svg fill="#ffffff" class="w-4 h-fit" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                     <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
@@ -128,7 +121,7 @@ if (isset($_SESSION['alert'])) {
                         </label>
                         <div class="relative">
                             <div class="relative">
-                                <select name="level" class="w-81 pl-10 bg-transparent placeholder:text-neutral-700 text-black text-sm border border-neutral-300 rounded py-2 transition duration-300 ease focus:outline-none focus:border-neutral-400 hover:border-neutral-400 appearance-none cursor-pointer">
+                                <select required name="level" class="w-81 pl-10 bg-transparent placeholder:text-neutral-700 text-black text-sm border border-neutral-300 rounded py-2 transition duration-300 ease focus:outline-none focus:border-neutral-400 hover:border-neutral-400 appearance-none cursor-pointer">
                                     <option value="" selected="" disabled class="disabled:text-neutral-700 hover:bg-[rgb(99,52,14)]">Pilih level</option>
                                     <option value="warga">Warga</option>
                                     <option value="berqurban">Berqurban</option>
