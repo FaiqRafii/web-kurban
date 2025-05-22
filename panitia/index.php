@@ -1,13 +1,18 @@
 <?php
 require_once '../View/Content.php';
+require_once '../Model/akunModel.php';
+
 use App\View\Content;
 
-session_start();
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
 
-if($_SESSION['level_akun']!='panitia'){
+if ($_SESSION['level_akun'] != 'panitia') {
     header('Location: ../');
 }
 
+$akun = new akunModel();
 $content = new Content();
 ?>
 
@@ -21,7 +26,7 @@ $content = new Content();
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="icon" href="assets/img/icon.png">
+    <link rel="icon" href="../assets/img/icon.png">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../assets/css/style.css">
 
@@ -29,7 +34,12 @@ $content = new Content();
 <?php include 'sidebar.php' ?>
 
 <body class="font-montserrat bg-white p-4 sm:ml-64">
-<?php $content->loadContent($content->getPage()) ?>
+    <?php $content->loadContent($content->getPage()) ?>
+
+    <script src="../assets/js/date2.js"></script>
+    <script src="../assets/js/alert.js"></script>
+    <script src="../assets/js/admin.js"></script>
+
 </body>
 
 </html>

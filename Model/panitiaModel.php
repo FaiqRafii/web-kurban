@@ -4,7 +4,7 @@ require_once 'koneksi.php';
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
-class adminModel extends koneksi
+class panitiaModel extends koneksi
 {
 
     function getAllAkunByLevel()
@@ -41,24 +41,6 @@ class adminModel extends koneksi
     {
         $sql = $this->connect()->query("SELECT COUNT(*) AS jumlah FROM akun");
         return $jumlah = $sql->fetch_assoc()['jumlah'];
-    }
-
-    function updateAkun($field, $value, $idAkun)
-    {
-        $update = $this->connect()->query("UPDATE akun SET " . $field . " = '" . $value . "' WHERE id_akun='" . $idAkun . "'");
-        if (!$update) {
-            die('Update gagal');
-        }
-    }
-
-    function addAkun($nama, $nik, $alamat, $noHp, $level)
-    {
-        $add = $this->connect()->query("INSERT INTO akun (nama, alamat, nik, level, no_hp) VALUES ('" . $nama . "','" . $alamat . "','" . $nik . "','" . $level . "','" . $noHp . "')");
-        if (!$add) {
-            return false;
-        } else {
-            return true;
-        }
     }
 
     function getAllKeuanganByTanggal()
@@ -121,19 +103,6 @@ class adminModel extends koneksi
         }
     }
 
-    function deleteAkun($idAkun)
-    {
-        foreach ($idAkun as $akun) {
-            $hapus = $this->connect()->query("DELETE FROM akun WHERE id_akun='" . $akun . "'");
-            if ($hapus) {
-                $_SESSION['alertSukses'] = 'Berhasil menghapus akun';
-            } else {
-                $_SESSION['alert'] = 'Gagal menghapus akun';
-            }
-            header('Location: ../admin/');
-        }
-    }
-
     function deleteTransaksi($idTransaksi)
     {
         foreach ($idTransaksi as $transaksi) {
@@ -160,5 +129,37 @@ class adminModel extends koneksi
             }
             $q = $this->connect()->query("UPDATE keuangan SET saldo='" . $saldo . "' WHERE id_transaksi='" . $dataSetelah['id_transaksi'] . "'");
         }
+    }
+
+    function updateDagingModel($dagingKambing, $dagingSapi)
+    {
+        $cek = $this->connect()->query("SELECT * FROM daging");
+        if ($cek->num_rows > 1) {
+            $updateKambing = $this->connect()->query("UPDATE daging SET berat='$dagingKambing' WHERE hewan='kambing'");
+            $updateSapi = $this->connect()->query("UPDATE daging SET berat='$dagingSapi' WHERE hewan='sapi'");
+            if ($updateKambing && $updateSapi) {
+                return true;
+            } else {
+                return false;
+            }
+        } else {
+            $insertKambing = $this->connect()->query("INSERT INTO daging (hewan, berat) VALUES ('kambing','" . $dagingKambing . "')");
+            $insertSapi = $this->connect()->query("INSERT INTO daging (hewan, berat) VALUES ('sapi','" . $dagingSapi . "')");
+            if ($insertKambing && $insertKambing) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+    }
+
+    function getTotalKambingModel(){
+        $q=$this->connect()->query("SELECT berat FROM daging WHERE hewan='kambing'");
+        return $q;
+    }
+
+    function getTotalSapiModel(){
+        $q=$this->connect()->query("SELECT berat FROM daging WHERE hewan='sapi'");
+        return $q;
     }
 }

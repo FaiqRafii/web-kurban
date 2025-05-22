@@ -26,16 +26,19 @@
       <ul class="space-y-2 font-montserrat">
          <li>
             <a href="./" class="flex items-center p-2 text-[rgb(102,57,19)] rounded-lg  hover:bg-[rgb(102,57,19)] hover:text-white  group">
-               <svg class="w-5 h-5 text-[rgb(102,57,19)] transition duration-75  group-hover:text-white " aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 22 21">
-                  <path d="M16.975 11H10V4.025a1 1 0 0 0-1.066-.998 8.5 8.5 0 1 0 9.039 9.039.999.999 0 0 0-1-1.066h.002Z" />
-                  <path d="M12.5 0c-.157 0-.311.01-.565.027A1 1 0 0 0 11 1.02V10h8.975a1 1 0 0 0 1-.935c.013-.188.028-.374.028-.565A8.51 8.51 0 0 0 12.5 0Z" />
+               <svg fill="currentColor" class="w-5 h-5 text-[rgb(102,57,19)] transition duration-75  group-hover:text-white mb-0.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                  <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                  <g id="SVGRepo_iconCarrier">
+                     <path d="M21.555,8.168l-9-6A1,1,0,0,0,12,2h0a1,1,0,0,0-.554.168l-9,6A1,1,0,0,0,3,10H4V21a1,1,0,0,0,1,1H19a1,1,0,0,0,1-1V10h1a1,1,0,0,0,.556-1.832ZM18,20H6V8.2l6-4,6,4Z"></path>
+                  </g>
                </svg>
-               <span class="ms-3">Akun</span>
+               <span class="ms-3">Dashboard</span>
             </a>
          </li>
          <li>
             <a href="?page=keuangan" class="flex items-center p-2 text-[rgb(102,57,19)] rounded-lg  hover:bg-[rgb(102,57,19)] hover:text-white  group">
-               <svg fill="currentColor" class="w-5 h-5 text-[rgb(102,57,19)] transition duration-75  group-hover:text-white mb-0.5"  viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+               <svg fill="currentColor" class="w-5 h-5 text-[rgb(102,57,19)] transition duration-75  group-hover:text-white mb-0.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                   <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
                   <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
                   <g id="SVGRepo_iconCarrier">

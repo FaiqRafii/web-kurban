@@ -1,3 +1,8 @@
+<?php
+require_once '../Model/panitiaModel.php';
+$model = new panitiaModel();
+?>
+
 <div class="my-20 mx-10 grid lg:grid-cols-4 space-y-8 gap-x-5">
     <div class="border border-neutral-300 rounded-xl w-full h-25 relative">
         <div class="bg-gradient-to-bl from-[rgb(154,94,44)] to-[rgb(99,52,14)] w-18 h-18 rounded-xl absolute -inset-y-7 inset-x-5 flex justify-center items-center">
@@ -14,7 +19,7 @@
             Warga
         </div>
         <div class="font-bold absolute right-0 top-7 text-3xl mr-5 mt-2">
-            60
+            <?= $model->getJumlahWarga() ?>
         </div>
     </div>
     <div class="border border-neutral-300 rounded-xl w-full h-25 relative">
@@ -31,7 +36,7 @@
             Berqurban
         </div>
         <div class="font-bold absolute right-0 top-7 text-3xl mr-5 mt-2">
-            9
+            <?= $model->getJumlahBerqurban() ?>
         </div>
     </div>
     <div class="border border-neutral-300 rounded-xl w-full h-25 relative">
@@ -48,7 +53,7 @@
             Panitia
         </div>
         <div class="font-bold absolute right-0 top-7 text-3xl mr-5 mt-2">
-            15
+            <?= $model->getJumlahPanitia() ?>
         </div>
     </div>
     <div class="border border-neutral-300 rounded-xl w-full h-25 flex justify-center items-center">
@@ -57,7 +62,7 @@
                 Total
             </div>
             <div class="font-bold text-3xl">
-                90
+                <?= $model->getJumlahTotal() ?>
             </div>
         </div>
     </div>

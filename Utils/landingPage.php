@@ -27,7 +27,7 @@
     <!-- Part Fitur -->
     <div id="fitur" class="bg-white w-full h-full p-25">
         <div class="grid grid-cols-[40%_60%]">
-            <div class=" w-full h-full font-bold text-3xl ">
+            <div class=" w-full pr-5 h-full font-bold text-3xl ">
                 Fitur Yang Akan Anda Dapatkan
             </div>
             <div class=" w-full h-full">

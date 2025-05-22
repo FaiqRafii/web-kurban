@@ -1,56 +1,11 @@
 <?php
-require_once '../Model/adminModel.php';
+require_once '../Model/panitiaModel.php';
 require_once '../Model/koneksi.php';
 
 
 
-class adminController extends adminModel
+class panitiaController extends panitiaModel
 {
-
-    function getAllAkunByLevel()
-    {
-        return $this->getAllAkunByLevel();
-    }
-
-    function updateFields()
-    {
-        $idAkun = $_POST['idAkun'];
-        $field = $_POST['field'];
-        $value = $_POST['value'];
-
-        $allowedFields = ['nama', 'noHp', 'alamat', 'nik', 'level'];
-        if (!in_array($field, $allowedFields)) {
-            echo 'Field tidak valid.';
-            exit;
-        }
-
-        $this->updateAkun($field, $value, $idAkun);
-    }
-
-    function addAkunBaru()
-    {
-        $nama = ucwords($_POST['nama']);
-        $nik = ucwords($_POST['nik']);
-        $alamat = ucwords($_POST['alamat']);
-        $noHp = ucwords($_POST['noHp']);
-        $level = ucwords($_POST['level']);
-
-        $addStatus = $this->addAkun($nama, $nik, $alamat, $noHp, $level);
-
-        if ($addStatus) {
-            $_SESSION['alertSukses'] = 'Berhasil menambah akun';
-            header('Location: ../admin/');
-        } else {
-            $_SESSION['alert'] = 'Gagal menambah akun';
-            header('Location: ../admin/');
-        }
-    }
-
-    function hapusAkun()
-    {
-        $idAkun = $_POST['idAkun'];
-        $this->deleteAkun($idAkun);
-    }
 
     function addTransaksiBaru()
     {
@@ -64,22 +19,21 @@ class adminController extends adminModel
 
         $addStatus = $this->addTransaksi($penginput, $tglInput, $tanggal, $keterangan, $nominal, $akun);
         if ($addStatus) {
-            $this->updateSaldoAll();
             $_SESSION['alertSukses'] = 'Berhasil menambah transaksi';
-            header('Location: ../admin/index.php?page=keuangan');
+            header('Location: ../panitia/index.php?page=keuangan');
         } else {
             $_SESSION['alert'] = 'Gagal menambah transaksi';
-            header('Location: ../admin/index.php?page=keuangan');
+            header('Location: ../panitia/index.php?page=keuangan');
         }
     }
 
     function hapusTransaksi()
     {
         $idTransaksi = $_POST['idTransaksi'];
-        $status=$this->deleteTransaksi($idTransaksi);
-        if($status){
+        $status = $this->deleteTransaksi($idTransaksi);
+        if ($status) {
             $_SESSION['alertSukses'] = 'Berhasil menghapus transaksi';
-            header('Location: ../admin/index.php?page=keuangan');
+            header('Location: ../panitia/index.php?page=keuangan');
         }
     }
 
@@ -114,21 +68,60 @@ class adminController extends adminModel
     {
         return $totalSaldo = $this->getTotalSaldo()->fetch_assoc()['totalSaldo'];
     }
+
+    function getJumlahWargaClean()
+    {
+        return $this->getJumlahWarga();
+    }
+
+    function getJumlahBerqurbanClean()
+    {
+        return $this->getJumlahBerqurbanClean();
+    }
+
+    function getJumlahPanitiaClean()
+    {
+        return $this->getJumlahPanitia();
+    }
+
+    function getJumlahTotalClean()
+    {
+        return $this->getJumlahTotal();
+    }
+
+    function updateDaging()
+    {
+        $dagingKambing = $_POST['kambing'];
+        $dagingSapi = $_POST['sapi'];
+
+        $update=$this->updateDagingModel($dagingKambing, $dagingSapi);
+        if($update){
+            $_SESSION['alertSukses'] = 'Berhasil mengubah total daging';
+        }else{
+            $_SESSION['alert'] = 'Gagal mengubah total daging';
+        }
+
+        header('Location:../panitia/?page=pembagian');
+    }
+
+    function getTotalKambing(){
+        return $this->getTotalKambingModel()->fetch_assoc()['berat'];
+    }
+
+    function getTotalSapi(){
+        return $this->getTotalSapiModel()->fetch_assoc()['berat'];
+    }
 }
 
-$controller = new adminController();
+$controller = new panitiaController();
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if (isset($_POST['action'])) {
-        if ($_POST['action'] == 'updateField') {
-            $controller->updateFields();
-        } else if ($_POST['action'] == 'add') {
-            $controller->addAkunBaru();
-        } else if ($_POST['action'] == 'gettotaldebet') {
+        if ($_POST['action'] == 'gettotaldebet') {
             echo $controller->getTotalDebetFoot();
+        }else if($_POST['action']=='updateDaging'){
+            $controller->updateDaging();
         }
-    } else if (isset($_POST['idAkun'])) {
-        $controller->hapusAkun();
     } else if (isset($_POST['penginput'])) {
         $controller->addTransaksiBaru();
     } else if (isset($_POST['idTransaksi'])) {
