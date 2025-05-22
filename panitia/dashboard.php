@@ -1,5 +1,7 @@
 <?php
 require_once '../Model/panitiaModel.php';
+require_once '../View/panitiaView.php';
+$view=new panitiaView();
 $model = new panitiaModel();
 ?>
 
@@ -77,7 +79,7 @@ $model = new panitiaModel();
                 <div class="flex justify-center items-center ">
                     <div class="grid grid-rows-10%_90% text-center">
                         <div class="text-sm ">Total</div>
-                        <div class="font-bold text-xl">80 Kg</div>
+                        <div class="font-bold text-xl"><?php $view->totalDagingSapi() ?> Kg</div>
                     </div>
                 </div>
                 <div class="flex justify-center items-center ">
@@ -101,7 +103,7 @@ $model = new panitiaModel();
                 <div class="flex justify-center items-center ">
                     <div class="grid grid-rows-10%_90% text-center">
                         <div class="text-sm ">Total</div>
-                        <div class="font-bold text-xl">40 Kg</div>
+                        <div class="font-bold text-xl"><?php $view->totalDagingKambing(); ?> Kg</div>
                     </div>
                 </div>
                 <div class="flex justify-center items-center ">

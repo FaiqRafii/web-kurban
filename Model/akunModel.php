@@ -13,6 +13,20 @@ class akunModel extends koneksi
         return $nama;
     }
 
+    function getAlamat()
+    {
+        $sql = $this->connect()->query("SELECT alamat FROM akun WHERE id_akun='" . $_SESSION['id_akun'] . "'");
+        $alamat = $sql->fetch_assoc()['alamat'];
+        return $alamat;
+    }
+
+    function getNoHp()
+    {
+        $sql = $this->connect()->query("SELECT no_hp FROM akun WHERE id_akun='" . $_SESSION['id_akun'] . "'");
+        $noHp = $sql->fetch_assoc()['no_hp'];
+        return $noHp;
+    }
+
     function getNIK()
     {
         $sql = $this->connect()->query("SELECT nik FROM akun WHERE id_akun='" . $_SESSION['id_akun'] . "'");
