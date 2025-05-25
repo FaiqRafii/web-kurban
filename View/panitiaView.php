@@ -120,7 +120,7 @@ class panitiaView extends panitiaController
                     echo '<li class="text-xs">' . $kiri[$i] . '</li>';
                 }
                 echo '</ol>';
-                echo '<ol class="pl-4" start="4" style="list-style-type:decimal">';
+                echo '<ol class="pl-4" start="' . (count($kiri) + 1) . '" style="list-style-type:decimal">';
                 for ($i = 0; $i < count($kanan); $i++) {
                     echo '
                 <li class="text-xs">' . $kanan[$i] . '</li>';
@@ -145,6 +145,25 @@ class panitiaView extends panitiaController
         </form>
         </div>
         ';
+        }
+    }
+
+    function isiTabelPembagian()
+    {
+        $qP = $this->getPembagian();
+
+        while ($data = $qP->fetch_assoc()) {
+            echo '
+            <tr>
+            <td class="py-2 pl-5 flex justify-center items-end"><input type="checkbox" class="hover:cursor-pointer" name="" id=""></td>
+            <td class="py-2 pl-5">'.$data['id_pembagian'].'</td>
+            <td class="py-2 px-5">' . $data['nama'] . '</td>
+            <td class="py-2 px-10">' . $data['alamat'] . '</td>
+            <td class="py-2 pl-10">' . $data['no_hp'] . '</td>
+            <td class="py-2 pl-15">' . number_format($data['kambing'], 2, ',') . ' Kg</td>
+            <td class="py-2 pl-8">' .  number_format($data['sapi'], 2, ',')  . ' Kg</td>
+        </tr>
+            ';
         }
     }
 

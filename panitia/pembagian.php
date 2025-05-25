@@ -23,9 +23,9 @@ if (isset($_SESSION['alert'])) {
                             <input type="hidden" disabled name="action" value="cariPenerima" id="">
                             <div class="w-full relative">
                                 <div class="relative">
-                                    <input required name="cari" type="text" class="w-45 absolute left-0 bg-transparent placeholder:text-neutral-400 text-black text-sm border border-neutral-300 rounded-md pr-3 pl-8 font-normal py-2 transition duration-300 ease focus:outline-none focus:border-neutral-400 hover:border-neutral-300" placeholder="Cari penerima..." />
-                                    <div class="absolute left-1 top-1 rounded p-1.5 text-center text-sm text-white transition-all focus:bg-neutral-700 active:bg-neutral-700  disabled:pointer-events-none disabled:opacity-50">
-                                        <svg fill="currentColor" class="w-4 h-fit text-neutral-400" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                    <input required name="cari" type="text" class="w-45 absolute left-0 bg-white placeholder:text-neutral-400 text-black text-sm border border-neutral-300 rounded-md pr-3 pl-10 font-normal py-2 transition duration-300 ease focus:outline-none focus:border-neutral-400 hover:border-neutral-300" placeholder="Cari penerima..." />
+                                    <div class="absolute bg-gradient-to-bl from-[rgb(154,94,44)] to-[rgb(99,52,14)] left-1 top-1 rounded p-1.5 text-center text-sm text-white transition-all focus:bg-neutral-700 active:bg-neutral-700  disabled:pointer-events-none disabled:opacity-50">
+                                        <svg fill="currentColor" class="w-4 h-fit text-white" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                             <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
                                             <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
                                             <g id="SVGRepo_iconCarrier">
@@ -83,16 +83,8 @@ if (isset($_SESSION['alert'])) {
                         <th class="py-2 pl-15">Kambing</th>
                         <th class="py-2 pl-8">Sapi</th>
                     </tr>
-                    <tr>
-                        <td class="py-2 pl-5 flex justify-center items-end"><input type="checkbox" class="hover:cursor-pointer" name="" id=""></td>
-                        <td class="py-2 pl-5">1</td>
-                        <td class="py-2 px-5">Budi Susanto</td>
-                        <td class="py-2 px-10">Jl. Flores No. 10</td>
-                        <td class="py-2 pl-10">0812345678</td>
-                        <td class="py-2 pl-15">1.7</td>
-                        <td class="py-2 pl-8">1.4</td>
-                    </tr>
 
+                    <?php $view->isiTabelPembagian() ?>
 
                 </table>
 

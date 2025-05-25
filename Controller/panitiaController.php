@@ -1,6 +1,7 @@
 <?php
 require_once '../Model/panitiaModel.php';
 require_once '../Model/koneksi.php';
+require_once '../Services/seederPembagian.php';
 
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
@@ -9,6 +10,13 @@ if (session_status() === PHP_SESSION_NONE) {
 
 class panitiaController extends panitiaModel
 {
+
+    private $seeder;
+
+    function __construct()
+    {
+        $seeder = new seederPembagian();
+    }
 
     function addTransaksiBaru()
     {
@@ -99,6 +107,7 @@ class panitiaController extends panitiaModel
 
         $update = $this->updateDagingModel($dagingKambing, $dagingSapi);
         if ($update) {
+            $this->seeder->seedPembagian();
             $_SESSION['alertSukses'] = 'Berhasil mengubah total daging';
         } else {
             $_SESSION['alert'] = 'Gagal mengubah total daging';
@@ -133,6 +142,7 @@ class panitiaController extends panitiaModel
         $idAkun = $_POST['idAkun'];
         $status = $this->addQurbanModel($hewan, $idAkun);
         if ($status) {
+            $this->seeder->seedPembagian();
             $_SESSION['alertSukses'] = 'Berhasil menambah qurban';
             header('Location: ../panitia?page=pengqurban');
         } else {
@@ -151,6 +161,7 @@ class panitiaController extends panitiaModel
         $status = $this->updateQurbanModel($idQurban, $hewan, $pengqurban, $pengqurbanLama);
 
         if ($status) {
+            $this->seeder->seedPembagian();
             $_SESSION['alertSukses'] = "Berhasil mengupdate qurban";
             header('Location: ../panitia?page=pengqurban');
         } else {
@@ -163,14 +174,20 @@ class panitiaController extends panitiaModel
     {
         $idQurban = $_POST['id_qurban'];
 
-        $status=$this->deleteQurban($idQurban);
-        if($status){
+        $status = $this->deleteQurban($idQurban);
+        if ($status) {
+            $this->seeder->seedPembagian();
             $_SESSION['alertSukses'] = "Berhasil menghapus qurban";
             header('Location: ../panitia?page=pengqurban');
-        }else{
+        } else {
             $_SESSION['alert'] = "Gagal menghapus qurban";
             header('Location: ../panitia?page=pengqurban');
         }
+    }
+
+    function getPembagian()
+    {
+        return $this->getPembagianModel();
     }
 }
 

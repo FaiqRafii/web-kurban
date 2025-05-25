@@ -292,4 +292,9 @@ class panitiaModel extends koneksi
         $q = $this->connect()->query("SELECT berat FROM daging WHERE hewan='sapi'");
         return $q;
     }
+
+    function getPembagianModel(){
+        $q=$this->connect()->query("SELECT * FROM pembagian p JOIN akun a ON p.id_akun=a.id_akun");
+        return $q;
+    }
 }

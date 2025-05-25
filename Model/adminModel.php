@@ -1,11 +1,19 @@
 <?php
 require_once 'koneksi.php';
+require_once '../Services/seederPembagian.php';
 
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 class adminModel extends koneksi
 {
+
+    private $seeder;
+
+    function __construct()
+    {
+        $seeder=new seederPembagian();
+    }
 
     function getAllAkunByLevel()
     {
@@ -49,6 +57,7 @@ class adminModel extends koneksi
         if (!$update) {
             die('Update gagal');
         }
+        $this->seeder->seedPembagian();
     }
 
     function addAkun($nama, $nik, $alamat, $noHp, $level)
@@ -57,6 +66,7 @@ class adminModel extends koneksi
         if (!$add) {
             return false;
         } else {
+            $this->seeder->seedPembagian();
             return true;
         }
     }
@@ -126,6 +136,7 @@ class adminModel extends koneksi
         foreach ($idAkun as $akun) {
             $hapus = $this->connect()->query("DELETE FROM akun WHERE id_akun='" . $akun . "'");
             if ($hapus) {
+                $this->seeder->seedPembagian();
                 $_SESSION['alertSukses'] = 'Berhasil menghapus akun';
             } else {
                 $_SESSION['alert'] = 'Gagal menghapus akun';
