@@ -2,6 +2,9 @@
 require_once '../Model/panitiaModel.php';
 require_once '../Model/koneksi.php';
 
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
 
 
 class panitiaController extends panitiaModel
@@ -94,22 +97,80 @@ class panitiaController extends panitiaModel
         $dagingKambing = $_POST['kambing'];
         $dagingSapi = $_POST['sapi'];
 
-        $update=$this->updateDagingModel($dagingKambing, $dagingSapi);
-        if($update){
+        $update = $this->updateDagingModel($dagingKambing, $dagingSapi);
+        if ($update) {
             $_SESSION['alertSukses'] = 'Berhasil mengubah total daging';
-        }else{
+        } else {
             $_SESSION['alert'] = 'Gagal mengubah total daging';
         }
 
         header('Location:../panitia/?page=pembagian');
     }
 
-    function getTotalKambing(){
+    function getTotalKambing()
+    {
         return $this->getTotalKambingModel()->fetch_assoc()['berat'];
     }
 
-    function getTotalSapi(){
+    function getTotalSapi()
+    {
         return $this->getTotalSapiModel()->fetch_assoc()['berat'];
+    }
+
+    function getAkun()
+    {
+        return $this->getAkunModel();
+    }
+
+    function getResult($keyword)
+    {
+        return $this->getResultModel($keyword);
+    }
+
+    function addQurban()
+    {
+        $hewan = $_POST['hewan'];
+        $idAkun = $_POST['idAkun'];
+        $status = $this->addQurbanModel($hewan, $idAkun);
+        if ($status) {
+            $_SESSION['alertSukses'] = 'Berhasil menambah qurban';
+            header('Location: ../panitia?page=pengqurban');
+        } else {
+            $_SESSION['alert'] = 'Gagal menambah qurban';
+            header('Location: ../panitia?page=pengqurban');
+        }
+    }
+
+    function updateQurban()
+    {
+        $idQurban = $_POST['idQurban'];
+        $hewan = $_POST['hewan'];
+        $pengqurban = $_POST['idAkun'];
+        $pengqurbanLama = $_POST['pengqurbanLama'];
+
+        $status = $this->updateQurbanModel($idQurban, $hewan, $pengqurban, $pengqurbanLama);
+
+        if ($status) {
+            $_SESSION['alertSukses'] = "Berhasil mengupdate qurban";
+            header('Location: ../panitia?page=pengqurban');
+        } else {
+            $_SESSION['alert'] = "Gagal mengupdate qurban";
+            header('Location: ../panitia?page=pengqurban');
+        }
+    }
+
+    function hapusQurban()
+    {
+        $idQurban = $_POST['id_qurban'];
+
+        $status=$this->deleteQurban($idQurban);
+        if($status){
+            $_SESSION['alertSukses'] = "Berhasil menghapus qurban";
+            header('Location: ../panitia?page=pengqurban');
+        }else{
+            $_SESSION['alert'] = "Gagal menghapus qurban";
+            header('Location: ../panitia?page=pengqurban');
+        }
     }
 }
 
@@ -119,8 +180,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if (isset($_POST['action'])) {
         if ($_POST['action'] == 'gettotaldebet') {
             echo $controller->getTotalDebetFoot();
-        }else if($_POST['action']=='updateDaging'){
+        } else if ($_POST['action'] == 'updateDaging') {
             $controller->updateDaging();
+        } else if ($_POST['action'] == 'addQurban') {
+            $controller->addQurban();
+        } else if ($_POST['action'] == 'updateQurban') {
+            $controller->updateQurban();
+        } else if ($_POST['action'] == 'hapusQurban') {
+            $controller->hapusQurban();
         }
     } else if (isset($_POST['penginput'])) {
         $controller->addTransaksiBaru();

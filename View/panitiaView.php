@@ -46,14 +46,107 @@ class panitiaView extends panitiaController
         ';
     }
 
-    function totalDagingKambing(){
+    function totalDagingKambing()
+    {
         echo $this->getTotalKambing();
     }
 
-    function totalDagingSapi(){
+    function totalDagingSapi()
+    {
         echo $this->getTotalSapi();
     }
 
+    function listAkun()
+    {
+        $akun = $this->getAkun();
+        while ($data = $akun->fetch_assoc()) {
+            echo '
+             <div class="px-1 mt-2 text-sm w-full p-2 rounded hover:bg-[rgb(99,52,14)] hover:cursor-pointer transition-all ease-in duration-75 group">
+             <div data-id="' . $data['id_akun'] . '" class="opt px-2 group-hover:text-white ">' . $data['nama'] . '</div>
+         </div>
+             ';
+        }
+    }
+
+    function listSearch($keyword)
+    {
+        $hasil = $this->getResult($keyword);
+        while ($result = $hasil->fetch_assoc()) {
+            echo '
+             <div class="px-1 mt-2 text-sm w-full p-2 rounded hover:bg-[rgb(99,52,14)] hover:cursor-pointer transition-all ease-in duration-75 group">
+             <div data-id="' . $result['id_akun'] . '" class="opt px-2 group-hover:text-white ">' . $result['nama'] . '</div>
+         </div>
+             ';
+        }
+    }
+
+    function isiQurban()
+    {
+        $q = $this->getQurbanAll();
+        $noKambing = 1;
+        $noSapi = 1;
+        $idQurban = 0;
+        while ($qurban = $q->fetch_assoc()) {
+            $qId = $this->getIdAkunQurban($qurban['id_qurban']);
+            $idAkun = $qId->fetch_assoc()['id_akun'];
+            echo '
+            <div data-id="' . $qurban['id_qurban'] . '" data-hewan="' . $qurban['hewan'] . '" data-idAkun="' . $idAkun . '" data-namaAkun="' . $qurban['nama'] . '" class="cardQurban hover:cursor-pointer hover:-translate-y-1 transition-all ease-in duration-100 col-span-2 bg-gradient-to-r from-[#fff5e3] via-white to-white rounded-xl w-full h-30 relative overflow-hidden group">
+            <form action="../Controller/panitiaController.php" method="POST">
+            <div class="grid grid-cols-75%_25%">
+            <div class="absolute left-0 h-full w-35 overflow-hidden">
+                <img src="../assets/img/' . (($qurban['hewan'] == 'kambing') ? 'kambing' : 'sapi') . '.png" class="absolute ' . (($qurban['hewan'] == 'kambing') ? "scale-180 right-10" : "scale-220 scale-x-[-2.5] right-25") . ' top-14" alt="">
+            </div>
+            <div class="w-85 h-30 ml-28 grid grid-cols-3">
+                <div class="flex justify-center items-center ">
+                    <div class="grid grid-rows-10%_90% text-center">
+                        <div class="font-bold text-lg">';
+            if ($qurban['hewan'] == 'kambing') {
+                echo ucwords($qurban['hewan']) . " " . $noKambing++;
+            } else {
+                echo ucwords($qurban['hewan']) . " " . $noSapi++;
+            }
+            echo '</div>
+                    </div>
+                </div>
+                <div class="flex justify-center text-left items-center col-span-2">
+                <div class="grid grid-cols-2">';
+            if ($qurban['hewan'] == 'sapi') {
+                $pengqurbanView = explode(", ", $qurban['nama']);
+                $kiri = array_slice($pengqurbanView, 0, 4);
+                $kanan = array_slice($pengqurbanView, 4);
+
+                echo '<ol style="list-style-type:decimal">';
+                for ($i = 0; $i < count($kiri); $i++) {
+                    echo '<li class="text-xs">' . $kiri[$i] . '</li>';
+                }
+                echo '</ol>';
+                echo '<ol class="pl-4" start="4" style="list-style-type:decimal">';
+                for ($i = 0; $i < count($kanan); $i++) {
+                    echo '
+                <li class="text-xs">' . $kanan[$i] . '</li>';
+                }
+                echo '</ol>';
+            } else {
+                echo '<div class="grid grid-rows-10%_90% text-left">
+                <div class="text-sm text-left">' . $qurban['nama'] . '</div>
+            </div>';
+            }
+            echo '</div>
+                </div>
+            </div>
+        </div>
+        <input type="hidden" name="action" value="hapusQurban">
+        <input type="hidden" name="id_qurban" value="' . $qurban['id_qurban'] . '">
+        <button type="submit" class="hapusBtn absolute right-0 bottom-0 opacity-0 pointer-events-none group-hover:opacity-100 group-hover:pointer-events-auto hover:-translate-y-1 hover:cursor-pointer transition-all ease-in duration-100">
+        <div class="w-8 h-8 rounded-full bg-red-600/30 flex justify-center items-center p-1">
+        <svg fill="currentColor" class="text-red-500 w-4.5 h-fit" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"><path d="M22,5H17V2a1,1,0,0,0-1-1H8A1,1,0,0,0,7,2V5H2A1,1,0,0,0,2,7H3.117L5.008,22.124A1,1,0,0,0,6,23H18a1,1,0,0,0,.992-.876L20.883,7H22a1,1,0,0,0,0-2ZM9,3h6V5H9Zm8.117,18H6.883L5.133,7H18.867Z"></path></g></svg>
+        </div>
+        </button>            
+        </form>
+        </div>
+        ';
+        }
+    }
 
     function isiTabelAkun()
     {
@@ -103,7 +196,7 @@ class panitiaView extends panitiaController
     function alert($keterangan)
     {
         echo '
-        <div id="alert" class="z-10 transition-all ease-in-out transform duration-150 fixed top-2 right-5 bg-red-50 border border-red-200 text-sm text-red-800 rounded-lg p-4" role="alert">
+        <div id="alert" class="z-100 transition-all ease-in-out transform duration-150 fixed top-2 right-5 bg-red-50 border border-red-200 text-sm text-red-800 rounded-lg p-4" role="alert">
         <div class="flex">
             <div class="shrink-0">
                 <svg class="shrink-0 size-4 mt-0.5" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -136,7 +229,7 @@ class panitiaView extends panitiaController
     function alertSukses($keterangan)
     {
         echo '
-        <div id="alert" class="z-10 transition-all ease-in-out transform duration-150 fixed top-2 right-5 bg-teal-50 border border-teal-200 text-sm text-teal-800 rounded-lg p-4" role="alert">
+        <div id="alert" class="z-100 transition-all ease-in-out transform duration-150 fixed top-2 right-5 bg-teal-50 border border-teal-200 text-sm text-teal-800 rounded-lg p-4" role="alert">
         <div class="flex">
             <div class="shrink-0">
             <svg class="shrink-0 size-4 mt-0.5" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -214,5 +307,15 @@ class panitiaView extends panitiaController
         </tr>
     </tfoot>
         ';
+    }
+}
+
+
+$view = new panitiaView();
+
+if ($_SERVER['REQUEST_METHOD'] == 'GET') {
+    if (isset($_GET['search'])) {
+        $keyword = $_GET['search'];
+        $view->listSearch($keyword);
     }
 }

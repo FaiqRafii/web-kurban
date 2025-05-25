@@ -13,6 +13,18 @@ class panitiaModel extends koneksi
         return $sql;
     }
 
+    function getAkunModel()
+    {
+        $akun = $this->connect()->query("SELECT * FROM akun");
+        return $akun;
+    }
+
+    function getResultModel($keyword)
+    {
+        $q = $this->connect()->query("SELECT * FROM akun WHERE nama LIKE '%$keyword%'");
+        return $q;
+    }
+
     function getJumlahWarga()
     {
         $sql = $this->connect()->query("SELECT COUNT(*) AS jumlahWarga FROM akun WHERE level='warga'");
@@ -117,6 +129,122 @@ class panitiaModel extends koneksi
         }
     }
 
+    function getQurbanAll()
+    {
+        $q = $this->connect()->query("SELECT GROUP_CONCAT(a.nama SEPARATOR ', ') AS nama, q.id_qurban, q.hewan FROM qurban q JOIN pengqurban p ON q.id_qurban=p.id_qurban JOIN akun a ON p.id_akun=a.id_akun GROUP BY q.id_qurban, q.hewan ORDER BY q.hewan");
+        return $q;
+    }
+
+    function getIdAkunQurban($idQurban)
+    {
+        $q = $this->connect()->query("SELECT GROUP_CONCAT(p.id_akun SEPARATOR ', ') AS id_akun FROM pengqurban p WHERE p.id_qurban='" . $idQurban . "'");
+        return $q;
+    }
+
+    function addQurbanModel($hewan, $idAkun)
+    {
+        $conn = $this->connect();
+        $insertQurban = $conn->query("INSERT INTO qurban (hewan) VALUES ('" . $hewan . "')");
+        $idQurban = $conn->insert_id;
+        echo "idQurban: " . $idQurban;
+        $idAkunArr = explode(", ", $idAkun);
+        foreach ($idAkunArr as $p) {
+            echo "idAkun: " . $p;
+            $insertPengqurban = $this->connect()->query("INSERT INTO pengqurban(id_qurban,id_akun) VALUES ('" . $idQurban . "', '" . $p . "')");
+            $levelRaw = $this->connect()->query("SELECT level FROM akun WHERE id_akun='" . $p . "'");
+            $levelRaw2 = $levelRaw->fetch_assoc()['level'];
+            $level = explode(", ", $levelRaw2);
+            if ($level[0] !== 'berqurban' && $level[0] != 'warga') {
+                $akun = $this->connect()->query("UPDATE akun SET level='" . $level[0] . ", berqurban' WHERE id_akun='" . $p . "'");
+            } else if ($level[0] == 'warga') {
+                $akun = $this->connect()->query("UPDATE akun SET level='berqurban' WHERE id_akun='" . $p . "'");
+            }
+        }
+        if ($insertPengqurban && $akun) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    function updateQurbanModel($idQurban, $hewan, $pengqurban, $pengqurbanLama)
+    {
+        $pengqurbanBaruArr = explode(", ", $pengqurban);
+        $pengqurbanLamaArr = explode(", ", $pengqurbanLama);
+        foreach ($pengqurbanLamaArr as $arr) {
+            $levelRaw = $this->connect()->query("SELECT level FROM akun WHERE id_akun='" . $arr . "'");
+            $levelRaw2 = $levelRaw->fetch_assoc()['level'];
+            $level = explode(", ", $levelRaw2);
+            echo 'arrLama: ' . $arr;
+            echo 'levelLama: ' . $level[0];
+            if ($level[0] == 'berqurban') {
+                if (in_array($arr, $pengqurbanBaruArr)) {
+                    $akun = $this->connect()->query("UPDATE akun SET level='berqurban' WHERE id_akun='" . $arr . "'");
+                } else {
+                    $akun = $this->connect()->query("UPDATE akun SET level='warga' WHERE id_akun='" . $arr . "'");
+                }
+            } else {
+                $akun = $this->connect()->query("UPDATE akun SET level='" . $level[0] . "' WHERE id_akun='" . $arr . "'");
+            }
+        }
+        $deletePengqurban = $this->connect()->query("DELETE FROM pengqurban WHERE id_qurban='$idQurban'");
+
+        echo "pengqurban: " . $pengqurban;
+        echo "pengqurbanbaruarr[0]: " . $pengqurbanBaruArr[0];
+        foreach ($pengqurbanBaruArr as $arr) {
+            echo 'arrBaru: ' . $arr;
+            $levelRaw = $this->connect()->query("SELECT level FROM akun WHERE id_akun='" . $arr . "'");
+            $level = $levelRaw->fetch_assoc()['level'];
+            echo 'levelBaru: ' . $level;
+            if ($level == 'berqurban') {
+                $akunBaru = $this->connect()->query("UPDATE akun SET level='berqurban' WHERE id_akun='" . $arr . "'");
+            } else if ($level !== 'warga') {
+                $akunBaru = $this->connect()->query("UPDATE akun SET level='" . $level . ", berqurban' WHERE id_akun= '" . $arr . "'");
+            } else {
+                $akunBaru = $this->connect()->query("UPDATE akun SET level='berqurban' WHERE id_akun='" . $arr . "'");
+            }
+            $update = $this->connect()->query("INSERT INTO pengqurban (id_qurban,id_akun) VALUES ('" . $idQurban . "','" . $arr . "')");
+        }
+
+
+        if ($akun && $akunBaru && $update) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    function deleteQurban($idQurban)
+    {
+        $qIdAkunPengqurban = $this->connect()->query("SELECT GROUP_CONCAT(id_akun SEPARATOR ', ') AS id_akun FROM pengqurban WHERE id_qurban='" . $idQurban . "'");
+        $idAkunArr = explode(', ', $qIdAkunPengqurban->fetch_assoc()['id_akun']);
+        foreach ($idAkunArr as $arrId) {
+            $qLevelAkun = $this->connect()->query("SELECT level FROM akun WHERE id_akun='" . $arrId . "'");
+            $levelAkun = explode(', ', $qLevelAkun->fetch_assoc()['level']);
+            if ($levelAkun[0] == 'berqurban') {
+                $updateAkun = $this->connect()->query("UPDATE akun SET level='warga' WHERE id_akun='".$arrId."'");
+            } else {
+                $updateAkun = $this->connect()->query("UPDATE akun SET level='" . $levelAkun[0] . "' WHERE id_akun='".$arrId."'");
+            }
+        }
+
+        if ($updateAkun) {
+            $qP = $this->connect()->query("DELETE FROM pengqurban WHERE id_qurban='" . $idQurban . "'");
+            if ($qP) {
+                $hapusQurban = $this->connect()->query("DELETE FROM qurban WHERE id_qurban='" . $idQurban . "'");
+                if ($hapusQurban) {
+                    return true;
+                } else {
+                    return false;
+                }
+            } else {
+                return false;
+            }
+        } else {
+            return false;
+        }
+    }
+
     function updateSaldoAll()
     {
         $qDataSetelah = $this->connect()->query("SELECT * FROM keuangan ORDER BY tanggal ASC");
@@ -153,13 +281,15 @@ class panitiaModel extends koneksi
         }
     }
 
-    function getTotalKambingModel(){
-        $q=$this->connect()->query("SELECT berat FROM daging WHERE hewan='kambing'");
+    function getTotalKambingModel()
+    {
+        $q = $this->connect()->query("SELECT berat FROM daging WHERE hewan='kambing'");
         return $q;
     }
 
-    function getTotalSapiModel(){
-        $q=$this->connect()->query("SELECT berat FROM daging WHERE hewan='sapi'");
+    function getTotalSapiModel()
+    {
+        $q = $this->connect()->query("SELECT berat FROM daging WHERE hewan='sapi'");
         return $q;
     }
 }
