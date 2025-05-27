@@ -69,7 +69,7 @@ if (isset($_SESSION['alert'])) {
                             NIK
                         </label>
                         <div class="relative">
-                            <input required name="nik" type="text" class="w-81 bg-transparent placeholder:text-neutral-400 text-black text-sm border border-neutral-300 rounded-md pr-3 pl-10 py-2 transition duration-300 ease focus:outline-none focus:border-neutral-400 hover:border-neutral-300" placeholder="Masukkan NIK" />
+                            <input required name="id_akun" type="text" class="w-81 bg-transparent placeholder:text-neutral-400 text-black text-sm border border-neutral-300 rounded-md pr-3 pl-10 py-2 transition duration-300 ease focus:outline-none focus:border-neutral-400 hover:border-neutral-300" placeholder="Masukkan NIK" />
                             <div class="absolute left-1 top-1 rounded bg-gradient-to-bl from-[rgb(154,94,44)] to-[rgb(99,52,14)] p-1.5 border border-transparent text-center text-sm text-white transition-all focus:bg-neutral-700 active:bg-neutral-700  disabled:pointer-events-none disabled:opacity-50">
                                 <svg fill="#ffffff" class="w-4 h-fit" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                     <g id="SVGRepo_bgCarrier" stroke-width="0"></g>

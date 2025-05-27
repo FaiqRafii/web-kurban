@@ -29,8 +29,8 @@ class akunModel extends koneksi
 
     function getNIK()
     {
-        $sql = $this->connect()->query("SELECT nik FROM akun WHERE id_akun='" . $_SESSION['id_akun'] . "'");
-        $nik = $sql->fetch_assoc()['nik'];
+        $sql = $this->connect()->query("SELECT id_akun FROM akun WHERE nama='" . $_SESSION['nama_akun'] . "'");
+        $nik = $sql->fetch_assoc()['id_akun'];
         return $nik;
     }
 
@@ -43,7 +43,7 @@ class akunModel extends koneksi
 
     function login($nik)
     {
-        $sql = $this->connect()->query("SELECT * FROM akun WHERE nik='" . $nik . "'");
+        $sql = $this->connect()->query("SELECT * FROM akun WHERE id_akun='" . $nik . "'");
         $isLogin = $sql->num_rows;
 
         if ($isLogin > 0) {

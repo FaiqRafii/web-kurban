@@ -12,7 +12,7 @@ class adminModel extends koneksi
 
     function __construct()
     {
-        $seeder=new seederPembagian();
+        $this->seeder = new seederPembagian();
     }
 
     function getAllAkunByLevel()
@@ -60,9 +60,9 @@ class adminModel extends koneksi
         $this->seeder->seedPembagian();
     }
 
-    function addAkun($nama, $nik, $alamat, $noHp, $level)
+    function addAkun($nama, $idAkun, $alamat, $noHp, $level)
     {
-        $add = $this->connect()->query("INSERT INTO akun (nama, alamat, nik, level, no_hp) VALUES ('" . $nama . "','" . $alamat . "','" . $nik . "','" . $level . "','" . $noHp . "')");
+        $add = $this->connect()->query("INSERT INTO akun (nama, alamat, id_akun, level, no_hp) VALUES ('" . $nama . "','" . $alamat . "','" . $idAkun . "','" . $level . "','" . $noHp . "')");
         if (!$add) {
             return false;
         } else {
@@ -134,8 +134,9 @@ class adminModel extends koneksi
     function deleteAkun($idAkun)
     {
         foreach ($idAkun as $akun) {
+            $hapusPembagian = $this->connect()->query("DELETE FROM pembagian WHERE id_akun='" . $akun . "'");
             $hapus = $this->connect()->query("DELETE FROM akun WHERE id_akun='" . $akun . "'");
-            if ($hapus) {
+            if ($hapus && $hapusPembagian) {
                 $this->seeder->seedPembagian();
                 $_SESSION['alertSukses'] = 'Berhasil menghapus akun';
             } else {

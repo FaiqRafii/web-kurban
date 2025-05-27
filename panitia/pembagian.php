@@ -14,7 +14,7 @@ if (isset($_SESSION['alert'])) {
     <div class="w-full h-fit px-10 pb-15 bg-gradient-to-b from-[#fff5e3] via-white to-white rounded-xl">
         <div class="w-full pt-1">
             <form action="../Controller/adminController.php" method="POST">
-                <table class="mt-10 w-full text-sm">
+                <table class="mt-10 w-fit text-sm">
                     <tr>
                         <th colspan="5" class="text-3xl text-left pb-10">Rekapan Pembagian</th>
                     </tr>
@@ -23,7 +23,7 @@ if (isset($_SESSION['alert'])) {
                             <input type="hidden" disabled name="action" value="cariPenerima" id="">
                             <div class="w-full relative">
                                 <div class="relative">
-                                    <input required name="cari" type="text" class="w-45 absolute left-0 bg-white placeholder:text-neutral-400 text-black text-sm border border-neutral-300 rounded-md pr-3 pl-10 font-normal py-2 transition duration-300 ease focus:outline-none focus:border-neutral-400 hover:border-neutral-300" placeholder="Cari penerima..." />
+                                    <input required name="keyword" type="text" class="w-45 absolute left-0 bg-white placeholder:text-neutral-400 text-black text-sm border border-neutral-300 rounded-md pr-3 pl-10 font-normal py-2 transition duration-300 ease focus:outline-none focus:border-neutral-400 hover:border-neutral-300" placeholder="Cari penerima..." />
                                     <div class="absolute bg-gradient-to-bl from-[rgb(154,94,44)] to-[rgb(99,52,14)] left-1 top-1 rounded p-1.5 text-center text-sm text-white transition-all focus:bg-neutral-700 active:bg-neutral-700  disabled:pointer-events-none disabled:opacity-50">
                                         <svg fill="currentColor" class="w-4 h-fit text-white" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                             <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
@@ -36,11 +36,12 @@ if (isset($_SESSION['alert'])) {
                                 </div>
                             </div>
                         </th>
-                        <th colspan="4"></th>
-                        <th class="pb-15 pr-5">
+                        <th ></th>
+                        <th class="pr-20"></th>
+                        <th class="pb-15 pl-35">
                             <input type="hidden" disabled name="action" value="updateDaging" id="">
-                            <div class="w-40 relative">
-                                <label class="absolute left-0 -top-6 mb-1 text-sm font-normal text-neutral-600">
+                            <div class="w-fit relative">
+                                <label class="absolute w-40 left-0 -top-6 mb-1 text-sm font-normal text-neutral-600">
                                     Total Daging Kambing
                                 </label>
                                 <div class="absolute left-0 h-9.5 w-40 bg-white placeholder:text-neutral-400 text-black text-sm border border-neutral-300 rounded-md pr-3 pl-10 py-2 transition duration-300 ease focus:outline-none focus:border-neutral-400 hover:border-neutral-300"><?php $view->totalDagingKambing() ?> Kg</div>
@@ -55,10 +56,10 @@ if (isset($_SESSION['alert'])) {
                                 </div>
                             </div>
                         </th>
-                        <th class="pb-15">
+                        <th class="pb-15 pl-30">
                             <input type="hidden" disabled name="action" value="updateDaging" id="">
-                            <div class="w-40 relative">
-                                <label class="absolute left-0 -top-6 mb-1 text-sm font-normal text-neutral-600">
+                            <div class="w-fit relative">
+                                <label class="absolute w-40 text-left left-0 -top-6 mb-1 text-sm font-normal text-neutral-600">
                                     Total Daging Sapi
                                 </label>
                                 <div class="absolute left-0 h-9.5 w-40 bg-white placeholder:text-neutral-400 text-black text-sm border border-neutral-300 rounded-md pr-3 pl-10 py-2 transition duration-300 ease focus:outline-none focus:border-neutral-400 hover:border-neutral-300"><?php $view->totalDagingSapi() ?> Kg</div>
@@ -76,15 +77,17 @@ if (isset($_SESSION['alert'])) {
                     </tr>
                     <tr class="text-left text-white bg-gradient-to-bl from-[rgb(154,94,44)] to-[rgb(99,52,14)]">
                         <th class="py-2 pl-5">Dibagikan</th>
-                        <th class="py-2 pl-5">No</th>
+                        <th class="py-2 pl-5">NIK</th>
                         <th class="py-2 px-5">Nama</th>
-                        <th class="py-2 px-10">Alamat</th>
-                        <th class="py-2 pl-10">No HP</th>
-                        <th class="py-2 pl-15">Kambing</th>
-                        <th class="py-2 pl-8">Sapi</th>
+                        <th class="py-2 px-5">Alamat</th>
+                        <th class="py-2 pr-5">No HP</th>
+                        <th class="py-2 pr-5">Kambing</th>
+                        <th class="py-2 pr-5">Sapi</th>
                     </tr>
 
-                    <?php $view->isiTabelPembagian() ?>
+                    <tbody id="isiTabelPembagian">
+                        <?php $view->isiTabelPembagian() ?>
+                    </tbody>
 
                 </table>
 
@@ -147,3 +150,4 @@ if (isset($_SESSION['alert'])) {
         </div>
     </div>
 </div>
+<script defer src="../assets/js/pembagian.js"></script>

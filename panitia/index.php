@@ -39,7 +39,6 @@ $content = new Content();
     <script src="../assets/js/date2.js"></script>
     <script src="../assets/js/alert.js"></script>
     <script src="../assets/js/admin.js"></script>
-    <script src="../assets/js/panitia.js"></script>
 
 </body>
 

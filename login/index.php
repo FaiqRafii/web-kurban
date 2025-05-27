@@ -65,7 +65,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                             </g>
                         </svg>
                     </div>
-                    <input type="text" name="nik" id="nik" class="bg-neutral-50 border border-gray-300 text-gray-900 text-sm rounded-lg  focus:ring-blue-500 focus:border-neutral-500 block w-full ps-10 p-2.5" placeholder="Masukkan NIK Anda">
+                    <input type="text" name="id_akun" id="id_akun" class="bg-neutral-50 border border-gray-300 text-gray-900 text-sm rounded-lg  focus:ring-blue-500 focus:border-neutral-500 block w-full ps-10 p-2.5" placeholder="Masukkan NIK Anda">
                 </div>
 
                 <div class="flex justify-center items-center mt-15">

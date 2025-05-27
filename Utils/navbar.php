@@ -51,7 +51,7 @@
                                 ' . ucwords($_SESSION['nama_akun']) . '
                             </div>
                             <div class="text-xs">
-                                ' . $_SESSION['nik_akun'] . '
+                                ' . $_SESSION['id_akun'] . '
                             </div>
                         </li>
                         <a href="../' . $_SESSION['level_akun'] . '" class="">

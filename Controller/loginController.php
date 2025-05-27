@@ -7,7 +7,7 @@ session_start();
 
 class loginController extends akunModel
 {
-    public $nik;
+    public $idAkun;
     public $password;
     private $view;
 
@@ -27,17 +27,16 @@ class loginController extends akunModel
 
     function validasiData()
     {
-        if (isset($_POST['nik'])) {
-            $this->nik = $_POST['nik'];
+        if (isset($_POST['id_akun'])) {
+            $this->idAkun = $_POST['id_akun'];
 
-            $login = $this->login($this->nik);
+            $login = $this->login($this->idAkun);
 
             if ($login) {
                 $_SESSION['isLogin'] = true;
                 $_SESSION['id_akun'] = $this->akun['id_akun'];
                 $_SESSION['nama_akun'] = $this->akun['nama'];
                 $_SESSION['alamat_akun'] = $this->akun['alamat'];
-                $_SESSION['nik_akun'] = $this->akun['nik'];
                 $_SESSION['level_akun'] = explode(", ",$this->akun['level'])[0];
                 $_SESSION['no_hp_akun'] = $this->akun['no_hp'];
                 unset($_SESSION['alert']);

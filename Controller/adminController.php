@@ -18,7 +18,7 @@ class adminController extends adminModel
         $field = $_POST['field'];
         $value = $_POST['value'];
 
-        $allowedFields = ['nama', 'noHp', 'alamat', 'nik', 'level'];
+        $allowedFields = ['nama', 'no_hp', 'alamat', 'level'];
         if (!in_array($field, $allowedFields)) {
             echo 'Field tidak valid.';
             exit;
@@ -30,12 +30,12 @@ class adminController extends adminModel
     function addAkunBaru()
     {
         $nama = ucwords($_POST['nama']);
-        $nik = ucwords($_POST['nik']);
+        $idAkun = ucwords($_POST['id_akun']);
         $alamat = ucwords($_POST['alamat']);
         $noHp = ucwords($_POST['noHp']);
         $level = ucwords($_POST['level']);
 
-        $addStatus = $this->addAkun($nama, $nik, $alamat, $noHp, $level);
+        $addStatus = $this->addAkun($nama, $idAkun, $alamat, $noHp, $level);
 
         if ($addStatus) {
             $_SESSION['alertSukses'] = 'Berhasil menambah akun';
@@ -112,7 +112,14 @@ class adminController extends adminModel
 
     function getTotalSaldoClean()
     {
-        return $totalSaldo = $this->getTotalSaldo()->fetch_assoc()['totalSaldo'];
+        $totalSaldoRaw = $this->getTotalSaldo();
+        if(!empty($totalSaldoRaw)){
+            $totalSaldo=$totalSaldoRaw->fetch_assoc();
+            if($totalSaldo&&isset($totalSaldo['totalSaldo'])){
+                return $totalSaldo['totalSaldo'];
+            }
+        }
+        return 0;
     }
 }
 

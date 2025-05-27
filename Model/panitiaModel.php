@@ -297,4 +297,28 @@ class panitiaModel extends koneksi
         $q=$this->connect()->query("SELECT * FROM pembagian p JOIN akun a ON p.id_akun=a.id_akun");
         return $q;
     }
+
+    function searchPembagian($keyword){
+        $q=$this->connect()->query("SELECT * FROM pembagian p JOIN akun a ON p.id_akun=a.id_akun WHERE a.nama LIKE '%$keyword%'");
+        return $q;
+    }
+
+    function checkedStatusModel($idPembagian){
+        $q=$this->connect()->query("UPDATE pembagian SET status='terbagi' WHERE id_pembagian='$idPembagian'");
+        if($q){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+    function uncheckedStatusModel($idPembagian){
+        $q=$this->connect()->query("UPDATE pembagian SET status=null WHERE id_pembagian='$idPembagian'");
+        if($q){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
 }

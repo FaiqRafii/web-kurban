@@ -91,3 +91,5 @@ if (isset($_SESSION['alert'])) {
         </form>
     </div>
 </div>
+
+<script defer src="../assets/js/panitia.js"></script>

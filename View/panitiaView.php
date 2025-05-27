@@ -155,13 +155,17 @@ class panitiaView extends panitiaController
         while ($data = $qP->fetch_assoc()) {
             echo '
             <tr>
-            <td class="py-2 pl-5 flex justify-center items-end"><input type="checkbox" class="hover:cursor-pointer" name="" id=""></td>
-            <td class="py-2 pl-5">'.$data['id_pembagian'].'</td>
+            <td class="py-5 pl-5 flex justify-center items-center"><input name="statusCheck" data-idPembagian="' . $data['id_pembagian'] . '" type="checkbox"';
+            if ($data['status'] == 'terbagi') {
+                echo ' checked ';
+            }
+            echo 'class="hover:cursor-pointer" name="" id=""></td>
+            <td class="py-2 pl-5">' . $data['id_akun'] . '</td>
             <td class="py-2 px-5">' . $data['nama'] . '</td>
-            <td class="py-2 px-10">' . $data['alamat'] . '</td>
-            <td class="py-2 pl-10">' . $data['no_hp'] . '</td>
-            <td class="py-2 pl-15">' . number_format($data['kambing'], 2, ',') . ' Kg</td>
-            <td class="py-2 pl-8">' .  number_format($data['sapi'], 2, ',')  . ' Kg</td>
+            <td class="py-2 px-5">' . $data['alamat'] . '</td>
+            <td class="py-2 pr-5">' . $data['no_hp'] . '</td>
+            <td class="py-2 pr-5">' . number_format($data['kambing'], 2, ',') . ' Kg</td>
+            <td class="py-2 pr-5">' .  number_format($data['sapi'], 2, ',')  . ' Kg</td>
         </tr>
             ';
         }
@@ -327,6 +331,29 @@ class panitiaView extends panitiaController
     </tfoot>
         ';
     }
+
+    function tabelPembagianSearch()
+    {
+        $keyword = $_GET['searchp'];
+        $hasil = $this->searchPembagian($keyword);
+        while ($data = $hasil->fetch_assoc()) {
+            echo '
+            <tr>
+            <td class="py-5 pl-5 flex justify-center items-center"><input name="statusCheck" data-idPembagian="' . $data['id_pembagian'] . '" type="checkbox"';
+            if ($data['status'] == 'terbagi') {
+                echo ' checked ';
+            }
+            echo 'class="hover:cursor-pointer" name="" id=""></td>
+            <td class="py-2 pl-5">' . $data['id_akun'] . '</td>
+            <td class="py-2 px-5">' . $data['nama'] . '</td>
+            <td class="py-2 px-10">' . $data['alamat'] . '</td>
+            <td class="py-2 pl-10">' . $data['no_hp'] . '</td>
+            <td class="py-2 px-5">' . number_format($data['kambing'], 2, ',') . ' Kg</td>
+            <td class="py-2 px-8">' .  number_format($data['sapi'], 2, ',')  . ' Kg</td>
+        </tr>
+            ';
+        }
+    }
 }
 
 
@@ -336,5 +363,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
     if (isset($_GET['search'])) {
         $keyword = $_GET['search'];
         $view->listSearch($keyword);
+    } else if (isset($_GET['searchp'])) {
+        $view->tabelPembagianSearch();
     }
 }

@@ -60,11 +60,11 @@ class adminView extends adminController
                             </td>
                             <td class="border border-black pl-5"><input name="nama" type="text" class="input-data w-25 placeholder:text-black focus:border-none focus:outline-none" placeholder="Masukkan nama" data-field="nama" data-id="' . $akun['id_akun'] . '" value="' . $akun['nama'] . '">
                             </td>
-                            <td class="border border-black pl-5"><input name="nik" type="text" class="input-data w-29 placeholder:text-black focus:border-none focus:outline-none" placeholder="Masukkan NIK" data-field="nik" data-id="' . $akun['id_akun'] . '" value="' . $akun['nik'] . '">
+                            <td class="border border-black pl-5"><input name="id_akun" type="text" class="input-data w-29 placeholder:text-black focus:border-none focus:outline-none" placeholder="Masukkan NIK" data-field="nik" data-id="' . $akun['id_akun'] . '" value="' . $akun['id_akun'] . '">
                             </td>
                             <td class="border border-black py-2 "> <input name="alamat" type="text" class="input-data w-40 placeholder:text-black focus:border-none focus:outline-none" placeholder="Jl. Melati No. 5" data-field="alamat" data-id="' . $akun['id_akun'] . '" value="' . $akun['alamat'] . '">
                             </td>
-                            <td class="border border-black py-2 px-5"> <input name="noHp" type="text" class="input-data w-25 placeholder:text-black focus:border-none focus:outline-none" placeholder="08123456789" data-field="noHp" data-id="' . $akun['id_akun'] . '" value="' . $akun['no_hp'] . '">
+                            <td class="border border-black py-2 px-5"> <input name="noHp" type="text" class="input-data w-25 placeholder:text-black focus:border-none focus:outline-none" placeholder="08123456789" data-field="no_hp" data-id="' . $akun['id_akun'] . '" value="' . $akun['no_hp'] . '">
                             </td>
                             <td>
                             <select name="" class="input-data focus-within:outline-none focus-within:border-none hover:cursor-pointer" data-field="level" data-id="' . $akun['id_akun'] . '" id="">

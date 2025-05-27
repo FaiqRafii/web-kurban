@@ -20,7 +20,7 @@ if (isset($_SESSION['alert'])) {
                     <form action="../Controller/adminController.php" method="POST" class="w-full h-20 bg-white border border-neutral-300 mt-5 rounded-lg flex space-x-5 items-center px-5">
                         <div class="datepicker-container">
                             <div class="bg-white rounded-lg border-1 text-black border-neutral-300 focus-within:border-neutral-500">
-                                <input type="hidden" name="penginput" value="<?= $_SESSION['nama_akun'] ?>">
+                                <input type="hidden" name="penginput" value="<?= $_SESSION['id_akun'] ?>">
                                 <input type="hidden" name="tgl_input" value="<?= ((new DateTime('now', new DateTimeZone('Asia/Jakarta')))->format('d-m-Y H:i:s')) ?>">
                                 <input type="text" name="tanggal" id="tanggal" required class="date-input w-35" placeholder="Pilih tanggal" />
                             </div>

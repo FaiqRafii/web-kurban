@@ -15,7 +15,7 @@ class panitiaController extends panitiaModel
 
     function __construct()
     {
-        $seeder = new seederPembagian();
+        $this->seeder = new seederPembagian();
     }
 
     function addTransaksiBaru()
@@ -189,6 +189,18 @@ class panitiaController extends panitiaModel
     {
         return $this->getPembagianModel();
     }
+
+    function checkedStatus()
+    {
+        $idPembagian = $_POST['id'];
+        $status = $this->checkedStatusModel($idPembagian);
+    }
+
+    function uncheckedStatus()
+    {
+        $idPembagian = $_POST['id'];
+        $status = $this->uncheckedStatusModel($idPembagian);
+    }
 }
 
 $controller = new panitiaController();
@@ -205,6 +217,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $controller->updateQurban();
         } else if ($_POST['action'] == 'hapusQurban') {
             $controller->hapusQurban();
+        } else if ($_POST['action'] == 'checkedStatus') {
+            $controller->checkedStatus();
+        } else if ($_POST['action'] == 'uncheckedStatus') {
+            $controller->uncheckedStatus();
         }
     } else if (isset($_POST['penginput'])) {
         $controller->addTransaksiBaru();
