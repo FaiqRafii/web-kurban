@@ -201,6 +201,7 @@ class panitiaController extends panitiaModel
         $idPembagian = $_POST['id'];
         $status = $this->uncheckedStatusModel($idPembagian);
     }
+
 }
 
 $controller = new panitiaController();

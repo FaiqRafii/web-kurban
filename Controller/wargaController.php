@@ -16,5 +16,12 @@ class wargaController extends wargaModel
         return $this->getNoHpModel()->fetch_assoc()['no_hp'];
     }
     
+    function getJatah()
+    {
+        return $this->getJatahModel();
+    }
 
+    function getStatus(){
+        return $this->getStatusModel();
+    }
 }
