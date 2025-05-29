@@ -37,10 +37,14 @@ class loginController extends akunModel
                 $_SESSION['id_akun'] = $this->akun['id_akun'];
                 $_SESSION['nama_akun'] = $this->akun['nama'];
                 $_SESSION['alamat_akun'] = $this->akun['alamat'];
-                $_SESSION['level_akun'] = explode(", ",$this->akun['level'])[0];
+                $_SESSION['level_akun'] = explode(", ", $this->akun['level'])[0];
                 $_SESSION['no_hp_akun'] = $this->akun['no_hp'];
                 unset($_SESSION['alert']);
-                header('Location: ../' . $_SESSION['level_akun'] . '/');
+                if ($_SESSION['level_akun'] == 'berqurban') {
+                    header('Location: ../warga/');
+                } else {
+                    header('Location: ../' . $_SESSION['level_akun'] . '/');
+                }
                 exit();
             } else {
                 $_SESSION['alert'] = 'NIK salah';

@@ -5,7 +5,7 @@ require_once '../Model/akunModel.php';
 use App\View\Content;
 
 session_start();
-if ($_SESSION['level_akun'] != 'warga') {
+if ($_SESSION['level_akun'] != 'warga' && $_SESSION['level_akun'] != 'berqurban') {
     header('Location: ../');
 }
 

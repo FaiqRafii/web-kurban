@@ -8,7 +8,7 @@ use App\View\Content;
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
-if ($_SESSION['level_akun'] != 'warga') {
+if ($_SESSION['level_akun'] != 'warga' && $_SESSION['level_akun']!='berqurban') {
     header('Location: ../');
 }
 
