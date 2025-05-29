@@ -8,7 +8,7 @@
             </div>
             <div class=" h-full">
                 <div class="mt-2 flex justify-center space-x-4">
-                    <a class="hover:cursor-pointer hover:-translate-y-1 border border-white text-white py-2 px-6 rounded-lg hover:bg-green-700 hover:border-transparent hover:text-white  transition">
+                    <a target="_blank" href="https://api.whatsapp.com/send?phone=6285158366780&text=Halo%20saya%20mau%20daftarkan%20RT%20saya%20ke%20EasyQurban" class="hover:cursor-pointer hover:-translate-y-1 border border-white text-white py-2 px-6 rounded-lg hover:bg-green-700 hover:border-transparent hover:text-white  transition">
                         Hubungi Kami
                     </a>
                 </div>

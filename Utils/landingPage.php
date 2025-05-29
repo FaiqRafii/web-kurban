@@ -113,7 +113,7 @@
                     </div>
                     <div class="h-50 w-40 mt-6 ml-14 space-y-11">
                         <div class="text-[rgb(99,52,14)] font-semibold group-hover:text-white">Pendataan Identitas</div>
-                        <div class="text-[rgb(99,52,14)] font-semibold group-hover:text-white">Cetak ID Card Panitia</div>
+                        <div class="text-[rgb(99,52,14)] font-semibold group-hover:text-white">Rekap Keuangan</div>
                     </div>
                 </div>
                 <div class="relative p-5 hover:bg-[rgb(99,52,14)] text-white bg-white hover:cursor-pointer hover:-translate-y-1 transition-all ease-in duration-100 h-70 w-65 group">
