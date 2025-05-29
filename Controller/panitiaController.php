@@ -202,6 +202,40 @@ class panitiaController extends panitiaModel
         $status = $this->uncheckedStatusModel($idPembagian);
     }
 
+    function getTerbagiKambing()
+    {
+        return $this->getTerbagiKambingModel();
+    }
+
+    function getTerbagiSapi()
+    {
+        return $this->getTerbagiSapiModel();
+    }
+
+    function searchJatah($keyword)
+    {
+        return $this->searchJatahModel($keyword);
+    }
+
+    function getJatah()
+    {
+        $idPembagian = $_GET['searchjt'];
+        $jatahAll = $this->getJatahModel($idPembagian)->fetch_assoc();
+        $kambing = number_format($jatahAll['kambing'], 2);
+        $sapi = number_format($jatahAll['sapi'], 2);
+        $status = $jatahAll['status'];
+        if ($status == 'terbagi') {
+            $status = 'Sudah Menerima';
+        } else {
+            $status = 'Belum Menerima';
+        }
+        $data = [
+            "kambing" => $kambing,
+            "sapi" => $sapi,
+            "status" => $status
+        ];
+        echo json_encode($data);
+    }
 }
 
 $controller = new panitiaController();
@@ -227,5 +261,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $controller->addTransaksiBaru();
     } else if (isset($_POST['idTransaksi'])) {
         $controller->hapusTransaksi();
+    }
+} else if ($_SERVER['REQUEST_METHOD'] == 'GET') {
+    if (isset($_GET['searchjt'])) {
+        $controller->getJatah();
     }
 }

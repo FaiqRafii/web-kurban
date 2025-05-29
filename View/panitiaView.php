@@ -354,6 +354,47 @@ class panitiaView extends panitiaController
             ';
         }
     }
+
+    function suggestion(){
+        $keyword=$_GET['searchj'];
+        $q=$this->searchJatah($keyword);
+
+        while ($data=$q->fetch_assoc()){
+            echo '
+            <div data-value="'.$data['nama'].'" data-idPembagian="'.$data['id_pembagian'].'" class="optJ px-4 py-2 cursor-pointer hover:bg-[rgb(99,52,14)] hover:text-white">
+            '.$data['nama'].'
+            </div>
+            ';
+        }
+    }
+
+    function totalTerbagiKambing()
+    {
+        $kambing = $this->getTerbagiKambing()->fetch_column();
+        echo number_format($kambing, 2) . " Kg";
+    }
+
+    function persenTerbagiKambing()
+    {
+        $kambing = (float) $this->getTerbagiKambing()->fetch_column();
+        $totalKambing = (float) $this->getTotalKambing();
+        $persenTerbagiKambing = (($kambing / $totalKambing) * 100);
+        echo $persenTerbagiKambing . "%";
+    }
+
+    function totalTerbagiSapi()
+    {
+        $sapi = $this->getTerbagiSapi()->fetch_column();
+        echo number_format($sapi, 2) . " Kg";
+    }
+
+    function persenTerbagiSapi()
+    {
+        $sapi = (float) $this->getTerbagiSapi()->fetch_column();
+        $totalSapi = (float) $this->getTotalSapi();
+        $persenTerbagiSapi = (($sapi / $totalSapi) * 100);
+        echo $persenTerbagiSapi . "%";
+    }
 }
 
 
@@ -365,5 +406,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
         $view->listSearch($keyword);
     } else if (isset($_GET['searchp'])) {
         $view->tabelPembagianSearch();
+    } else if(isset($_GET['searchj'])){
+        $view->suggestion();
     }
 }

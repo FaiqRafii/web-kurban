@@ -33,19 +33,19 @@ class panitiaModel extends koneksi
 
     function getJumlahBerqurban()
     {
-        $sql = $this->connect()->query("SELECT COUNT(*) AS jumlahBerqurban FROM akun WHERE level='berqurban'");
+        $sql = $this->connect()->query("SELECT COUNT(*) AS jumlahBerqurban FROM akun WHERE level LIKE '%berqurban%'");
         return $jumlahBerqurban = $sql->fetch_assoc()['jumlahBerqurban'];
     }
 
     function getJumlahAdmin()
     {
-        $sql = $this->connect()->query("SELECT COUNT(*) AS jumlahAdmin FROM akun WHERE level='admin'");
+        $sql = $this->connect()->query("SELECT COUNT(*) AS jumlahAdmin FROM akun WHERE level LIKE '%admin%'");
         return $jumlahAdmin = $sql->fetch_assoc()['jumlahAdmin'];
     }
 
     function getJumlahPanitia()
     {
-        $sql = $this->connect()->query("SELECT COUNT(*) AS jumlahPanitia FROM akun WHERE level='panitia'");
+        $sql = $this->connect()->query("SELECT COUNT(*) AS jumlahPanitia FROM akun WHERE level LIKE '%panitia%'");
         return $jumlahPanitia = $sql->fetch_assoc()['jumlahPanitia'];
     }
 
@@ -158,9 +158,18 @@ class panitiaModel extends koneksi
                 $akun = $this->connect()->query("UPDATE akun SET level='" . $level[0] . ", berqurban' WHERE id_akun='" . $p . "'");
             } else if ($level[0] == 'warga') {
                 $akun = $this->connect()->query("UPDATE akun SET level='berqurban' WHERE id_akun='" . $p . "'");
+            } else {
+                $akun = $this->connect()->query("UPDATE akun SET level='berqurban' WHERE id_akun='" . $p . "'");
             }
         }
         if ($insertPengqurban && $akun) {
+            $beratTerkiniKambing = (int) $this->connect()->query("SELECT berat FROM daging WHERE hewan='kambing'")->fetch_assoc()['berat'];
+            $beratTerkiniSapi = (int) $this->connect()->query("SELECT berat FROM daging WHERE hewan='sapi'")->fetch_assoc()['berat'];
+            if ($hewan == 'kambing') {
+                $addBeratKambing = $this->connect()->query("UPDATE daging SET berat='" . ($beratTerkiniKambing + 50) . "' WHERE hewan='kambing'");
+            } else if ($hewan == 'sapi') {
+                $addBeratSapi = $this->connect()->query("UPDATE daging SET berat='" . ($beratTerkiniSapi + 100) . "' WHERE hewan='sapi'");
+            }
             return true;
         } else {
             return false;
@@ -222,13 +231,27 @@ class panitiaModel extends koneksi
             $qLevelAkun = $this->connect()->query("SELECT level FROM akun WHERE id_akun='" . $arrId . "'");
             $levelAkun = explode(', ', $qLevelAkun->fetch_assoc()['level']);
             if ($levelAkun[0] == 'berqurban') {
-                $updateAkun = $this->connect()->query("UPDATE akun SET level='warga' WHERE id_akun='".$arrId."'");
+                $cekQurban = $this->connect()->query("SELECT * FROM pengqurban WHERE id_akun='$arrId'");
+                if ($cekQurban->num_rows > 1) {
+                    $updateAkun = $this->connect()->query("UPDATE akun SET level='berqurban' WHERE id_akun='" . $arrId . "'");
+                } else {
+                    $updateAkun = $this->connect()->query("UPDATE akun SET level='warga' WHERE id_akun='" . $arrId . "'");
+                }
             } else {
-                $updateAkun = $this->connect()->query("UPDATE akun SET level='" . $levelAkun[0] . "' WHERE id_akun='".$arrId."'");
+                $updateAkun = $this->connect()->query("UPDATE akun SET level='" . $levelAkun[0] . "' WHERE id_akun='" . $arrId . "'");
             }
         }
 
-        if ($updateAkun) {
+        $hewan = $this->connect()->query("SELECT hewan FROM qurban WHERE id_qurban='" . $idQurban . "'")->fetch_assoc()['hewan'];
+        $beratTerkiniKambing = (int) $this->connect()->query("SELECT berat FROM daging WHERE hewan='kambing'")->fetch_assoc()['berat'];
+        $beratTerkiniSapi = (int) $this->connect()->query("SELECT berat FROM daging WHERE hewan='sapi'")->fetch_assoc()['berat'];
+        if ($hewan == 'kambing') {
+            $updateDaging = $this->connect()->query("UPDATE daging SET berat='" . ($beratTerkiniKambing - 50) . "' WHERE hewan='kambing'");
+        } else if ($hewan == 'sapi') {
+            $updateDaging = $this->connect()->query("UPDATE daging SET berat='" . ($beratTerkiniSapi - 100) . "' WHERE hewan='sapi'");
+        }
+
+        if ($updateAkun && $updateDaging) {
             $qP = $this->connect()->query("DELETE FROM pengqurban WHERE id_qurban='" . $idQurban . "'");
             if ($qP) {
                 $hapusQurban = $this->connect()->query("DELETE FROM qurban WHERE id_qurban='" . $idQurban . "'");
@@ -293,32 +316,59 @@ class panitiaModel extends koneksi
         return $q;
     }
 
-    function getPembagianModel(){
-        $q=$this->connect()->query("SELECT * FROM pembagian p JOIN akun a ON p.id_akun=a.id_akun");
+    function getPembagianModel()
+    {
+        $q = $this->connect()->query("SELECT * FROM pembagian p JOIN akun a ON p.id_akun=a.id_akun");
         return $q;
     }
 
-    function searchPembagian($keyword){
-        $q=$this->connect()->query("SELECT * FROM pembagian p JOIN akun a ON p.id_akun=a.id_akun WHERE a.nama LIKE '%$keyword%'");
+    function searchPembagian($keyword)
+    {
+        $q = $this->connect()->query("SELECT * FROM pembagian p JOIN akun a ON p.id_akun=a.id_akun WHERE a.nama LIKE '%$keyword%'");
         return $q;
     }
 
-    function checkedStatusModel($idPembagian){
-        $q=$this->connect()->query("UPDATE pembagian SET status='terbagi' WHERE id_pembagian='$idPembagian'");
-        if($q){
+    function checkedStatusModel($idPembagian)
+    {
+        $q = $this->connect()->query("UPDATE pembagian SET status='terbagi' WHERE id_pembagian='$idPembagian'");
+        if ($q) {
             return true;
-        }else{
+        } else {
             return false;
         }
     }
 
-    function uncheckedStatusModel($idPembagian){
-        $q=$this->connect()->query("UPDATE pembagian SET status=null WHERE id_pembagian='$idPembagian'");
-        if($q){
+    function uncheckedStatusModel($idPembagian)
+    {
+        $q = $this->connect()->query("UPDATE pembagian SET status=null WHERE id_pembagian='$idPembagian'");
+        if ($q) {
             return true;
-        }else{
+        } else {
             return false;
         }
     }
 
+    function getTerbagiKambingModel()
+    {
+        $q = $this->connect()->query("SELECT SUM(kambing) AS terbagiKambing FROM pembagian WHERE status='terbagi'");
+        return $q;
+    }
+
+    function getTerbagiSapiModel()
+    {
+        $q = $this->connect()->query("SELECT SUM(sapi) AS terbagiSapi FROM pembagian WHERE status='terbagi'");
+        return $q;
+    }
+
+    function searchJatahModel($keyword)
+    {
+        $q = $this->connect()->query("SELECT * FROM pembagian p JOIN akun a ON p.id_akun=a.id_akun WHERE a.nama LIKE '%$keyword%'");
+        return $q;
+    }
+
+    function getJatahModel($idPembagian)
+    {
+        $q = $this->connect()->query("SELECT * FROM pembagian WHERE id_pembagian='" . $idPembagian . "'");
+        return $q;
+    }
 }

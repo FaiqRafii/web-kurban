@@ -1,13 +1,13 @@
 <?php
 require_once '../Model/panitiaModel.php';
 require_once '../View/panitiaView.php';
-$view=new panitiaView();
+$view = new panitiaView();
 $model = new panitiaModel();
 ?>
 
-<div class="my-20 mx-10 grid lg:grid-cols-4 space-y-8 gap-x-5">
+<div class="mt-20 mx-10 grid lg:grid-cols-5 space-y-8 gap-x-5">
     <div class="border border-neutral-300 rounded-xl w-full h-25 relative">
-        <div class="bg-gradient-to-bl from-[rgb(154,94,44)] to-[rgb(99,52,14)] w-18 h-18 rounded-xl absolute -inset-y-7 inset-x-5 flex justify-center items-center">
+        <div class="bg-gradient-to-bl from-[rgb(154,94,44)] to-[rgb(99,52,14)] w-18 h-18 rounded-xl absolute -inset-y-7 inset-x-2 flex justify-center items-center">
             <svg fill="#ffffff" class="w-10 h-fit" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                 <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
                 <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
@@ -17,7 +17,7 @@ $model = new panitiaModel();
             </svg>
 
         </div>
-        <div class="absolute text-sm right-0 mr-5 mt-2">
+        <div class="absolute text-xs right-0 mr-4 mt-4.5">
             Warga
         </div>
         <div class="font-bold absolute right-0 top-7 text-3xl mr-5 mt-2">
@@ -25,7 +25,7 @@ $model = new panitiaModel();
         </div>
     </div>
     <div class="border border-neutral-300 rounded-xl w-full h-25 relative">
-        <div class="bg-gradient-to-bl from-[#ffc261] to-[#B78029] w-18 h-18 rounded-xl absolute -inset-y-7 inset-x-5 flex justify-center items-center">
+        <div class="bg-gradient-to-bl from-[#ffc261] to-[#B78029] w-18 h-18 rounded-xl absolute -inset-y-7 inset-x-2 flex justify-center items-center">
             <svg fill="#ffffff" class="w-10 h-fit" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                 <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
                 <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
@@ -34,7 +34,7 @@ $model = new panitiaModel();
                 </g>
             </svg>
         </div>
-        <div class="absolute text-sm right-0 mr-5 mt-2">
+        <div class="absolute text-xs right-0 mr-4 mt-4.5">
             Berqurban
         </div>
         <div class="font-bold absolute right-0 top-7 text-3xl mr-5 mt-2">
@@ -42,7 +42,7 @@ $model = new panitiaModel();
         </div>
     </div>
     <div class="border border-neutral-300 rounded-xl w-full h-25 relative">
-        <div class="bg-gradient-to-br from-[#e2cca7] to-[#F6F2EC] w-18 h-18 rounded-xl absolute -inset-y-7 inset-x-5 flex justify-center items-center">
+        <div class="bg-gradient-to-br from-[#e2cca7] to-[#F6F2EC] w-18 h-18 rounded-xl absolute -inset-y-7 inset-x-2 flex justify-center items-center">
             <svg fill="#673A10" class="w-10 h-fit" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                 <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
                 <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
@@ -51,11 +51,28 @@ $model = new panitiaModel();
                 </g>
             </svg>
         </div>
-        <div class="absolute text-sm right-0 mr-5 mt-2">
+        <div class="absolute text-xs right-0 mr-4 mt-4.5">
             Panitia
         </div>
         <div class="font-bold absolute right-0 top-7 text-3xl mr-5 mt-2">
             <?= $model->getJumlahPanitia() ?>
+        </div>
+    </div>
+    <div class="border border-neutral-300 rounded-xl w-full h-25 relative">
+        <div class="bg-gradient-to-bl from-[#ffffff] to-[#dfdfdf] w-18 h-18 rounded-xl absolute -inset-y-7 inset-x-2 flex justify-center items-center">
+            <svg fill="currentColor" class="text-black w-10 h-fit" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                <g id="SVGRepo_iconCarrier">
+                    <path d="M12,11A5,5,0,1,0,7,6,5.006,5.006,0,0,0,12,11Zm0-8A3,3,0,1,1,9,6,3,3,0,0,1,12,3ZM3,22V18a5.006,5.006,0,0,1,5-5h8a5.006,5.006,0,0,1,5,5v4a1,1,0,0,1-2,0V18a3,3,0,0,0-3-3H8a3,3,0,0,0-3,3v4a1,1,0,0,1-2,0Z"></path>
+                </g>
+            </svg>
+        </div>
+        <div class="absolute text-xs right-0 mr-4 mt-4.5">
+            Admin
+        </div>
+        <div class="font-bold absolute right-0 top-7 text-3xl mr-5 mt-2">
+            <?= $model->getJumlahAdmin() ?>
         </div>
     </div>
     <div class="border border-neutral-300 rounded-xl w-full h-25 flex justify-center items-center">
@@ -68,14 +85,15 @@ $model = new panitiaModel();
             </div>
         </div>
     </div>
+</div>
 
-
-    <div class="col-span-2 bg-gradient-to-l from-[#fff5e3] via-white to-white rounded-xl w-full h-30 relative overflow-hidden">
+<div class="flex space-x-5">
+    <div class="flex bg-gradient-to-l from-[#fff5e3] via-white to-white rounded-xl w-full h-30 relative overflow-hidden">
         <div class="grid grid-cols-75%_25%">
             <div class="absolute right-0 h-full w-35 overflow-hidden">
                 <img src="../assets/img/sapi.png" class="absolute scale-250 left-20 top-15" alt="">
             </div>
-            <div class="w-85 h-30 grid grid-cols-3">
+            <div class="w-85 h-30 ml-6 grid grid-cols-3">
                 <div class="flex justify-center items-center ">
                     <div class="grid grid-rows-10%_90% text-center">
                         <div class="text-sm ">Total</div>
@@ -85,16 +103,16 @@ $model = new panitiaModel();
                 <div class="flex justify-center items-center ">
                     <div class="grid grid-rows-10%_90% text-center">
                         <div class="text-sm ">Terbagi</div>
-                        <div class="font-bold text-xl">40 Kg</div>
+                        <div class="font-bold text-xl"><?php $view->totalTerbagiSapi() ?></div>
                     </div>
                 </div>
                 <div class="flex justify-center items-center ">
-                    <div class="font-bold text-4xl text-green-800">50%</div>
+                    <div class="font-bold text-3xl text-green-800"><?php $view->persenTerbagiSapi() ?></div>
                 </div>
             </div>
         </div>
     </div>
-    <div class="col-span-2 bg-gradient-to-r from-[#fff5e3] via-white to-white rounded-xl w-full h-30 relative overflow-hidden">
+    <div class="flex bg-gradient-to-r from-[#fff5e3] via-white to-white rounded-xl w-full h-30 relative overflow-hidden">
         <div class="grid grid-cols-75%_25%">
             <div class="absolute left-0 h-full w-35 overflow-hidden">
                 <img src="../assets/img/kambing.png" class="absolute scale-180 right-10 top-14" alt="">
@@ -109,16 +127,18 @@ $model = new panitiaModel();
                 <div class="flex justify-center items-center ">
                     <div class="grid grid-rows-10%_90% text-center">
                         <div class="text-sm ">Terbagi</div>
-                        <div class="font-bold text-xl">20 Kg</div>
+                        <div class="font-bold text-xl"><?php $view->totalTerbagiKambing() ?></div>
                     </div>
                 </div>
                 <div class="flex justify-center items-center ">
-                    <div class="font-bold text-4xl text-green-800">50%</div>
+                    <div class="font-bold text-3xl text-green-800"><?php $view->persenTerbagiKambing() ?></div>
                 </div>
             </div>
         </div>
     </div>
-    <div class="col-span-4 bg-gradient-to-l from-[#fff5e3] via-white to-white rounded-xl w-full h-30 relative overflow-hidden">
+</div>
+<div class="p-10 w-full">
+    <div class=" bg-gradient-to-l from-[#fff5e3] via-white to-white rounded-xl h-30 px-10 relative">
         <div class="grid grid-cols-2">
             <div class="w-full max-w-sm min-w-[200px] relative mt-6 ml-15">
                 <label class="block mb-2 text-sm text-slate-600">
@@ -126,28 +146,35 @@ $model = new panitiaModel();
                 </label>
 
                 <div class="relative">
-                    <input type="text" class="w-full bg-transparent placeholder:text-slate-400 text-black text-sm border border-slate-200 rounded-md pl-3 pr-20 py-2 transition duration-300 ease focus:outline-none focus:border-slate-400 hover:border-slate-300 shadow-sm focus:shadow" placeholder="Masukkan nama penerima" />
-                    <button class="absolute right-1 top-1 rounded bg-[rgb(154,94,44)] py-1 px-2.5 border border-transparent text-center text-sm text-white transition-all shadow-sm hover:shadow hover:bg-[rgb(99,52,14)] hover:cursor-pointer disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none" type="button">
+                    <input type="text" data-idPembagian="" name="cariJatah" autocomplete="off" class="w-full bg-transparent placeholder:text-slate-400 text-black text-sm border border-slate-200 rounded-md pl-3 pr-20 py-2 transition duration-300 ease focus:outline-none focus:border-slate-400 hover:border-slate-300 shadow-sm focus:shadow" placeholder="Masukkan nama penerima" />
+                    <div id="suggestions" class="absolute z-100 mt-1 w-full bg-white border border-neutral-300 rounded-md shadow-lg max-h-48 overflow-auto hidden"></div>
+                    <button class="hitungBtn absolute right-1 top-1 rounded bg-[rgb(154,94,44)] py-1 px-2.5 border border-transparent text-center text-sm text-white transition-all shadow-sm hover:shadow hover:bg-[rgb(99,52,14)] hover:cursor-pointer disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none" type="button">
                         Hitung
                     </button>
                 </div>
             </div>
-            <div class=" w-full h-30 grid grid-cols-3 ml-20">
-                <div class="flex justify-center items-center text-center">
-                    <div class="grid grid-rows-10%_90%">
-                        <div class="text-sm">Sapi</div>
-                        <div class="font-bold text-2xl">3 Kg</div>
-                    </div>
-                </div>
+            <div class=" w-full h-30 grid grid-cols-3 ml-3">
                 <div class="flex justify-center items-center text-center">
                     <div class="grid grid-rows-10%_90%">
                         <div class="text-sm">Kambing</div>
-                        <div class="font-bold text-2xl">3 Kg</div>
+                        <div class="font-bold text-2xl"><span class="jatahKambing">0</span> Kg</div>
                     </div>
+                </div>
+                <div class="flex justify-center items-center text-center">
+                    <div class="grid grid-rows-10%_90%">
+                        <div class="text-sm">Sapi</div>
+                        <div class="font-bold text-2xl"><span class="jatahSapi">0</span> Kg</div>
+                    </div>
+                </div>
+                <div class="flex justify-center items-center text-center">
+                    <div class="statusTerbagi font-bold text-xl">Belum Menerima</span></div>
                 </div>
             </div>
         </div>
-
     </div>
-
 </div>
+
+
+
+
+<script defer src="../assets/js/dashboardPanitia.js"></script>

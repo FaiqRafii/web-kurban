@@ -18,6 +18,8 @@ const pengqurbanLamaInput = document.querySelector(
   'input[name="pengqurbanLama"]'
 );
 const hapusBtn = document.querySelectorAll(".hapusBtn");
+const hitungJatahInput = document.querySelector('input[name="cariJatah"]');
+const suggestionBox = document.getElementById("suggestions");
 
 const pengqurban = [];
 const pengqurbanLama = [];
@@ -102,31 +104,6 @@ cardQurban.forEach((card) => {
       updateLabelPengqurban();
       pengqurbanList.appendChild(tag);
     }
-
-    // dataIdAkunSplitted.forEach((i) => {
-    //   pengqurban.push(i);
-    //   pengqurbanLama.push(i);
-    //   const tag = document.createElement("div");
-    //   tag.className =
-    //     "min-w-20 h-6 text-[rgb(255,228,205)] bg-[rgb(99,52,14)] rounded-xl py-1 px-3 text-xs flex justify-between";
-    //   tag.innerHTML = `
-    //             ${i}
-    //             <div class="hapusPengqurbanBtn hover:font-semibold hover:cursor-pointer">x</div>
-    //             `;
-    //   const hapusPengqurbanBtn = tag.querySelector(".hapusPengqurbanBtn");
-    //   hapusPengqurbanBtn.addEventListener("click", function (event) {
-    //     event.stopPropagation();
-    //     tag.remove();
-    //     hapusPengqurban(i);
-    //     updateLabelPengqurban();
-    //   });
-
-    //   pengqurbanLamaInput.value = pengqurbanLama.join(", ");
-    //   idAkunInput.value = pengqurban.join(", ");
-    //   updateLabelPengqurban();
-    //   pengqurbanList.appendChild(tag);
-    // });
-
     modal.classList.remove("hidden");
   });
 });

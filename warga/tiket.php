@@ -1,6 +1,17 @@
 <?php
 require_once '../View/wargaView.php';
+require_once '../Controller/wargaController.php';
+$controller = new wargaController();
 $view = new wargaView();
+
+if (session_status() == PHP_SESSION_NONE) {
+    session_start();
+}
+
+$status = $controller->getStatus()->fetch_assoc()['status'];
+if ($status == 'terbagi') {
+    header('Location: ../' . $_SESSION["level_akun"] . '');
+}
 ?>
 
 <html lang="en">
@@ -39,12 +50,12 @@ $view = new wargaView();
             justify-content: center;
         }
 
-        .qrTitle{
+        .qrTitle {
             font-size: 13px;
             text-align: center;
         }
 
-        .qr-loading{
+        .qr-loading {
             display: flex;
             align-items: center;
             justify-content: center;
@@ -108,7 +119,7 @@ $view = new wargaView();
         </div>
     </div>
     <script>
-        window.onload=function(){
+        window.onload = function() {
             window.print();
         }
     </script>
