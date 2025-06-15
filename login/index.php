@@ -19,6 +19,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Easy Qurban | Login</title>
+    <link rel="shortcut icon" href="../assets/img/icon.png" type="image/x-icon">
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -32,7 +33,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <div class="bg-gradient-to-l from-[rgb(154,94,44)] to-[rgb(99,52,14)] h-3/7 w-screen absolute top-0 left-0"></div>
         <div class="text-white font-semibold text-5xl absolute left-30 top-40">Selamat Datang</div>
         <div class="bg-gradient-to-r from-[rgb(154,94,44)] to-[rgb(99,52,14)] max-h-full h-screen w-screen absolute top-3/7 left-0"></div>
-        <div class="text-white font-thin text-sm absolute left-30 top-55">*Silahkan kontak <span><a href="" class="font-bold hover:underline">Admin</a></span> bila belum terdaftar</div>
+        <div class="text-white font-thin text-sm absolute left-30 top-55">*Silahkan kontak <span><a target="__blank" href="https://api.whatsapp.com/send?phone=6285158366780&text=Halo%20saya%20belum%20terdaftar%20di%20sistem%20EasyQurban" class="font-bold hover:underline">Admin</a></span> bila belum terdaftar</div>
     </div>
 
     <?php

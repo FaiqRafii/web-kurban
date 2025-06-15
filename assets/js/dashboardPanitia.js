@@ -4,7 +4,7 @@ const suggestionBox = document.getElementById("suggestions");
 const hitungBtn = document.querySelector(".hitungBtn");
 const jatahKambingDisplay = document.querySelector(".jatahKambing");
 const jatahSapiDisplay = document.querySelector(".jatahSapi");
-const statusTerbagi=document.querySelector('.statusTerbagi');
+const statusTerbagi = document.querySelector(".statusTerbagi");
 
 hitungJatahInput.addEventListener("input", () => {
   const keyword = hitungJatahInput.value.trim();
@@ -12,12 +12,12 @@ hitungJatahInput.addEventListener("input", () => {
   if (keyword.length === 0) {
     suggestionBox.innerHTML = "";
     suggestionBox.classList.add("hidden");
-    hitungJatahInput.value = '';
-    hitungJatahInput.setAttribute("data-idPembagian", '');
-    jatahKambingDisplay.innerHTML = '0';
-    jatahSapiDisplay.innerHTML = '0';
-    statusTerbagi.classList.remove('text-green-800');
-    statusTerbagi.innerHTML='Belum Menerima'
+    hitungJatahInput.value = "";
+    hitungJatahInput.setAttribute("data-idPembagian", "");
+    jatahKambingDisplay.innerHTML = "0";
+    jatahSapiDisplay.innerHTML = "0";
+    statusTerbagi.classList.remove("text-green-800");
+    statusTerbagi.innerHTML = "Belum Menerima";
     return;
   }
 
@@ -43,12 +43,12 @@ hitungJatahInput.addEventListener("input", () => {
 
 hitungBtn.addEventListener("click", function (e) {
   const idPembagian = hitungJatahInput.getAttribute("data-idPembagian");
-  if (idPembagian == '') {
-    jatahKambingDisplay.innerHTML = '0';
-    jatahSapiDisplay.innerHTML = '0';
-    statusTerbagi.classList.remove('text-green-800');
-    statusTerbagi.innerHTML='Belum Menerima'
-  }else{
+  if (idPembagian == "") {
+    jatahKambingDisplay.innerHTML = "0";
+    jatahSapiDisplay.innerHTML = "0";
+    statusTerbagi.classList.remove("text-green-800");
+    statusTerbagi.innerHTML = "Belum Menerima";
+  } else {
     fetch(
       `../Controller/panitiaController.php?searchjt=${encodeURIComponent(
         idPembagian
@@ -58,8 +58,12 @@ hitungBtn.addEventListener("click", function (e) {
       .then((data) => {
         jatahKambingDisplay.innerHTML = data.kambing;
         jatahSapiDisplay.innerHTML = data.sapi;
-        statusTerbagi.innerHTML=data.status;
-        statusTerbagi.classList.add('text-green-800');
+        statusTerbagi.innerHTML = data.status;
+        if (data.status == "Sudah Menerima") {
+          statusTerbagi.classList.add("text-green-800");
+        } else {
+          statusTerbagi.classList.remove("text-green-800");
+        }
       });
   }
 });
