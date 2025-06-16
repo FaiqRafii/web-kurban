@@ -2,7 +2,7 @@
 require_once 'koneksi.php';
 
 
-class akunModel extends koneksi
+class akunDatabase extends koneksi
 {
     protected $akun;
 

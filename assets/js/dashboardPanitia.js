@@ -21,7 +21,7 @@ hitungJatahInput.addEventListener("input", () => {
     return;
   }
 
-  fetch(`../View/panitiaView.php?searchj=${encodeURIComponent(keyword)}`)
+  fetch(`../tampilan/panitiaTampilan.php?searchj=${encodeURIComponent(keyword)}`)
     .then((response) => response.text())
     .then((data) => {
       suggestionBox.innerHTML = data;
@@ -50,7 +50,7 @@ hitungBtn.addEventListener("click", function (e) {
     statusTerbagi.innerHTML = "Belum Menerima";
   } else {
     fetch(
-      `../Controller/panitiaController.php?searchjt=${encodeURIComponent(
+      `../action/panitiaAction.php?searchjt=${encodeURIComponent(
         idPembagian
       )}`
     )

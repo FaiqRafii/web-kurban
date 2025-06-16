@@ -1,10 +1,10 @@
 <?php
-require_once '../Model/adminModel.php';
-require_once '../Model/koneksi.php';
+require_once '../database/adminDatabase.php';
+require_once '../database/koneksi.php';
 
 
 
-class adminController extends adminModel
+class adminAction extends adminDatabase
 {
 
     function getAllAkunByLevel()
@@ -123,22 +123,22 @@ class adminController extends adminModel
     }
 }
 
-$controller = new adminController();
+$action = new adminAction();
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if (isset($_POST['action'])) {
         if ($_POST['action'] == 'updateField') {
-            $controller->updateFields();
+            $action->updateFields();
         } else if ($_POST['action'] == 'add') {
-            $controller->addAkunBaru();
+            $action->addAkunBaru();
         } else if ($_POST['action'] == 'gettotaldebet') {
-            echo $controller->getTotalDebetFoot();
+            echo $action->getTotalDebetFoot();
         }
     } else if (isset($_POST['idAkun'])) {
-        $controller->hapusAkun();
+        $action->hapusAkun();
     } else if (isset($_POST['penginput'])) {
-        $controller->addTransaksiBaru();
+        $action->addTransaksiBaru();
     } else if (isset($_POST['idTransaksi'])) {
-        $controller->hapusTransaksi();
+        $action->hapusTransaksi();
     }
 }

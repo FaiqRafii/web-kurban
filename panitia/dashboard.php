@@ -1,8 +1,8 @@
 <?php
-require_once '../Model/panitiaModel.php';
-require_once '../View/panitiaView.php';
-$view = new panitiaView();
-$model = new panitiaModel();
+require_once '../database/panitiaDatabase.php';
+require_once '../tampilan/panitiaTampilan.php';
+$tampilan = new panitiaTampilan();
+$database = new panitiaDatabase();
 ?>
 
 <div class="mt-20 mx-10 grid lg:grid-cols-5 space-y-8 gap-x-5">
@@ -21,7 +21,7 @@ $model = new panitiaModel();
             Warga
         </div>
         <div class="font-bold absolute right-0 top-7 text-3xl mr-5 mt-2">
-            <?= $model->getJumlahWarga() ?>
+            <?= $database->getJumlahWarga() ?>
         </div>
     </div>
     <div class="border border-neutral-300 rounded-xl w-full h-25 relative">
@@ -38,7 +38,7 @@ $model = new panitiaModel();
             Berqurban
         </div>
         <div class="font-bold absolute right-0 top-7 text-3xl mr-5 mt-2">
-            <?= $model->getJumlahBerqurban() ?>
+            <?= $database->getJumlahBerqurban() ?>
         </div>
     </div>
     <div class="border border-neutral-300 rounded-xl w-full h-25 relative">
@@ -55,7 +55,7 @@ $model = new panitiaModel();
             Panitia
         </div>
         <div class="font-bold absolute right-0 top-7 text-3xl mr-5 mt-2">
-            <?= $model->getJumlahPanitia() ?>
+            <?= $database->getJumlahPanitia() ?>
         </div>
     </div>
     <div class="border border-neutral-300 rounded-xl w-full h-25 relative">
@@ -72,7 +72,7 @@ $model = new panitiaModel();
             Admin
         </div>
         <div class="font-bold absolute right-0 top-7 text-3xl mr-5 mt-2">
-            <?= $model->getJumlahAdmin() ?>
+            <?= $database->getJumlahAdmin() ?>
         </div>
     </div>
     <div class="border border-neutral-300 rounded-xl w-full h-25 flex justify-center items-center">
@@ -81,7 +81,7 @@ $model = new panitiaModel();
                 Total
             </div>
             <div class="font-bold text-3xl">
-                <?= $model->getJumlahTotal() ?>
+                <?= $database->getJumlahTotal() ?>
             </div>
         </div>
     </div>
@@ -97,17 +97,17 @@ $model = new panitiaModel();
                 <div class="flex justify-center items-center ">
                     <div class="grid grid-rows-10%_90% text-center">
                         <div class="text-sm ">Total</div>
-                        <div class="font-bold text-xl"><?php $view->totalDagingSapi() ?> Kg</div>
+                        <div class="font-bold text-xl"><?php $tampilan->totalDagingSapi() ?> Kg</div>
                     </div>
                 </div>
                 <div class="flex justify-center items-center ">
                     <div class="grid grid-rows-10%_90% text-center">
                         <div class="text-sm ">Terbagi</div>
-                        <div class="font-bold text-xl"><?php $view->totalTerbagiSapi() ?></div>
+                        <div class="font-bold text-xl"><?php $tampilan->totalTerbagiSapi() ?></div>
                     </div>
                 </div>
                 <div class="flex justify-center items-center ">
-                    <div class="font-bold text-3xl text-green-800"><?php $view->persenTerbagiSapi() ?></div>
+                    <div class="font-bold text-3xl text-green-800"><?php $tampilan->persenTerbagiSapi() ?></div>
                 </div>
             </div>
         </div>
@@ -121,17 +121,17 @@ $model = new panitiaModel();
                 <div class="flex justify-center items-center ">
                     <div class="grid grid-rows-10%_90% text-center">
                         <div class="text-sm ">Total</div>
-                        <div class="font-bold text-xl"><?php $view->totalDagingKambing(); ?> Kg</div>
+                        <div class="font-bold text-xl"><?php $tampilan->totalDagingKambing(); ?> Kg</div>
                     </div>
                 </div>
                 <div class="flex justify-center items-center ">
                     <div class="grid grid-rows-10%_90% text-center">
                         <div class="text-sm ">Terbagi</div>
-                        <div class="font-bold text-xl"><?php $view->totalTerbagiKambing() ?></div>
+                        <div class="font-bold text-xl"><?php $tampilan->totalTerbagiKambing() ?></div>
                     </div>
                 </div>
                 <div class="flex justify-center items-center ">
-                    <div class="font-bold text-3xl text-green-800"><?php $view->persenTerbagiKambing() ?></div>
+                    <div class="font-bold text-3xl text-green-800"><?php $tampilan->persenTerbagiKambing() ?></div>
                 </div>
             </div>
         </div>

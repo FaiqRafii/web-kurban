@@ -1,6 +1,6 @@
 <?php
 
-class loginView
+class loginTampilan
 {
 
     function alert($keterangan)

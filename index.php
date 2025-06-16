@@ -6,7 +6,7 @@ session_start();
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="tampilanport" content="width=device-width, initial-scale=1.0">
     <title>Easy Qurban</title>
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
 
@@ -17,9 +17,9 @@ session_start();
     
 </head>
 
-<?php include 'Utils/navbar.php' ?>
-<?php include 'Utils/landingPage.php' ?>
-<?php include 'Utils/footer.php' ?>
+<?php include 'layout/navbar.php' ?>
+<?php include 'layout/landingPage.php' ?>
+<?php include 'layout/footer.php' ?>
 
 <script src="assets/js/configHome.js"></script>
 </html>

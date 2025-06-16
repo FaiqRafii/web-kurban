@@ -242,7 +242,7 @@ listAkun.addEventListener("click", function (e) {
 
 searchInput.addEventListener("input", function () {
   const keyword = this.value;
-  fetch(`../View/panitiaView.php?search=${encodeURIComponent(keyword)}`)
+  fetch(`../tampilan/panitiaTampilan.php?search=${encodeURIComponent(keyword)}`)
     .then((response) => response.text())
     .then((data) => {
       listAkun.innerHTML = data;

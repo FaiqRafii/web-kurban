@@ -1,9 +1,9 @@
 <?php
-require_once '../View/Content.php';
-require_once '../Model/akunModel.php';
-require_once '../View/adminView.php';
+require_once '../tampilan/Content.php';
+require_once '../database/akunDatabase.php';
+require_once '../tampilan/adminTampilan.php';
 
-use App\View\Content;
+use App\tampilan\Content;
 
 
 if ($_SESSION['level_akun'] != 'admin') {
@@ -12,15 +12,15 @@ if ($_SESSION['level_akun'] != 'admin') {
 
 ob_start();
 $content = new Content();
-$akun = new akunModel();
-$view = new adminView();
+$akun = new akunDatabase();
+$tampilan = new adminTampilan();
 ?>
 
 <html lang="en">
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="tampilanport" content="width=device-width, initial-scale=1.0">
     <title>Easy Qurban | Admin</title>
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
 

@@ -1,12 +1,12 @@
 <?php
-require_once '../View/adminView.php';
-$view = new adminView();
+require_once '../tampilan/adminTampilan.php';
+$tampilan = new adminTampilan();
 
 if (isset($_SESSION['alert'])) {
-    $view->alert($_SESSION['alert']);
+    $tampilan->alert($_SESSION['alert']);
     unset($_SESSION['alert']);
 } else if (isset($_SESSION['alertSukses'])) {
-    $view->alertSukses($_SESSION['alertSukses']);
+    $tampilan->alertSukses($_SESSION['alertSukses']);
     unset($_SESSION['alertSukses']);
 }
 ?>
@@ -17,7 +17,7 @@ if (isset($_SESSION['alert'])) {
             <div class="w-full">
                 <h1 class="text-left text-3xl pt-10 font-bold">Pencatatan Keuangan</h1>
                 <div id="addContainer">
-                    <form action="../Controller/adminController.php" method="POST" class="w-full h-20 bg-white border border-neutral-300 mt-5 rounded-lg flex space-x-5 items-center px-5">
+                    <form action="../action/adminAction.php" method="POST" class="w-full h-20 bg-white border border-neutral-300 mt-5 rounded-lg flex space-x-5 items-center px-5">
                         <div class="datepicker-container">
                             <div class="bg-white rounded-lg border-1 text-black border-neutral-300 focus-within:border-neutral-500">
                                 <input type="hidden" name="penginput" value="<?= $_SESSION['id_akun'] ?>">
@@ -96,7 +96,7 @@ if (isset($_SESSION['alert'])) {
                         </div>
                     </form>
                 </div>
-                <form action="../Controller/adminController.php" method="POST">
+                <form action="../action/adminAction.php" method="POST">
                     <table class="mt-5 w-full text-sm">
                         <tr class=" text-left text-white bg-gradient-to-bl from-[rgb(154,94,44)] to-[rgb(99,52,14)]">
                             <th class="border border-black py-2 pr-5"></th>
@@ -107,7 +107,7 @@ if (isset($_SESSION['alert'])) {
                             <th class="border border-black py-2 px-5">Saldo</th>
                         </tr>
 
-                        <?php $view->isiTabelKeuangan() ?>
+                        <?php $tampilan->isiTabelKeuangan() ?>
 
                     </table>
                 </form>

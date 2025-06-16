@@ -1,6 +1,6 @@
 document.addEventListener("DOMContentLoaded", function () {
   const navbar = document.getElementById("navbar");
-  fetch("Controller/getIsLogin.php")
+  fetch("../action/getIsLogin.php")
     .then((response) => response.json())
     .then((data) => {
       if (data.isLogin) {

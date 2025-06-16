@@ -1,7 +1,7 @@
 <?php
-require_once '../Controller/wargaController.php';
+require_once '../action/wargaAction.php';
 
-class wargaView extends wargaController
+class wargaTampilan extends wargaAction
 {
     function getNama()
     {

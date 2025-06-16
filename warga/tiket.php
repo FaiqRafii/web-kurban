@@ -1,14 +1,14 @@
 <?php
-require_once '../View/wargaView.php';
-require_once '../Controller/wargaController.php';
-$controller = new wargaController();
-$view = new wargaView();
+require_once '../tampilan/wargaTampilan.php';
+require_once '../action/wargaAction.php';
+$action = new wargaAction();
+$tampilan = new wargaTampilan();
 
 if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }
 
-$status = $controller->getStatus()->fetch_assoc()['status'];
+$status = $action->getStatus()->fetch_assoc()['status'];
 if ($status == 'terbagi') {
     header('Location: ../' . $_SESSION["level_akun"] . '');
 }
@@ -18,7 +18,7 @@ if ($status == 'terbagi') {
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="tampilanport" content="width=device-width, initial-scale=1.0">
     <title>Tiket Pengambilan Daging</title>
     <link rel="icon" href="../assets/img/icon.png">
 
@@ -103,18 +103,18 @@ if ($status == 'terbagi') {
             <div class="logo">
                 <img src="../assets/img/logoScroll.png" alt="">
             </div>
-            <div class="info"><strong>Nama:</strong> <?= $view->getNama() ?></div>
-            <div class="info"><strong>Alamat:</strong> <?= $view->getAlamat() ?></div>
-            <div class="info"><strong>No HP:</strong> <?= $view->getNoHp() ?></div>
+            <div class="info"><strong>Nama:</strong> <?= $tampilan->getNama() ?></div>
+            <div class="info"><strong>Alamat:</strong> <?= $tampilan->getAlamat() ?></div>
+            <div class="info"><strong>No HP:</strong> <?= $tampilan->getNoHp() ?></div>
             <div class="info"><strong>Menerima:</strong>
-                <?php $view->pembagian() ?>
+                <?php $tampilan->pembagian() ?>
             </div>
             <div class="small">*harap menunjukkan qr-code saat mengambil daging</div>
         </div>
         <div class="right">
             <div class="qrTitle"><strong>QR-CODE PENGAMBILAN DAGING</strong></div>
             <div class="qr">
-                <?php $view->qrCodeTiket() ?>
+                <?php $tampilan->qrCodeTiket() ?>
             </div>
         </div>
     </div>

@@ -1,48 +1,48 @@
 <?php
-require_once '../Controller/panitiaController.php';
-require_once '../Model/panitiaModel.php';
+require_once '../action/panitiaAction.php';
+require_once '../database/panitiaDatabase.php';
 
-class panitiaView extends panitiaController
+class panitiaTampilan extends panitiaAction
 {
-    public $model;
+    public $database;
 
     function __construct()
     {
-        $this->model = new panitiaModel();
+        $this->database = new panitiaDatabase();
     }
 
     function jumlahWarga()
     {
         echo '
-        <td class="text-xs pt-5 pl-5"><span class="font-bold">' . $this->model->getJumlahWarga() . '</span> Warga</td>
+        <td class="text-xs pt-5 pl-5"><span class="font-bold">' . $this->database->getJumlahWarga() . '</span> Warga</td>
         ';
     }
 
     function jumlahBerqurban()
     {
         echo '
-        <td class="text-xs pt-5 pl-5"><span class="font-bold">' . $this->model->getJumlahBerqurban() . '</span> Berqurban</td>
+        <td class="text-xs pt-5 pl-5"><span class="font-bold">' . $this->database->getJumlahBerqurban() . '</span> Berqurban</td>
         ';
     }
 
     function jumlahAdmin()
     {
         echo '
-        <td class="text-xs pt-5 pl-5"><span class="font-bold">' . $this->model->getJumlahAdmin() . '</span> Admin</td>
+        <td class="text-xs pt-5 pl-5"><span class="font-bold">' . $this->database->getJumlahAdmin() . '</span> Admin</td>
         ';
     }
 
     function jumlahPanitia()
     {
         echo '
-        <td class="text-xs pt-5 pl-5"><span class="font-bold">' . $this->model->getJumlahPanitia() . '</span> Panitia</td>
+        <td class="text-xs pt-5 pl-5"><span class="font-bold">' . $this->database->getJumlahPanitia() . '</span> Panitia</td>
         ';
     }
 
     function jumlahTotal()
     {
         echo '
-        <td class="text-xs pt-5 pl-5 font-semibold">Total <span class="font-bold">' . $this->model->getJumlahTotal() . '</span></td>
+        <td class="text-xs pt-5 pl-5 font-semibold">Total <span class="font-bold">' . $this->database->getJumlahTotal() . '</span></td>
         ';
     }
 
@@ -91,7 +91,7 @@ class panitiaView extends panitiaController
             $idAkun = $qId->fetch_assoc()['id_akun'];
             echo '
             <div data-id="' . $qurban['id_qurban'] . '" data-hewan="' . $qurban['hewan'] . '" data-idAkun="' . $idAkun . '" data-namaAkun="' . $qurban['nama'] . '" class="cardQurban hover:cursor-pointer hover:-translate-y-1 transition-all ease-in duration-100 col-span-2 bg-gradient-to-r from-[#fff5e3] via-white to-white rounded-xl w-full h-30 relative overflow-hidden group">
-            <form action="../Controller/panitiaController.php" method="POST">
+            <form action="../action/panitiaAction.php" method="POST">
             <div class="grid grid-cols-75%_25%">
             <div class="absolute left-0 h-full w-35 overflow-hidden">
                 <img src="../assets/img/' . (($qurban['hewan'] == 'kambing') ? 'kambing' : 'sapi') . '.png" class="absolute ' . (($qurban['hewan'] == 'kambing') ? "scale-180 right-10" : "scale-220 scale-x-[-2.5] right-25") . ' top-14" alt="">
@@ -111,9 +111,9 @@ class panitiaView extends panitiaController
                 <div class="flex justify-center text-left items-center col-span-2">
                 <div class="grid grid-cols-2">';
             if ($qurban['hewan'] == 'sapi') {
-                $pengqurbanView = explode(", ", $qurban['nama']);
-                $kiri = array_slice($pengqurbanView, 0, 4);
-                $kanan = array_slice($pengqurbanView, 4);
+                $pengqurbanTampilan = explode(", ", $qurban['nama']);
+                $kiri = array_slice($pengqurbanTampilan, 0, 4);
+                $kanan = array_slice($pengqurbanTampilan, 4);
 
                 echo '<ol style="list-style-type:decimal">';
                 for ($i = 0; $i < count($kiri); $i++) {
@@ -173,7 +173,7 @@ class panitiaView extends panitiaController
 
     function isiTabelAkun()
     {
-        $q = $this->model->getAllAkunByLevel();
+        $q = $this->database->getAllAkunByLevel();
         $no = 1;
         while ($akun = $q->fetch_array()) {
             echo '
@@ -283,7 +283,7 @@ class panitiaView extends panitiaController
 
     function isiTabelKeuangan()
     {
-        $qTransaksi = $this->model->getAllKeuanganByTanggal();
+        $qTransaksi = $this->database->getAllKeuanganByTanggal();
         while ($transaksi = $qTransaksi->fetch_assoc()) {
             echo '
             <tr class="text-left odd:bg-white even:bg-neutral-50 hover:bg-[rgb(154,94,44)]/10" onclick="">
@@ -399,15 +399,15 @@ class panitiaView extends panitiaController
 }
 
 
-$view = new panitiaView();
+$tampilan = new panitiaTampilan();
 
 if ($_SERVER['REQUEST_METHOD'] == 'GET') {
     if (isset($_GET['search'])) {
         $keyword = $_GET['search'];
-        $view->listSearch($keyword);
+        $tampilan->listSearch($keyword);
     } else if (isset($_GET['searchp'])) {
-        $view->tabelPembagianSearch();
+        $tampilan->tabelPembagianSearch();
     } else if (isset($_GET['searchj'])) {
-        $view->suggestion();
+        $tampilan->suggestion();
     }
 }

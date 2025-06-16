@@ -4,7 +4,7 @@ require_once 'koneksi.php';
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
-class panitiaModel extends koneksi
+class panitiaDatabase extends koneksi
 {
 
     function getAllAkunByLevel()
@@ -13,13 +13,13 @@ class panitiaModel extends koneksi
         return $sql;
     }
 
-    function getAkunModel()
+    function getAkunDatabase()
     {
         $akun = $this->connect()->query("SELECT * FROM akun");
         return $akun;
     }
 
-    function getResultModel($keyword)
+    function getResultDatabase($keyword)
     {
         $q = $this->connect()->query("SELECT * FROM akun WHERE nama LIKE '%$keyword%'");
         return $q;
@@ -57,7 +57,7 @@ class panitiaModel extends koneksi
 
     function getAllKeuanganByTanggal()
     {
-        $qAll = $this->connect()->query("SELECT * FROM keuangan ORDER BY tanggal");
+        $qAll = $this->connect()->query("SELECT * FROM keuangan");
         return $qAll;
     }
 
@@ -141,7 +141,7 @@ class panitiaModel extends koneksi
         return $q;
     }
 
-    function addQurbanModel($hewan, $idAkun)
+    function addQurbanDatabase($hewan, $idAkun)
     {
         $conn = $this->connect();
         $insertQurban = $conn->query("INSERT INTO qurban (hewan) VALUES ('" . $hewan . "')");
@@ -176,7 +176,7 @@ class panitiaModel extends koneksi
         }
     }
 
-    function updateQurbanModel($idQurban, $hewan, $pengqurban, $pengqurbanLama)
+    function updateQurbanDatabase($idQurban, $hewan, $pengqurban, $pengqurbanLama)
     {
         $pengqurbanBaruArr = explode(", ", $pengqurban);
         $pengqurbanLamaArr = explode(", ", $pengqurbanLama);
@@ -282,7 +282,7 @@ class panitiaModel extends koneksi
         }
     }
 
-    function updateDagingModel($dagingKambing, $dagingSapi)
+    function updateDagingDatabase($dagingKambing, $dagingSapi)
     {
         $cek = $this->connect()->query("SELECT * FROM daging");
         if ($cek->num_rows > 1) {
@@ -304,19 +304,19 @@ class panitiaModel extends koneksi
         }
     }
 
-    function getTotalKambingModel()
+    function getTotalKambingDatabase()
     {
         $q = $this->connect()->query("SELECT berat FROM daging WHERE hewan='kambing'");
         return $q;
     }
 
-    function getTotalSapiModel()
+    function getTotalSapiDatabase()
     {
         $q = $this->connect()->query("SELECT berat FROM daging WHERE hewan='sapi'");
         return $q;
     }
 
-    function getPembagianModel()
+    function getPembagianDatabase()
     {
         $q = $this->connect()->query("SELECT * FROM pembagian p JOIN akun a ON p.id_akun=a.id_akun");
         return $q;
@@ -328,7 +328,7 @@ class panitiaModel extends koneksi
         return $q;
     }
 
-    function checkedStatusModel($idPembagian)
+    function checkedStatusDatabase($idPembagian)
     {
         $q = $this->connect()->query("UPDATE pembagian SET status='terbagi' WHERE id_pembagian='$idPembagian'");
         if ($q) {
@@ -338,7 +338,7 @@ class panitiaModel extends koneksi
         }
     }
 
-    function uncheckedStatusModel($idPembagian)
+    function uncheckedStatusDatabase($idPembagian)
     {
         $q = $this->connect()->query("UPDATE pembagian SET status=null WHERE id_pembagian='$idPembagian'");
         if ($q) {
@@ -348,25 +348,25 @@ class panitiaModel extends koneksi
         }
     }
 
-    function getTerbagiKambingModel()
+    function getTerbagiKambingDatabase()
     {
         $q = $this->connect()->query("SELECT SUM(kambing) AS terbagiKambing FROM pembagian WHERE status='terbagi'");
         return $q;
     }
 
-    function getTerbagiSapiModel()
+    function getTerbagiSapiDatabase()
     {
         $q = $this->connect()->query("SELECT SUM(sapi) AS terbagiSapi FROM pembagian WHERE status='terbagi'");
         return $q;
     }
 
-    function searchJatahModel($keyword)
+    function searchJatahDatabase($keyword)
     {
         $q = $this->connect()->query("SELECT * FROM pembagian p JOIN akun a ON p.id_akun=a.id_akun WHERE a.nama LIKE '%$keyword%'");
         return $q;
     }
 
-    function getJatahModel($idPembagian)
+    function getJatahDatabase($idPembagian)
     {
         $q = $this->connect()->query("SELECT * FROM pembagian WHERE id_pembagian='" . $idPembagian . "'");
         return $q;

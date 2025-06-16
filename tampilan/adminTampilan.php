@@ -1,54 +1,54 @@
 <?php
-require_once '../Controller/adminController.php';
-require_once '../Model/adminModel.php';
+require_once '../action/adminAction.php';
+require_once '../database/adminDatabase.php';
 
-class adminView extends adminController
+class adminTampilan extends adminAction
 {
-    public $model;
+    public $database;
 
     function __construct()
     {
-        $this->model = new adminModel();
+        $this->database = new adminDatabase();
     }
 
     function jumlahWarga()
     {
         echo '
-        <td class="text-xs pt-5 pl-5"><span class="font-bold">' . $this->model->getJumlahWarga() . '</span> Warga</td>
+        <td class="text-xs pt-5 pl-5"><span class="font-bold">' . $this->database->getJumlahWarga() . '</span> Warga</td>
         ';
     }
 
     function jumlahBerqurban()
     {
         echo '
-        <td class="text-xs pt-5 pl-5"><span class="font-bold">' . $this->model->getJumlahBerqurban() . '</span> Berqurban</td>
+        <td class="text-xs pt-5 pl-5"><span class="font-bold">' . $this->database->getJumlahBerqurban() . '</span> Berqurban</td>
         ';
     }
 
     function jumlahAdmin()
     {
         echo '
-        <td class="text-xs pt-5 pl-5"><span class="font-bold">' . $this->model->getJumlahAdmin() . '</span> Admin</td>
+        <td class="text-xs pt-5 pl-5"><span class="font-bold">' . $this->database->getJumlahAdmin() . '</span> Admin</td>
         ';
     }
 
     function jumlahPanitia()
     {
         echo '
-        <td class="text-xs pt-5 pl-5"><span class="font-bold">' . $this->model->getJumlahPanitia() . '</span> Panitia</td>
+        <td class="text-xs pt-5 pl-5"><span class="font-bold">' . $this->database->getJumlahPanitia() . '</span> Panitia</td>
         ';
     }
 
     function jumlahTotal()
     {
         echo '
-        <td class="text-xs pt-5 pl-5 font-semibold">Total <span class="font-bold">' . $this->model->getJumlahTotal() . '</span></td>
+        <td class="text-xs pt-5 pl-5 font-semibold">Total <span class="font-bold">' . $this->database->getJumlahTotal() . '</span></td>
         ';
     }
 
     function isiTabelAkun()
     {
-        $q = $this->model->getAllAkunByLevel();
+        $q = $this->database->getAllAkunByLevel();
         $no = 1;
         while ($akun = $q->fetch_array()) {
             echo '
@@ -158,7 +158,7 @@ class adminView extends adminController
 
     function isiTabelKeuangan()
     {
-        $qTransaksi = $this->model->getAllKeuanganByTanggal();
+        $qTransaksi = $this->database->getAllKeuanganByTanggal();
         while ($transaksi = $qTransaksi->fetch_assoc()) {
             echo '
             <tr class="text-left odd:bg-white even:bg-neutral-50 hover:bg-[rgb(154,94,44)]/10" onclick="">

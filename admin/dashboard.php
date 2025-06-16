@@ -1,11 +1,11 @@
-<?php require_once '../View/adminView.php';
-$view = new adminView();
+<?php require_once '../tampilan/adminTampilan.php';
+$tampilan = new adminTampilan();
 
 if (isset($_SESSION['alert'])) {
-    $view->alert($_SESSION['alert']);
+    $tampilan->alert($_SESSION['alert']);
     unset($_SESSION['alert']);
 } else if (isset($_SESSION['alertSukses'])) {
-    $view->alertSukses($_SESSION['alertSukses']);
+    $tampilan->alertSukses($_SESSION['alertSukses']);
     unset($_SESSION['alertSukses']);
 }
 ?>
@@ -13,7 +13,7 @@ if (isset($_SESSION['alert'])) {
 
     <div class="w-full h-fit px-10 pb-15 bg-gradient-to-b from-[#fff5e3] via-white to-white rounded-xl">
         <div class="w-full pt-1">
-            <form action="../Controller/adminController.php" method="POST">
+            <form action="../action/adminAction.php" method="POST">
                 <table class="mt-10 w-full text-sm">
                     <tr class="">
                         <th colspan="3" class="text-left text-3xl pb-5">Pendataan Akun</th>
@@ -28,7 +28,7 @@ if (isset($_SESSION['alert'])) {
                         <th class="border border-black py-2 px-5">Level</th>
                     </tr>
 
-                    <?php $view->isiTabelAkun(); ?>
+                    <?php $tampilan->isiTabelAkun(); ?>
 
                 </table>
                 
@@ -45,7 +45,7 @@ if (isset($_SESSION['alert'])) {
                 </div>
             </div>
             <div id="addModalContent" class="hidden pb-6 pr-4">
-                <form action="../Controller/adminController.php" method="POST">
+                <form action="../action/adminAction.php" method="POST">
                     <input type="hidden" name="action" value="add" id="">
                     <div class="w-full max-w-sm min-w-[200px] relative mt-5 ml-5">
                         <label class="block mb-1 text-sm text-neutral-600">

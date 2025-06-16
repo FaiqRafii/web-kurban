@@ -1,14 +1,14 @@
 <?php
-require_once '../Model/panitiaModel.php';
-require_once '../Model/koneksi.php';
-require_once '../Services/seederPembagian.php';
+require_once '../database/panitiaDatabase.php';
+require_once '../database/koneksi.php';
+require_once '../pembagian/seederPembagian.php';
 
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 
 
-class panitiaController extends panitiaModel
+class panitiaAction extends panitiaDatabase
 {
 
     private $seeder;
@@ -105,7 +105,7 @@ class panitiaController extends panitiaModel
         $dagingKambing = $_POST['kambing'];
         $dagingSapi = $_POST['sapi'];
 
-        $update = $this->updateDagingModel($dagingKambing, $dagingSapi);
+        $update = $this->updateDagingDatabase($dagingKambing, $dagingSapi);
         if ($update) {
             $this->seeder->seedPembagian();
             $_SESSION['alertSukses'] = 'Berhasil mengubah total daging';
@@ -118,29 +118,29 @@ class panitiaController extends panitiaModel
 
     function getTotalKambing()
     {
-        return $this->getTotalKambingModel()->fetch_assoc()['berat'];
+        return $this->getTotalKambingDatabase()->fetch_assoc()['berat'];
     }
 
     function getTotalSapi()
     {
-        return $this->getTotalSapiModel()->fetch_assoc()['berat'];
+        return $this->getTotalSapiDatabase()->fetch_assoc()['berat'];
     }
 
     function getAkun()
     {
-        return $this->getAkunModel();
+        return $this->getAkunDatabase();
     }
 
     function getResult($keyword)
     {
-        return $this->getResultModel($keyword);
+        return $this->getResultDatabase($keyword);
     }
 
     function addQurban()
     {
         $hewan = $_POST['hewan'];
         $idAkun = $_POST['idAkun'];
-        $status = $this->addQurbanModel($hewan, $idAkun);
+        $status = $this->addQurbanDatabase($hewan, $idAkun);
         if ($status) {
             $this->seeder->seedPembagian();
             $_SESSION['alertSukses'] = 'Berhasil menambah qurban';
@@ -158,7 +158,7 @@ class panitiaController extends panitiaModel
         $pengqurban = $_POST['idAkun'];
         $pengqurbanLama = $_POST['pengqurbanLama'];
 
-        $status = $this->updateQurbanModel($idQurban, $hewan, $pengqurban, $pengqurbanLama);
+        $status = $this->updateQurbanDatabase($idQurban, $hewan, $pengqurban, $pengqurbanLama);
 
         if ($status) {
             $this->seeder->seedPembagian();
@@ -187,40 +187,40 @@ class panitiaController extends panitiaModel
 
     function getPembagian()
     {
-        return $this->getPembagianModel();
+        return $this->getPembagianDatabase();
     }
 
     function checkedStatus()
     {
         $idPembagian = $_POST['id'];
-        $status = $this->checkedStatusModel($idPembagian);
+        $status = $this->checkedStatusDatabase($idPembagian);
     }
 
     function uncheckedStatus()
     {
         $idPembagian = $_POST['id'];
-        $status = $this->uncheckedStatusModel($idPembagian);
+        $status = $this->uncheckedStatusDatabase($idPembagian);
     }
 
     function getTerbagiKambing()
     {
-        return $this->getTerbagiKambingModel();
+        return $this->getTerbagiKambingDatabase();
     }
 
     function getTerbagiSapi()
     {
-        return $this->getTerbagiSapiModel();
+        return $this->getTerbagiSapiDatabase();
     }
 
     function searchJatah($keyword)
     {
-        return $this->searchJatahModel($keyword);
+        return $this->searchJatahDatabase($keyword);
     }
 
     function getJatah()
     {
         $idPembagian = $_GET['searchjt'];
-        $jatahAll = $this->getJatahModel($idPembagian)->fetch_assoc();
+        $jatahAll = $this->getJatahDatabase($idPembagian)->fetch_assoc();
         $kambing = number_format($jatahAll['kambing'], 2);
         $sapi = number_format($jatahAll['sapi'], 2);
         $status = $jatahAll['status'];
@@ -238,32 +238,32 @@ class panitiaController extends panitiaModel
     }
 }
 
-$controller = new panitiaController();
+$action = new panitiaAction();
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if (isset($_POST['action'])) {
         if ($_POST['action'] == 'gettotaldebet') {
-            echo $controller->getTotalDebetFoot();
+            echo $action->getTotalDebetFoot();
         } else if ($_POST['action'] == 'updateDaging') {
-            $controller->updateDaging();
+            $action->updateDaging();
         } else if ($_POST['action'] == 'addQurban') {
-            $controller->addQurban();
+            $action->addQurban();
         } else if ($_POST['action'] == 'updateQurban') {
-            $controller->updateQurban();
+            $action->updateQurban();
         } else if ($_POST['action'] == 'hapusQurban') {
-            $controller->hapusQurban();
+            $action->hapusQurban();
         } else if ($_POST['action'] == 'checkedStatus') {
-            $controller->checkedStatus();
+            $action->checkedStatus();
         } else if ($_POST['action'] == 'uncheckedStatus') {
-            $controller->uncheckedStatus();
+            $action->uncheckedStatus();
         }
     } else if (isset($_POST['penginput'])) {
-        $controller->addTransaksiBaru();
+        $action->addTransaksiBaru();
     } else if (isset($_POST['idTransaksi'])) {
-        $controller->hapusTransaksi();
+        $action->hapusTransaksi();
     }
 } else if ($_SERVER['REQUEST_METHOD'] == 'GET') {
     if (isset($_GET['searchjt'])) {
-        $controller->getJatah();
+        $action->getJatah();
     }
 }

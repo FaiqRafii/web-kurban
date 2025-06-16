@@ -52,7 +52,7 @@
 
       <ul class="mt-auto">
          <li>
-            <a href="../Controller/logout.php" class="flex items-center p-2 text-[rgb(102,57,19)] rounded-lg hover:bg-[rgb(102,57,19)] hover:text-white group">
+            <a href="../action/logout.php" class="flex items-center p-2 text-[rgb(102,57,19)] rounded-lg hover:bg-[rgb(102,57,19)] hover:text-white group">
                <svg fill="currentColor" class="shrink-0 w-5 h-5 text-[rgb(102,57,19)] transition duration-75 group-hover:text-white" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                   <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
                   <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>

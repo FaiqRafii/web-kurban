@@ -4,7 +4,7 @@ const checkbox = document.querySelectorAll('input[name="statusCheck"]');
 
 search.addEventListener("input", function (e) {
   const keyword = e.target.value;
-  fetch(`../View/panitiaView.php?searchp=${encodeURIComponent(keyword)}`)
+  fetch(`../tampilan/panitiaTampilan.php?searchp=${encodeURIComponent(keyword)}`)
     .then((response) => response.text())
     .then((data) => {
       tabelPembagian.innerHTML = data;
@@ -13,7 +13,7 @@ search.addEventListener("input", function (e) {
         c.addEventListener("change", function () {
           const idPembagian = c.getAttribute("data-idPembagian");
           if (c.checked) {
-            fetch(`../Controller/panitiaController.php`, {
+            fetch(`../action/panitiaAction.php`, {
               method: "POST",
               headers: { "Content-Type": "application/x-www-form-urlencoded" },
               body: `action=checkedStatus&id=${encodeURIComponent(
@@ -28,7 +28,7 @@ search.addEventListener("input", function (e) {
                 console.log("Gagal update status: ", data);
               });
           } else {
-            fetch(`../Controller/panitiaController.php`, {
+            fetch(`../action/panitiaAction.php`, {
               method: "POST",
               headers: { "Content-Type": "application/x-www-form-urlencoded" },
               body: `action=uncheckedStatus&id=${encodeURIComponent(
@@ -55,7 +55,7 @@ checkbox.forEach((c) => {
   c.addEventListener("change", function () {
     const idPembagian = c.getAttribute("data-idPembagian");
     if (c.checked) {
-      fetch(`../Controller/panitiaController.php`, {
+      fetch(`../action/panitiaAction.php`, {
         method: "POST",
         headers: { "Content-Type": "application/x-www-form-urlencoded" },
         body: `action=checkedStatus&id=${encodeURIComponent(idPembagian)}`,
@@ -68,7 +68,7 @@ checkbox.forEach((c) => {
           console.log("Gagal update status: ", data);
         });
     } else {
-      fetch(`../Controller/panitiaController.php`, {
+      fetch(`../action/panitiaAction.php`, {
         method: "POST",
         headers: { "Content-Type": "application/x-www-form-urlencoded" },
         body: `action=uncheckedStatus&id=${encodeURIComponent(idPembagian)}`,

@@ -15,7 +15,7 @@ document.addEventListener("DOMContentLoaded", function () {
       const field = input.getAttribute("data-field");
       const value = input.value;
 
-      fetch("../Controller/adminController.php", {
+      fetch("../action/adminAction.php", {
         method: "POST",
         headers: {
           "Content-Type": "application/x-www-form-urlencoded",

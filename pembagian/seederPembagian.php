@@ -1,5 +1,5 @@
 <?php
-require_once '../Model/koneksi.php';
+require_once '../database/koneksi.php';
 
 if (session_status() === PHP_SESSION_NONE) {
     session_start();

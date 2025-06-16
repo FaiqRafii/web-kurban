@@ -1,15 +1,15 @@
 <?php
-require_once '../View/Content.php';
-require_once '../Model/akunModel.php';
+require_once '../tampilan/Content.php';
+require_once '../database/akunDatabase.php';
 
-use App\View\Content;
+use App\tampilan\Content;
 
 session_start();
 if ($_SESSION['level_akun'] != 'warga' && $_SESSION['level_akun'] != 'berqurban') {
     header('Location: ../');
 }
 
-$akun = new akunModel();
+$akun = new akunDatabase();
 $content = new Content();
 ?>
 
@@ -17,7 +17,7 @@ $content = new Content();
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="tampilanport" content="width=device-width, initial-scale=1.0">
     <title>Easy Qurban | Warga</title>
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
 

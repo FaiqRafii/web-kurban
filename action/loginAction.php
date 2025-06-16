@@ -1,19 +1,19 @@
 <?php
 
-require_once '../View/loginView.php';
-require_once '../Model/akunModel.php';
+require_once '../tampilan/loginTampilan.php';
+require_once '../database/akunDatabase.php';
 
 session_start();
 
-class loginController extends akunModel
+class loginAction extends akunDatabase
 {
     public $idAkun;
     public $password;
-    private $view;
+    private $tampilan;
 
     function __construct()
     {
-        $this->view = new loginView();
+        $this->tampilan = new loginTampilan();
     }
 
     function cekIsLogin()

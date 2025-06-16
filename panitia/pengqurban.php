@@ -1,21 +1,21 @@
 <?php
-require_once '../Model/panitiaModel.php';
-require_once '../View/panitiaView.php';
-$view = new panitiaView();
-$model = new panitiaModel();
+require_once '../database/panitiaDatabase.php';
+require_once '../tampilan/panitiaTampilan.php';
+$tampilan = new panitiaTampilan();
+$database = new panitiaDatabase();
 
 if (isset($_SESSION['alert'])) {
-    $view->alert($_SESSION['alert']);
+    $tampilan->alert($_SESSION['alert']);
     unset($_SESSION['alert']);
 } else if (isset($_SESSION['alertSukses'])) {
-    $view->alertSukses($_SESSION['alertSukses']);
+    $tampilan->alertSukses($_SESSION['alertSukses']);
     unset($_SESSION['alertSukses']);
 }
 ?>
 
 <div class="my-20 mx-10 grid lg:grid-cols-4 space-y-8 gap-x-5">
 
-    <?php $view->isiQurban() ?>
+    <?php $tampilan->isiQurban() ?>
 
     <div id="openModal" class="group hover:bg-green-600 transition-all ease-in duration-100 hover:cursor-pointer col-span-2 border-dashed bg-white border border-green-600 rounded-xl w-full h-30 relative flex justify-center items-center overflow-hidden">
         <svg fill="currentColor" class="text-green-600 group-hover:text-white w-20 h-fit" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -34,7 +34,7 @@ if (isset($_SESSION['alert'])) {
 
 <div id="containerQurban" class="hidden absolute flex justify-center items-center z-80 top-0 left-0 bg-black/20 w-screen h-screen mx-auto my-auto">
     <div class="modalQurban w-1/2 h-2/3 bg-white rounded-lg opacity-100 p-5 relative">
-        <form action="../Controller/panitiaController.php" method="POST">
+        <form action="../action/panitiaAction.php" method="POST">
             <div class="w-full h-10 border-b border-neutral-300 flex justify-between">
                 <div class="font-semibold">Pengqurban</div>
                 <div>
@@ -81,7 +81,7 @@ if (isset($_SESSION['alert'])) {
                     <input type="text" name="searchAkun" id="searchAkun" class="w-full focus:outline-none placeholder:text-sm text-xs" placeholder="Masukkan nama...">
                 </div>
                 <div id="listAkun" class="h-24 overflow-y-scroll">
-                    <?php $view->listAkun(); ?>
+                    <?php $tampilan->listAkun(); ?>
                 </div>
             </div>
             <div class="absolute bottom-5 right-5 space-x-3 mt-5">

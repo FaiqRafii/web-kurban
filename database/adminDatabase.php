@@ -1,11 +1,11 @@
 <?php
 require_once 'koneksi.php';
-require_once '../Services/seederPembagian.php';
+require_once '../pembagian/seederPembagian.php';
 
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
-class adminModel extends koneksi
+class adminDatabase extends koneksi
 {
 
     private $seeder;

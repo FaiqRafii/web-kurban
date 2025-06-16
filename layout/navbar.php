@@ -62,7 +62,7 @@
                         }
                         echo '" class="">
                             <li class="hover:cursor-pointer hover:font-bold flex justify-center items-center space-x-3 mb-5">
-                                <svg fill="currentColor" class="shrink-0 w-4 h-ft transition duration-75 group-hover:text-white" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <svg fill="currentColor" class="shrink-0 w-4 h-fit transition duration-75 group-hover:text-white" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                     <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
                                     <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
                                     <g id="SVGRepo_iconCarrier">
@@ -76,7 +76,7 @@
                         </a>
                         <a href="../Controller/logout.php">
                             <li class="hover:cursor-pointer hover:font-bold flex justify-center items-center space-x-3">
-                                <svg fill="currentColor" class="shrink-0 w-4 h-ft transition duration-75 group-hover:text-white" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <svg fill="currentColor" class="shrink-0 w-4 h-fit transition duration-75 group-hover:text-white" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                     <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
                                     <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
                                     <g id="SVGRepo_iconCarrier">

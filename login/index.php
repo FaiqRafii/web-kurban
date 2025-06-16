@@ -1,10 +1,10 @@
 <?php
-require_once '../Controller/loginController.php';
-require_once '../View/loginView.php';
+require_once '../action/loginAction.php';
+require_once '../tampilan/loginTampilan.php';
 
 
-$view = new loginView();
-$login = new loginController();
+$tampilan = new loginTampilan();
+$login = new loginAction();
 
 $login->cekIsLogin();
 
@@ -17,7 +17,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="tampilanport" content="width=device-width, initial-scale=1.0">
     <title>Easy Qurban | Login</title>
     <link rel="shortcut icon" href="../assets/img/icon.png" type="image/x-icon">
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
@@ -38,7 +38,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     <?php
     if ($_SESSION['alert']) {
-        $view->alert($_SESSION['alert']);
+        $tampilan->alert($_SESSION['alert']);
         unset($_SESSION['alert']);
     }
     ?>

@@ -1,9 +1,9 @@
 <?php
-require_once '../View/Content.php';
-require_once '../Model/akunModel.php';
-require_once '../View/wargaView.php';
+require_once '../tampilan/Content.php';
+require_once '../database/akunDatabase.php';
+require_once '../tampilan/wargaTampilan.php';
 
-use App\View\Content;
+use App\tampilan\Content;
 
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
@@ -12,8 +12,8 @@ if ($_SESSION['level_akun'] != 'warga' && $_SESSION['level_akun']!='berqurban') 
     header('Location: ../');
 }
 
-$view = new wargaView();
-$akun = new akunModel();
+$tampilan = new wargaTampilan();
+$akun = new akunDatabase();
 $content = new Content();
 ?>
 
@@ -28,15 +28,15 @@ $content = new Content();
                 <div class="mt-20 ml-10 grid grid-cols-[45%_55%]">
                     <div>
                         <div class="text-neutral-400">Nama</div>
-                        <div class="font-semibold text-lg mb-3"><?= $view->getNama() ?></div>
+                        <div class="font-semibold text-lg mb-3"><?= $tampilan->getNama() ?></div>
                         <div class="text-neutral-400">Alamat</div>
-                        <div class="font-semibold text-lg mb-3"><?= $view->getAlamat() ?></div>
+                        <div class="font-semibold text-lg mb-3"><?= $tampilan->getAlamat() ?></div>
                         <div class="text-neutral-400">No HP</div>
-                        <div class="font-semibold text-lg mb-4"><?= $view->getNoHp() ?></div>
+                        <div class="font-semibold text-lg mb-4"><?= $tampilan->getNoHp() ?></div>
                     </div>
                     <div>
                         <div class="text-neutral-400">Menerima</div>
-                        <?php $view->pembagian() ?>
+                        <?php $tampilan->pembagian() ?>
                     </div>
                 </div>
                 <div class="text-neutral-400 text-xs ml-10">*harap menunjukkan qr-code saat mengambil daging</div>
@@ -51,7 +51,7 @@ $content = new Content();
                     </div>
                     <div class="mx-auto
                     ">
-                        <?php $view->qrCodeDashboard() ?>
+                        <?php $tampilan->qrCodeDashboard() ?>
                     </div>
                 </div>
             </div>
