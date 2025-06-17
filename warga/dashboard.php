@@ -3,7 +3,6 @@ require_once '../tampilan/Content.php';
 require_once '../database/akunDatabase.php';
 require_once '../tampilan/wargaTampilan.php';
 
-use App\tampilan\Content;
 
 if (session_status() === PHP_SESSION_NONE) {
     session_start();

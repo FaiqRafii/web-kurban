@@ -2,8 +2,6 @@
 require_once '../tampilan/Content.php';
 require_once '../database/akunDatabase.php';
 
-use App\tampilan\Content;
-
 session_start();
 if ($_SESSION['level_akun'] != 'warga' && $_SESSION['level_akun'] != 'berqurban') {
     header('Location: ../');

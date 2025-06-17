@@ -3,8 +3,6 @@ require_once '../tampilan/Content.php';
 require_once '../database/akunDatabase.php';
 require_once '../tampilan/adminTampilan.php';
 
-use App\tampilan\Content;
-
 
 if ($_SESSION['level_akun'] != 'admin') {
     header('Location: ../');
